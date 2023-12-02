@@ -47,7 +47,8 @@ CREATE TABLE comparaisons(
  vehicule_3 INT,
  vehicule_4 INT,
  rech INT ,
- PRIMARY KEY(vehicule_1,vehicule_2) REFERENCES vehicules(vehicule_id)
+ PRIMARY KEY(vehicule_1,vehicule_2)
+ FOREIGN KEY(vehicule_1,vehicule_2,vehicule_3,vehicule_4) REFERENCES vehicules(vehicule_id,vehicule_id,vehicule_id,vehicule_id)
 );
 
 CREATE TABLE favoris(
@@ -73,7 +74,7 @@ CREATE TABLE note_marques(
   note FLOAT,
   PRIMARY KEY(user_id,marque_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
-  FOREIGN KEY(vehicule_id) REFERENCES marques(marque_id)
+  FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
 CREATE TABLE guides(
