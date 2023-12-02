@@ -1,5 +1,4 @@
 <?php
-require_once('controller.php');
 class bdd {
     
     private $dbName="comparateur";
@@ -7,10 +6,10 @@ class bdd {
     private $user ="root";
     private $password="";
 
-    public function connect($dbName , $host ,$user,$password){
-        $dsn="mysql:dbname=$dbName; host=$host;";
+    public function connect(){
+        $dsn="mysql:dbname=".$this->dbName."; host=".$this->host.";";
         try{
-            $conn=new PDO($dsn,$user,$password);
+            $conn=new PDO($dsn,$this->user,$this->password);
         }
         catch(PDOException $ex){
             printf("erreur de connexion à la base de donnée", $ex->getMessage());
@@ -28,7 +27,6 @@ class bdd {
         $r->execute();
         return $r->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
 
 ?>
