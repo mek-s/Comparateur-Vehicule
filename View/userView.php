@@ -44,6 +44,7 @@ class userView{
       <?php
 
     }
+    
     public function confirmUserView(){
       $this->controller = new userController();
       if (isset($_POST['confirm-user'])) {
@@ -57,6 +58,24 @@ class userView{
       <?php
 
     }
+
+    public function authenticateUserView(){
+      $this->controller = new userController();
+      if (isset($_POST['auth-user'])) {
+        $nom=$_POST['nom'];
+        $mdp=$_POST['mdp'];
+        if ($this->controller->authenticateUserController($nom,$mdp)) {
+          echo '<h1>Authenticated</h1>';
+        }
+      } ?>
+      <form method="POST">
+        <input type="text" name="nom">
+        <input type="password" name="mdp" >
+        <input type="submit" name="auth-user"value="Login">
+      </form>
+    <?php 
+      
+    } 
 }
 
 ?>

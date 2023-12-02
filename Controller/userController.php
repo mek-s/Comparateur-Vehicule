@@ -21,5 +21,12 @@ class userController{
         $this->model->confirmUserModel($id);
     }
 
+    public function authenticateUserController($nom,$mdp){
+        $this->model = new userModel();
+        if ($this->model->authenticateUserModel($nom,$mdp)) {
+           return true;
+        } else return false;
+    }
+
 }
 ?>
