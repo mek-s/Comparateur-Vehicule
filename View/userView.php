@@ -73,9 +73,49 @@ class userView{
         <input type="password" name="mdp" >
         <input type="submit" name="auth-user"value="Login">
       </form>
-    <?php 
-      
+     <?php 
+
     } 
+
+    public function showAllUsers(){
+      $this->controller = new userController();
+      $users =$this->controller->getAllUsersController();
+      ?>
+
+       <table>
+        <thead>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Sexe</th>
+          <th>Date</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($users as $user) {
+            $id = $user['user_id'];
+            $nom = $user['user_nom'];
+            $prenom =$user['user_prenom'];
+            $sexe= $user['sexe'];
+            $date = $user['date_naissance'];
+            $status= $user['status'];
+             echo '<tr>';
+             echo '<td>'.$id.'</td>';
+             echo '<td>'.$nom.'</td>';
+             echo '<td>'.$prenom.'</td>';
+             echo '<td>'.$sexe.'</td>';
+             echo '<td>'.$date.'</td>';
+             echo '<td>'.$status.'</td>';
+             echo '</tr>';
+          }
+          ?>
+        </tbody>
+       </table>
+      <?php
+    }
+
+    
 }
 
 ?>

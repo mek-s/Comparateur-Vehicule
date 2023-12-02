@@ -28,5 +28,10 @@ class userController{
         } else return false;
     }
 
+    public function getAllUsersController(){
+        $this->model = new userModel();
+        return $this->model->getAllUsersModel();    
+    }
+
 }
 ?>

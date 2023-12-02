@@ -51,6 +51,18 @@ class userModel{
         $this->db->disconnect($cnx);
     }
 
+    public function getAllUsersModel(){
+        $this->db = new bdd();
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `users`";
+        return $this->db->request($cnx,$query);  
+
+        $this->db->disconnect($cnx);
+
+    }
+
+  
 }
 
 ?>
