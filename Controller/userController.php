@@ -16,5 +16,10 @@ class userController{
         $this->model->blockUserModel($id);
     }
 
+    public function confirmUserController($id){
+        $this->model = new userModel();
+        $this->model->confirmUserModel($id);
+    }
+
 }
 ?>

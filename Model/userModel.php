@@ -25,6 +25,14 @@ class userModel{
         $this->db->disconnect($cnx);
     }
 
+    public function confirmUserModel($id){
+        $this->db = new bdd();
+        $cnx=$this->db->connect();
+        $query = "UPDATE `users` SET `status` = 'confirme' WHERE `user_id` = $id";
+        $this->db->request($cnx,$query);  
+        $this->db->disconnect($cnx);
+    }
+
 }
 
 ?>

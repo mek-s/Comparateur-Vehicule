@@ -44,6 +44,19 @@ class userView{
       <?php
 
     }
+    public function confirmUserView(){
+      $this->controller = new userController();
+      if (isset($_POST['confirm-user'])) {
+        $id=$_POST['id'];
+        $this->controller->confirmUserController($id);
+      } ?>
+      <form method="POST">
+        <input type="text" name="id" id="">
+        <input type="submit" value="Confirmer" name="confirm-user">
+      </form>
+      <?php
+
+    }
 }
 
 ?>
