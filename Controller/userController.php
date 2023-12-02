@@ -4,12 +4,16 @@ require_once "C:\wamp64\www\Comparateur-Vehicule\View\userView.php";
 
 class userController{
 
-    public function createUserController($nom,$prenom,$sexe,$date,$status,$mdp){
-     
-        $user = new userModel();
+    private $model;
 
-        $result=$user->createUserModel($nom,$prenom,$sexe,$date,$status,$mdp);
-        
+    public function createUserController($nom,$prenom,$sexe,$date,$status,$mdp){ 
+        $this->model = new userModel();
+        $result=$user->createUserModel($nom,$prenom,$sexe,$date,$status,$mdp);   
+    }
+
+    public function blockUserController($id){
+        $this->model = new userModel();
+        $this->model->blockUserModel($id);
     }
 
 }

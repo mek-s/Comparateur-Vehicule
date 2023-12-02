@@ -6,7 +6,7 @@ class userView{
     private $controller;
 
     public function createUserView(){
-      $controller = new userController();
+      $this->controller = new userController();
       if (isset($_POST['create-user'])) {
         $nom=$_POST['nom'];
         $prenom=$_POST['prenom'];
@@ -30,6 +30,20 @@ class userView{
       </form>
     <?php  
     } 
+
+    public function blockUserView(){
+      $this->controller = new userController();
+      if (isset($_POST['block-user'])) {
+        $id=$_POST['id'];
+        $this->controller->blockUserController($id);
+      } ?>
+      <form method="POST">
+        <input type="text" name="id" id="">
+        <input type="submit" value="Block" name="block-user">
+      </form>
+      <?php
+
+    }
 }
 
 ?>

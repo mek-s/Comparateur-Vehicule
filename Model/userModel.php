@@ -17,6 +17,14 @@ class userModel{
         
     }
 
+    public function blockUserModel($id){
+        $this->db = new bdd();
+        $cnx=$this->db->connect();
+        $query = "UPDATE `users` SET `status` = 'bloque' WHERE `user_id` = $id";
+        $this->db->request($cnx,$query);  
+        $this->db->disconnect($cnx);
+    }
+
 }
 
 ?>
