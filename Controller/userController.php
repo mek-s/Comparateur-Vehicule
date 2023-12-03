@@ -8,7 +8,7 @@ class userController{
 
     public function createUserController($nom,$prenom,$sexe,$date,$status,$mdp){ 
         $this->model = new userModel();
-        $result=$user->createUserModel($nom,$prenom,$sexe,$date,$status,$mdp);   
+        $result=$model->createUserModel($nom,$prenom,$sexe,$date,$status,$mdp);   
     }
 
     public function blockUserController($id){

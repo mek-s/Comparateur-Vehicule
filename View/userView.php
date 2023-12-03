@@ -13,16 +13,15 @@ class userView{
         $date=$_POST['date'];
         $status='attente';
         $mdp=$_POST['mdp'];
-        if ($_POST['sexe']=='F') $sexe='femme';
-        else $sexe='homme';
+        $sexe=$_POST['sexe'];
         $controller->createUserController($nom,$prenom,$sexe,$date,$status,$mdp);
       } ?>
       <form method="POST">
         <input type="text" name="nom">
         <input type="text" name="prenom">
         <select name="sexe" id="">
-            <option value="F">Feminin</option>
-            <option value="M">Masculain</option>
+            <option value="femme">Feminin</option>
+            <option value="homme">Masculain</option>
         </select>
         <input type="date" name="date" id="">
         <input type="password" name="mdp" id="">
