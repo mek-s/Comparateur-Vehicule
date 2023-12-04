@@ -16,7 +16,7 @@ class userView{
           5 => $_POST['mdp'],
           6 => $_POST['sexe']
         );
-        $controller->createUserController($params);
+        $this->controller->createUserController($params);
       } ?>
       <form method="POST">
         <input type="text" name="nom">

@@ -1,6 +1,5 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Model\userModel.php";
-require_once "C:\wamp64\www\Comparateur-Vehicule\View\userView.php";
 
 class userController{
 
