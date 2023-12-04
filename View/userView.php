@@ -8,20 +8,22 @@ class userView{
     public function createUserView(){
       $this->controller = new userController();
       if (isset($_POST['create-user'])) {
-        $nom=$_POST['nom'];
-        $prenom=$_POST['prenom'];
-        $date=$_POST['date'];
-        $status='attente';
-        $mdp=$_POST['mdp'];
-        $sexe=$_POST['sexe'];
-        $controller->createUserController($nom,$prenom,$sexe,$date,$status,$mdp);
+        $params=array(
+          1 => $_POST['nom'],
+          2 => $_POST['prenom'],
+          3 => $_POST['date'],
+          4 => 'attente',
+          5 => $_POST['mdp'],
+          6 => $_POST['sexe']
+        );
+        $controller->createUserController($params);
       } ?>
       <form method="POST">
         <input type="text" name="nom">
         <input type="text" name="prenom">
         <select name="sexe" id="">
-            <option value="femme">Feminin</option>
-            <option value="homme">Masculain</option>
+            <option value="feminin">Feminin</option>
+            <option value="masculin">Masculain</option>
         </select>
         <input type="date" name="date" id="">
         <input type="password" name="mdp" id="">

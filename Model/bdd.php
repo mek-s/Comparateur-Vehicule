@@ -25,7 +25,7 @@ class bdd {
     public function request($conn , $req , $params){
         $r = $conn->prepare($req);
         for ($i = 1; $i <= count($params); $i++) { 
-            $r->bindParam($i, $params[$i - 1]);
+            $r->bindParam($i, $params[$i]);
         }
         $r->execute();
         return $r->fetchAll(PDO::FETCH_ASSOC);

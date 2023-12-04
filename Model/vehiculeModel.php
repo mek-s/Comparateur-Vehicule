@@ -5,12 +5,12 @@ class vehiculeModel{
 
     private $db;
 
-    public function addVehiculeModel($nom ,$type, $marque, $modele, $version, $annee, $long, $larg, $haut, $moteur,$perf,$consm, $image, $guide){
+    public function addVehiculeModel($params){
         $this->db = new bdd();
         $cnx=$this->db->connect();
 
-        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `marque_id`, `modele`, `version`, `annee`, `longueur`, `largeur`, `hauteur`, `moteur`, `consomation`, `performance`, `image_id`, `guide_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        $params = array($nom,$type,$marque,$modele,$version,$annee,$long,$larg,$haut,$moteur,$perf,$consm,$image,$guide);
+        //$query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `marque_id`, `modele`, `version`, `annee`, `longueur`, `largeur`, `hauteur`, `moteur`, `consomation`, `performance`, `image_id`, `guide_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `marque_id`) VALUES (?,?,?)';
         $this->db->request($cnx,$query,$params);
     
         $this->db->disconnect($cnx);

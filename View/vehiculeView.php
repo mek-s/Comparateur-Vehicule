@@ -8,11 +8,13 @@ class vehiculeView{
     public function addVehiculeView(){
         $this->controller = new vehiculeController();
         if (isset($_POST['create-vehic'])) {
-          $nom=$_POST['nom'];
-          $type=$_POST['type'];
-          $marque=$_POST['marque'];
-          $this->controller->addVehiculeController($nom ,$type, $marque,NULL,NULL,
-           NULL, NULL, NULL, NULL, NULL,NULL,NULL, NULL, NULL);
+          $params = array(
+            1   => $_POST['nom'],
+            2   => $_POST['type'],
+            3   => $_POST['marque']
+          );
+         
+          $this->controller->addVehiculeController($params);
         } ?>
         <form method="POST">
           <input type="text" name="nom">

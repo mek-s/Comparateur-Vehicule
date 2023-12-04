@@ -5,12 +5,11 @@ class userModel{
 
     private $db;
 
-    public function createUserModel($nom,$prenom,$sexe,$date,$status,$mdp){
+    public function createUserModel($params){
         $this->db = new bdd();
         $cnx=$this->db->connect();
 
         $query = "INSERT INTO `users` (`user_nom`, `user_prenom`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES (?,?,?,?,?,?)";
-        $params = array($nom,$prenom,$sexe,$date,$status,$mdp);
         $this->db->request($cnx,$query,$params);
     
         $this->db->disconnect($cnx);

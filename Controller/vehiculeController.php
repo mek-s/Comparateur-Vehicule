@@ -5,9 +5,9 @@ class vehiculeController{
  
     private $model;
 
-    public function addVehiculeController($nom ,$type, $marque, $modele, $version, $annee, $long, $larg, $haut, $moteur,$perf,$consm, $image, $guide){
+    public function addVehiculeController($params){
         $this->model = new vehiculeModel();
-        $this->model->addVehiculeModel($nom ,$type, $marque, $modele, $version, $annee, $long, $larg, $haut, $moteur,$perf,$consm, $image, $guide);   
+        $this->model->addVehiculeModel($params);   
     }
 
 
