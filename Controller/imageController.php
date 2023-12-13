@@ -52,6 +52,16 @@ class imageController{
         }  
     }
 
+    public function getImageController($id){
+      $params=array(
+        1 => $id
+     );
+     $this->model = new imageModel();
+     $chemin = $this->model->getImageModel($params);
+    
+     return $chemin['chemin'];
+    }
+
 }
 
 
