@@ -25,9 +25,22 @@ class marqueView{
           <input type="submit" name="create-marque"value="Enregistrer">
         </form>
       <?php  
-      } 
+    } 
 
-    
+    public function getMarquesPrincipalesView(){
+      $this->controller = new marqueController();
+
+      $principales = $this->controller->getMarquesPrincipalesController();
+      foreach ($principales as $marque) {
+        $chemin= './Images/'.$marque['chemin'];
+       ?>
+        <a href="/Comparateur-Vehicule/marques/?marque=<?php echo $marque['marque_id']?>">
+          <img src="<?php echo $chemin ?>" alt="">
+        </a>
+         
+       <?php
+      }
+    }
 }
 
 ?>

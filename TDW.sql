@@ -22,6 +22,7 @@ CREATE TABLE marques(
    siege_social VARCHAR(50),
    annee_creation YEAR,
    supp BOOLEAN,
+   principale BOOLEAN,
    guide_id INT ,
    image_id INT,
    FOREIGN KEY(image_id) REFERENCES images(image_id),
@@ -173,5 +174,7 @@ CREATE TABLE style(
 CREATE TABLE contacts(
   contact_id int PRIMARY KEY AUTO_INCREMENT,
   contact_nom varchar(100),
-  value varchar(100)
+  value varchar(100),
+  image_id INT,
+  FOREIGN KEY(image_id) REFERENCES images(image_id)
 );

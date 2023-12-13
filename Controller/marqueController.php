@@ -9,6 +9,12 @@ class marqueController{
        $this->model = new marqueModel();
        $this->model-> createMarqueModel($params);
     }
+
+    public function getMarquesPrincipalesController(){
+       $this->model = new marqueModel();
+       $principales = $this->model-> getMarquesPrincipalesModel();
+       return $principales;
+    }
 }
 
 

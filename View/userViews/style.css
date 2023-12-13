@@ -1,0 +1,88 @@
+html {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+header , footer , .right-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer{
+    background-color: #0076a8;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+footer a {
+    color: white;
+}
+
+nav ul , footer ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #0076a8;
+    padding: 10px;
+    border-radius: 12px;
+    gap: 50px;
+}
+
+nav a{
+    color: white;
+}
+
+nav a:visited{
+   color: #ff9324;
+}
+
+a{
+    text-decoration: none;
+}
+
+.right-content{
+    gap: 64px;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.connexion button{
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #0076a8; /* Adjust the color as needed */
+    border: 1px solid #0076a8; /* Adjust the border color as needed */
+    border-radius: 5px;
+    background-color: #fff; /* Adjust the background color as needed */
+}
+
+#logo img{
+    width: 50%;
+    height: 50%;
+}
+
+.marques-zone{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.marques-zone img {
+    width: 50%;
+    height: 50%;
+}
+

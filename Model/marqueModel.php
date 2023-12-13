@@ -16,6 +16,19 @@ class marqueModel{
         $this->db->disconnect($cnx);
 
     }
+
+    public function getMarquesPrincipalesModel(){
+        $this->db = new bdd();
+        $cnx=$this->db->connect();
+        $params=array();
+
+        $query = "SELECT * FROM marques NATURAL JOIN images WHERE principale = 1";
+        $principales = $this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+
+        return $principales;
+    }
 }
 
 
