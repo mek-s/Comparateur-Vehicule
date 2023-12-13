@@ -4,3 +4,4 @@ INSERT INTO `users`(`user_nom`, `user_prenom`, `sexe`, `date_naissance`, `status
 INSERT INTO `contacts` (`contact_nom`,`value`) VALUES ('facebook','my-facebook');
 INSERT INTO `contacts` (`contact_nom`,`value`) VALUES ('email','email@gmail.com');
 INSERT INTO `contacts` (`contact_nom`,`value`) VALUES ('numero','00 11 22 33 44');
+INSERT INTO `admins` (`username`,`pwd`) VALUES ('admin','admin');

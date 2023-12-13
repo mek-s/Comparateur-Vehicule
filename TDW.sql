@@ -3,11 +3,15 @@ CREATE TABLE users(
    user_nom VARCHAR(50) NOT NULL,
    user_prenom VARCHAR(50) NOT NULL,
    email VARCHAR(100),
-   user_role ENUM('admin','user'),
    sexe ENUM('homme','femme'),
    date_naissance DATE,
    status ENUM('bloque','confirme','attente'),
    mdp VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE admins(
+  username VARCHAR(60) PRIMARY KEY ,
+  pwd VARCHAR(20) NOT NULL,
 );
 
 CREATE TABLE marques(
