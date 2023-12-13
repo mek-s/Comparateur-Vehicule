@@ -17,7 +17,7 @@ CREATE TABLE marques(
    image_id INT,
    guide_id INT,
    FOREIGN KEY(image_id) REFERENCES images(image_id),
-   FOREIGN KEY(guide_id) REFERENCES guides(guide_id)
+   FOREIGN KEY(guide_id) REFERENCES guides(guide_id),
 );
 
 CREATE TABLE vehicules(
@@ -25,8 +25,8 @@ CREATE TABLE vehicules(
   vehicule_nom VARCHAR(100) NOT NULL,
   type ENUM('voiture','moto','camion'),
   marque_id INT NOT NULL,
-  modele VARCHAR(50),
-  version VARCHAR(50),
+  modele_id INT NOT NULL,
+  version_id INT NOT NULL,
   annee YEAR,
   longueur FLOAT,
   largeur FLOAT,
@@ -38,7 +38,25 @@ CREATE TABLE vehicules(
   guide_id INT ,
   FOREIGN KEY(image_id) REFERENCES images(image_id),
   FOREIGN KEY(marque_id) REFERENCES marques(marque_id),
-  FOREIGN KEY(guide_id) REFERENCES guides(guide_id)
+  FOREIGN KEY(guide_id) REFERENCES guides(guide_id),
+  FOREIGN KEY(version_id) REFERENCES version(version_id)
+);
+
+CREATE TABLE version(
+ version_id INT PRIMARY KEY AUTO_INCREMENT,
+ version_nom VARCHAR(100),
+ modele_id INT NOT NULL,
+ date_debut YEAR,
+ date_fin YEAR,
+ PRIMARY KEY(version_id,version_nom)
+ FOREIGN KEY(modele_id) REFERENCES modeles(modele_id)
+);
+
+CREATE TABLE modeles(
+ modele_id INT PRIMARY KEY AUTO_INCREMENT,
+ modele_nom VARCHAR(100),
+ marque_id INT NOT NULL,
+ FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
 CREATE TABLE comparaisons(
