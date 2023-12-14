@@ -30,7 +30,7 @@ class home{
    public function showDiaporama(){
     ?>
       <div class="diaporama">
-
+         <img src="Images/images.jpg" alt="">
       </div>
     <?php
    }
