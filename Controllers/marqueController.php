@@ -1,5 +1,5 @@
 <?php
-require_once "C:\wamp64\www\Comparateur-Vehicule\Model\marqueModel.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Models\marqueModel.php";
 
 class marqueController{
 

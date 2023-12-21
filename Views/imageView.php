@@ -1,5 +1,5 @@
 <?php
-require_once "C:\wamp64\www\Comparateur-Vehicule\Controller\imageController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\imageController.php";
 
 
 class imageView{

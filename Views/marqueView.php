@@ -1,5 +1,5 @@
 <?php
-require_once "C:\wamp64\www\Comparateur-Vehicule\Controller\marqueController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
 
 class marqueView{
 
@@ -32,11 +32,13 @@ class marqueView{
 
       $principales = $this->controller->getMarquesPrincipalesController();
       foreach ($principales as $marque) {
-        $chemin= './Images/'.$marque['chemin'];
+        $chemin= './Images/marques/'.$marque['chemin'];
        ?>
+       <div class="marque<?php $marque['marque_id']?>">
         <a href="/Comparateur-Vehicule/marques/?marque=<?php echo $marque['marque_id']?>">
           <img src="<?php echo $chemin ?>" alt="">
         </a>
+        </div>
          
        <?php
       }

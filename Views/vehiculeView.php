@@ -1,5 +1,5 @@
 <?php
-require_once "C:\wamp64\www\Comparateur-Vehicule\Controller\/vehiculeController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\/vehiculeController.php";
 
 class vehiculeView{
 
