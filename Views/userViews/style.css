@@ -1,0 +1,112 @@
+html {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+header , footer , .right-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer{
+    height: 8%;
+    width: 85%;
+    background-color: #0076a8;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: fixed;
+    top: 92%;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #0076a8;
+    padding: 10px;
+    border-radius: 12px;
+    gap: 50px;
+}
+
+nav ul , footer ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav a:visited{
+   color: #ff9324;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.right-content{
+    gap: 64px;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.contacts a{
+    color: #0076a8;
+}
+.contacts img{
+    width: 30px;
+    height: 30px;
+}
+
+.connexion button{
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #0076a8; /* Adjust the color as needed */
+    border: 1px solid #0076a8; /* Adjust the border color as needed */
+    border-radius: 5px;
+    background-color: #fff; /* Adjust the background color as needed */
+}
+
+#logo img{
+    width: 50%;
+    height: 50%;
+}
+
+.marques-zone{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    padding: 3%;
+}
+
+.marque{
+    /* border: 1px solid black; */
+    width: 170px;
+    height: 100px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1%;
+}
+.marque img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.diaporama{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+
