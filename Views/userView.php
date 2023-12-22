@@ -5,8 +5,11 @@ class userView{
      
     private $controller;
 
+
+
     public function createUserView(){
       $this->controller = new userController();
+
       if (isset($_POST['create-user'])) {
         $params=array(
           1 => $_POST['nom'],
@@ -29,11 +32,12 @@ class userView{
         <input type="password" name="mdp" id="">
         <input type="submit" name="create-user"value="Enregistrer">
       </form>
-    <?php  
+    <?php
     } 
 
     public function blockUserView(){
       $this->controller = new userController();
+
       if (isset($_POST['block-user'])) {
         $id=$_POST['id'];
         $this->controller->blockUserController($id);
@@ -47,7 +51,8 @@ class userView{
     }
     
     public function confirmUserView(){
-      $this->controller = new userController();
+     $this->controller = new userController();
+
       if (isset($_POST['confirm-user'])) {
         $id=$_POST['id'];
         $this->controller->confirmUserController($id);
@@ -62,6 +67,7 @@ class userView{
 
     public function authenticateUserView(){
       $this->controller = new userController();
+
       if (isset($_POST['auth-user'])) {
         $nom=$_POST['nom'];
         $mdp=$_POST['mdp'];
@@ -74,7 +80,7 @@ class userView{
         <input type="password" name="mdp" >
         <input type="submit" name="auth-user"value="Login">
       </form>
-     <?php 
+     <?php
 
     } 
 

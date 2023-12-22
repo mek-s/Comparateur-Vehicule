@@ -5,6 +5,7 @@ class userController{
 
     private $model;
 
+
     public function createUserController($params){ 
         $this->model = new userModel();
         $result=$model->createUserModel($params);   

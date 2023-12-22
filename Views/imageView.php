@@ -7,7 +7,8 @@ class imageView{
     private $controller;
 
     public function createImageView(){
-        $this->controller = new imageController();
+      $this->controller = new imageController();
+      
         if (isset($_POST['create-image'])) {
             $params=array(
               1 => $_FILES["image"]["name"]

@@ -5,8 +5,9 @@ class vehiculeView{
 
     private $controller;
 
+
     public function addVehiculeView(){
-        $this->controller = new vehiculeController();
+      $this->controller = new vehiculeController();
         if (isset($_POST['create-vehic'])) {
           $params = array(
             1   => $_POST['nom'],
@@ -26,7 +27,7 @@ class vehiculeView{
           <input type="number" name="marque">
           <input type="submit" name="create-vehic"value="Enregistrer">
         </form>
-      <?php  
+      <?php 
       
     }
 }

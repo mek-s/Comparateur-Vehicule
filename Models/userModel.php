@@ -5,8 +5,13 @@ class userModel{
 
     private $db;
 
-    public function createUserModel($params){
+    public function __construct(){
         $this->db = new bdd();
+    }
+
+
+    public function createUserModel($params){
+       
         $cnx=$this->db->connect();
 
         $query = "INSERT INTO `users` (`user_nom`, `user_prenom`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES (?,?,?,?,?,?)";
@@ -17,7 +22,7 @@ class userModel{
     }
 
     public function blockUserModel($id){
-        $this->db = new bdd();
+       
         $cnx=$this->db->connect();
 
         $query = "UPDATE `users` SET `status` = 'bloque' WHERE `user_id` = ?";
@@ -28,7 +33,7 @@ class userModel{
     }
 
     public function confirmUserModel($id){
-        $this->db = new bdd();
+       
         $cnx=$this->db->connect();
 
         $query = "UPDATE `users` SET `status` = 'confirme' WHERE `user_id` = ?";
@@ -39,7 +44,7 @@ class userModel{
     }
 
     public function authenticateUserModel($nom , $mdp){
-        $this->db = new bdd();
+       
         $cnx=$this->db->connect();
         
         $query= "SELECT user_id FROM users WHERE user_nom = ? AND mdp= ?";
@@ -54,7 +59,7 @@ class userModel{
     }
 
     public function getAllUsersModel(){
-        $this->db = new bdd();
+       
         $cnx=$this->db->connect();
 
         $query = "SELECT * FROM `users`";

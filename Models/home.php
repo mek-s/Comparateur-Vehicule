@@ -5,8 +5,11 @@ require_once('bdd.php');
 class homeModel{
     private $db;
 
-    public function getContacts(){
+    public function __construct(){
         $this->db = new bdd();
+    }
+
+    public function getContacts(){
         $cnx=$this->db->connect();
 
         $params=array();

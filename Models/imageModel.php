@@ -5,8 +5,12 @@ require_once('bdd.php');
 class imageModel{
     private $db;
 
-    public function createImageModel($params){
+    public function __construct(){
         $this->db = new bdd();
+    }
+
+
+    public function createImageModel($params){
         $cnx=$this->db->connect();
 
         $query = "INSERT INTO `images`(`chemin`) VALUES (?)";
@@ -17,7 +21,6 @@ class imageModel{
     }
 
     public function getImageModel($params){
-        $this->db = new bdd();
         $cnx=$this->db->connect();
         
         $query = "SELECT chemin FROM images WHERE image_id = ?";

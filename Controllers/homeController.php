@@ -3,7 +3,7 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php");
 
 class homeController{
 
-    private $view;
+    private $view;  
 
     public function showHomeController(){
         $this->view = new homeView();
