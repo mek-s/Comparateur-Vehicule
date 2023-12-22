@@ -64,26 +64,36 @@ class marqueView{
     }
 
     public function showMarqueDetailsView($marque){
-      
+
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home = new homeView();
       $home->showMenu();
       ?>
-      
+      <div class="details-container">
         <div class="marque-details">
-          <div>
-            <img src="<?php $this->chemin.$marque['chemin']; ?>">
+          <div class="marque">
+            <img src="<?php echo $this->chemin.$marque['chemin']; ?>">
           </div>
-          <div>
-            <h3><?php echo $marque['marque_nom']; ?></h3>
-            <h3><?php echo $marque['pays_origine']; ?></h3>
+          <div class="infos">
+            <h3>La marque <?php echo $marque['marque_nom']; ?></h3>
+            <h3>Fonde en <?php echo $marque['annee_creation']; ?></h3>
+            <h3>dans <?php echo $marque['pays_origine']; ?>,</h3>
             <h3><?php echo $marque['siege_social']; ?></h3>
             <p>dfdghjhkjgfghh
               rtergjkhgfjdhbvfkj
               dghjlkjytwrqiudhygv bdgjkflw
             </p>
           </div>
+          
         </div>
+        <div class="vehic-principals">
+           <h1>Vehicules Populaires</h1>
+        </div>
+        <div class="vehicules">
+         <h1>Vehicules de la marques<?php echo $marque['marque_nom']; ?></h1>
+         
+        </div>
+      </div>
       <?php 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 
     }
