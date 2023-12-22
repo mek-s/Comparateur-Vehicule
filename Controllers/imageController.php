@@ -6,7 +6,7 @@ class imageController{
 
 
     private $model;
-
+    
     
     private function checkImage($image){
         $target_dir = "Images/";
@@ -42,9 +42,11 @@ class imageController{
     }
 
     public function createImageController($image,$params){
-        [$valid,$error]=$this->checkImage($image);
+  
+      [$valid,$error]=$this->checkImage($image);
+
         if ($valid) {
-            $this->model = new imageModel();
+          $this->model = new imageModel();
             $this->model-> createImageModel($params);
             return 'done';
         }else{
@@ -53,6 +55,7 @@ class imageController{
     }
 
     public function getImageController($id){
+  
       $params=array(
         1 => $id
      );

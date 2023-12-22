@@ -16,29 +16,27 @@ class homeView{
          ]?>
          <nav>
             <ul>
-               <?php foreach ($links as $link) {
-               ?>
+               <?php foreach ($links as $link) { ?>
                   <li>
                      <a href="/Comparateur-Vehicule/<?php echo $link['link'] ?>" class=""><?php echo $link['name'] ?></a>
                   </li>
                <?php
-               } ?>
-            </ul>
-         </nav><?php
+            }
+           echo '</ul></nav>';
 
    }
 
    public function showDiaporama(){
     ?>
       <div class="diaporama">
-         <img src="Images/images.jpg" alt="">
+         <img src="<?php echo $GLOBALS['base-url'];?>Images/images.png" alt="">
       </div>
     <?php
    }
 
    public function showZoneMarques(){?>
       <div class="marques-zone">
-         <?php 
+         <?php
          $v = new marqueView();
          $v->getMarquesPrincipalesView();
          ?>

@@ -7,14 +7,14 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Views/userViews/style.css">
+    <link rel="stylesheet" href="<?php echo $GLOBALS['base-url']; ?>Views/userViews/style.css">
     <title>Comparateur Vehicules</title>
 </head>
 <body>
 
 <header>
     <div id="logo">
-        <img src="Images/logo.png" alt="">
+        <img src="<?php echo $GLOBALS['base-url'];?>Images/logo.png" alt="">
     </div>
     <div class="right-content">
     <div class="contacts">
@@ -23,7 +23,7 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
           $contacts = $m->getContacts();
           foreach ($contacts as $contact) {
            echo '<a href="'.$contact['value'].'">
-                     <img src="Images/'.$contact['chemin'].'"/>
+                     <img src="'.$GLOBALS['base-url'].'Images/'.$contact['chemin'].'"/>
                 </a>';
           }
         ?>
