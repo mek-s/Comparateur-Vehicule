@@ -80,7 +80,7 @@ a{
     height: 30%;
 }
 
-.marques-zone{
+.marques-zone , .vehic-principals{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -91,15 +91,25 @@ a{
 }
 
 .marque {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     width: 170px;
     height: 100px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 1%;
 }
-.marque img  {
+
+.marque span{
+    font-size: large;
+    font-weight: bold;
+}
+.marque img , .vehicule img {
     width: 100%;
     height: auto;
-    object-fit: contain;
+    max-width: fit-content;
+    max-height: fit-content;
 }
 
 .marque-details{
@@ -108,6 +118,48 @@ a{
     align-items: center;
     gap: 100px;
 }
+
+.vehicules{
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    gap: 100px;
+}
+
+.vehicule{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+    width: 800px;
+    height: 180px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    overflow: hidden;
+}
+
+.vehicule .details{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+.vehicule img , .principals-images img{
+  width: 300px;
+  height: auto;
+}
+
+.vehic-principals{
+    width: 95%;
+    height: 210px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    gap: 50px;
+}
+
 
 .diaporama{
     display: flex;
