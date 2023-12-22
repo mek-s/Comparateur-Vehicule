@@ -56,6 +56,7 @@ CREATE TABLE vehicules(
   type ENUM('voiture','moto','camion'),
   version_id INT NOT NULL,
   annee YEAR,
+  principal BOOLEAN,
   supp BOOLEAN ,
   image_id INT,
   guide_id INT ,
