@@ -11,14 +11,15 @@ header , footer , .right-content{
 }
 
 footer{
+    justify-content: flex-start;
+    gap: 50%;
     height: 8%;
-    width: 85%;
+    width: 1150px;
     background-color: #0076a8;
     color: white;
     padding-left: 5px;
     padding-right: 5px;
-    position: fixed;
-    top: 92%;
+    border-radius: 12px;
 }
 
 nav {
@@ -29,6 +30,8 @@ nav {
     padding: 10px;
     border-radius: 12px;
     gap: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 nav ul , footer ul{
@@ -39,7 +42,7 @@ nav ul , footer ul{
     gap: 10px;
 }
 
-nav a:visited{
+nav a:visited {
    color: #ff9324;
 }
 
@@ -151,12 +154,13 @@ a{
 }
 
 .vehic-principals{
-    width: 95%;
+    width: 100px;
     height: 210px;
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    /* overflow-x: scroll;
     overflow-y: hidden;
     scroll-behavior: smooth;
+    scroll-snap-type: none; */
     gap: 50px;
 }
 
