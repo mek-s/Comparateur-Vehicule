@@ -26,7 +26,7 @@ class vehiculeController{
       $vehicule = $this->model-> getVehiculeModel($params);
       $note = $this->model-> getVehiculeNoteModel($params);
       $caracs = $this->model->getVehiculeCaracteristiquesModel($params);
-        
+    
       $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
     }
 

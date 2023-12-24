@@ -11,18 +11,24 @@ header , footer , .right-content{
     align-items: center;
 }
 
+/*********************************style footer*****************************/
 footer{
     justify-content: flex-start;
     gap: 50%;
     height: 8%;
-    width: 1150px;
+    width: 100%;
     background-color: #0076a8;
     color: white;
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 12px;
 }
+.footer-menu{
+  margin-right: 10%;
+  width: 100%;
+}
 
+/************************************style menu*******************************/
 nav {
     display: flex;
     flex-direction: row;
@@ -57,6 +63,7 @@ a{
     gap: 64px;
 }
 
+/************************************style header********************************/
 .contacts{
     display: flex;
     flex-direction: row;
@@ -81,10 +88,11 @@ a{
 }
 
 #logo img{
-    width: 30%;
-    height: 30%;
+    width: 50px;
+    height: auto;
 }
 
+/*********************************style diaporama********************************/
 .diaporama{
     display: flex;
     flex-direction: row;

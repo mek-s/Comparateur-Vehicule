@@ -23,7 +23,7 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
           $contacts = $m->getContacts();
           foreach ($contacts as $contact) {
            echo '<a href="'.$contact['value'].'">
-                     <img src="'.$GLOBALS['base-url'].'Images/'.$contact['chemin'].'"/>
+                     <img src="'.$GLOBALS['base-url'].'Images/contacts/'.$contact['chemin'].'"/>
                 </a>';
           }
         ?>

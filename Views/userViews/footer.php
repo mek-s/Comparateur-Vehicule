@@ -12,18 +12,20 @@ $links = [
 ?>
 </div>
 <footer>
-    <p>Copyright 2024</p>
-<ul>
-    <?php foreach ($links as $link) {
-    ?>
-    <li>
-            <a href="/Comparateur-vehicule/<?php echo $link['link'] ?>" class=""><?php echo $link['name'] ?></a>
-    </li>
-    <?php
-    } ?>
-</ul>
-
-
+    <div id="logo">
+            <img src="<?php echo $GLOBALS['base-url'];?>Images/logo.png" alt="">
+        </div>
+    <div class="footer-menu">
+        <ul>
+            <?php foreach ($links as $link) {
+            ?>
+            <li>
+                    <a href="<?php echo $GLOBALS['base-url'].$link['link'] ?>" class=""><?php echo $link['name'] ?></a>
+            </li>
+            <?php
+            } ?>
+        </ul>
+    </div>
 </footer>
 </body>
 </html>
