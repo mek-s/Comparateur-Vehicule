@@ -20,7 +20,8 @@ class vehiculeModel{
     
         $this->db->disconnect($cnx);
     }
-
+     
+    // recuperer les vehicules principals d'une marque
     public function getPrincipalesVehiculesModel($params){
         $cnx=$this->db->connect();
 
@@ -31,16 +32,7 @@ class vehiculeModel{
         return $vehicules;
     }
 
-    public function getVehiculeCracteristiques($params){
-        $cnx=$this->db->connect();
-
-        $query = "SELECT value,carac_nom FROM `carac_vehicule` NATURAL JOIN `vehicules` NATURAL JOIN `caracteristiques` WHERE vehicule_id= ?";
-        $caracs=$this->db->request($cnx,$query,$params);
-    
-        $this->db->disconnect($cnx);
-        return $caracs;
-    }
-
+    //Recuperer tous les vehicules d'une marques 
     public function getMarquesVehiculesModel($params){
         $cnx=$this->db->connect();
 
@@ -49,6 +41,51 @@ class vehiculeModel{
     
         $this->db->disconnect($cnx);
         return $vehicules;
+    }
+    
+    //Recuperer un vehicule 
+    public function getVehiculeModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom , v.marque_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom , m.marque_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.vehicule_id = ? AND vh.supp=0 ) veh ON veh.image_id=i.image_id; ";
+        $vehic=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $vehic[0];
+    }
+
+    //Recuperer toutes les caracteristiques d'un vehicule
+    public function getVehiculeCaracteristiquesModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT value, carac_nom, unite_mesure, i.chemin FROM `carac_vehicule` cv NATURAL JOIN `caracteristiques` c NATURAL JOIN( SELECT vehicule_id FROM `vehicules` WHERE vehicule_id = ?) v NATURAL JOIN `images` i";
+        $caracs=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $caracs;
+    }
+
+    // recuperer la note d'un vehicule
+    public function getVehiculeNoteModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT ROUND(AVG(n.note),1) AS NoteMoy FROM ( SELECT n.note FROM `note_vehicules` n WHERE n.vehicule_id = ? ) n";
+        $note=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $note[0];
+    }
+
+    //Recuperer les avis les plus aprecies d'un vehicule
+    public function getVehiculeTopAvisModel($params){
+
+        $cnx=$this->db->connect();
+
+        $query = "";
+        $avis=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $avis;
     }
 }
 

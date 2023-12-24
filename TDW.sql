@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
    user_id INT PRIMARY KEY AUTO_INCREMENT,
    user_nom VARCHAR(50) NOT NULL,
    user_prenom VARCHAR(50) NOT NULL,
@@ -9,13 +9,13 @@ CREATE TABLE users(
    mdp VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE admins(
+CREATE TABLE IF NOT EXISTS admins(
   username VARCHAR(60),
   pwd VARCHAR(20) NOT NULL,
    PRIMARY KEY(username)
 );
 
-CREATE TABLE marques(
+CREATE TABLE IF NOT EXISTS marques(
    marque_id INT PRIMARY KEY AUTO_INCREMENT,
    marque_nom VARCHAR(50) NOT NULL,
    pays_origine VARCHAR(50),
@@ -29,7 +29,7 @@ CREATE TABLE marques(
    FOREIGN KEY(guide_id) REFERENCES guides(guide_id)
 );
 
-CREATE TABLE modeles(
+CREATE TABLE IF NOT EXISTS modeles(
  modele_id INT PRIMARY KEY AUTO_INCREMENT,
  modele_nom VARCHAR(100),
  marque_id INT NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE modeles(
  FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
-CREATE TABLE versions(
+CREATE TABLE IF NOT EXISTS versions(
  version_id INT AUTO_INCREMENT,
  version_nom VARCHAR(100),
  modele_id INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE versions(
  FOREIGN KEY(modele_id) REFERENCES modeles(modele_id)
 );
 
-CREATE TABLE vehicules(
+CREATE TABLE IF NOT EXISTS vehicules(
   vehicule_id INT PRIMARY KEY AUTO_INCREMENT,
   vehicule_nom VARCHAR(100) NOT NULL,
   type ENUM('voiture','moto','camion'),
@@ -59,18 +59,20 @@ CREATE TABLE vehicules(
   principal BOOLEAN,
   supp BOOLEAN ,
   image_id INT,
-  guide_id INT ,
+  guide_id INT,
   FOREIGN KEY(image_id) REFERENCES images(image_id),
   FOREIGN KEY(version_id) REFERENCES version(version_id)
 );
 
-CREATE TABLE caracteristiques(
+CREATE TABLE IF NOT EXISTS caracteristiques(
  carac_id INT PRIMARY KEY AUTO_INCREMENT,
  carac_nom VARCHAR(40),
- unite_mesure VARCHAR(10)
+ unite_mesure VARCHAR(10),
+ image_id INT ,
+ FOREIGN KEY(image_id) REFERENCES images(image_id)
 );
 
-CREATE TABLE carac_vehicule(
+CREATE TABLE IF NOT EXISTS carac_vehicule(
  carac_id INT,
  vehicule_id INT,
  value VARCHAR(60),
@@ -79,7 +81,7 @@ CREATE TABLE carac_vehicule(
  FOREIGN KEY(vehicule_id) REFERENCES vehicules(vehicule_id)
 );
 
-CREATE TABLE comparaisons(
+CREATE TABLE IF NOT EXISTS comparaisons(
  vehicule_1 INT,
  vehicule_2 INT,
  vehicule_3 INT,
@@ -90,7 +92,7 @@ CREATE TABLE comparaisons(
  FOREIGN KEY(vehicule_1,vehicule_2,vehicule_3,vehicule_4) REFERENCES vehicules(vehicule_id,vehicule_id,vehicule_id,vehicule_id)
 );
 
-CREATE TABLE favoris_vehicules(
+CREATE TABLE IF NOT EXISTS favoris_vehicules(
   user_id INT,
   vehicule_id INT,
   PRIMARY KEY(user_id,vehicule_id),
@@ -98,7 +100,7 @@ CREATE TABLE favoris_vehicules(
   FOREIGN KEY(vehicule_id) REFERENCES vehicules(vehicule_id)
 );
 
-CREATE TABLE favoris_marques(
+CREATE TABLE IF NOT EXISTS favoris_marques(
   user_id INT,
   marque_id INT,
   PRIMARY KEY(user_id,marque_id),
@@ -106,7 +108,7 @@ CREATE TABLE favoris_marques(
   FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
-CREATE TABLE note_vehicules(
+CREATE TABLE IF NOT EXISTS note_vehicules(
   user_id INT,
   vehicule_id INT,
   note FLOAT,
@@ -115,7 +117,7 @@ CREATE TABLE note_vehicules(
   FOREIGN KEY(vehicule_id) REFERENCES vehicules(vehicule_id)
 );
 
-CREATE TABLE note_marques(
+CREATE TABLE IF NOT EXISTS note_marques(
   user_id INT,
   marque_id INT,
   note FLOAT,
@@ -124,7 +126,7 @@ CREATE TABLE note_marques(
   FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
-CREATE TABLE avis(
+CREATE TABLE IF NOT EXISTS avis(
   avis_id INT PRIMARY KEY  AUTO_INCREMENT,
   user_id INT NOT NULL,
   vehicule_id INT,
@@ -137,35 +139,35 @@ CREATE TABLE avis(
   FOREIGN KEY(marque_id) REFERENCES marques(marque_id)
 );
 
-CREATE TABLE guides(
+CREATE TABLE IF NOT EXISTS guides(
  guide_id INT PRIMARY KEY AUTO_INCREMENT,
  conseils CHAR,
  supp BOOLEAN
 );
 
-CREATE TABLE images(
+CREATE TABLE IF NOT EXISTS images(
  image_id INT PRIMARY KEY AUTO_INCREMENT,
  chemin VARCHAR(100)
 );
 
-CREATE TABLE news(
+CREATE TABLE IF NOT EXISTS news(
  news_id INT PRIMARY KEY AUTO_INCREMENT,
  title VARCHAR(100),
  descprition CHAR,
  supp BOOLEAN
 );
 
-CREATE TABLE pubs(
+CREATE TABLE IF NOT EXISTS pubs(
  pub_id INT PRIMARY KEY AUTO_INCREMENT,
  pub_link INT NOT NULL,
  supp BOOLEAN
 );
 
-CREATE TABLE diaporama(
+CREATE TABLE IF NOT EXISTS diaporama(
   diapo_id INT PRIMARY KEY AUTO_INCREMENT
 );
 
-CREATE TABLE style(
+CREATE TABLE IF NOT EXISTS style(
  style_id INT PRIMARY KEY AUTO_INCREMENT,
  primary_color VARCHAR(50),
  secondary_color VARCHAR(50),
@@ -173,7 +175,7 @@ CREATE TABLE style(
  supp BOOLEAN
 );
 
-CREATE TABLE contacts(
+CREATE TABLE IF NOT EXISTS contacts(
   contact_id int PRIMARY KEY AUTO_INCREMENT,
   contact_nom varchar(100),
   value varchar(100),

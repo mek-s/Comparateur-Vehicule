@@ -2,9 +2,11 @@ INSERT INTO `users`(`user_nom`, `user_prenom`, `email`, `sexe`, `date_naissance`
 INSERT INTO `users`(`user_nom`, `user_prenom`, `email`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES ('Mekki','Mohamed','email2@gmail.com','masculin',1991-02-23,'ettente','abc123');
 INSERT INTO `users`(`user_nom`, `user_prenom`, `email`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES ('Mekki','Ali','email3@gmail.com','masculin',1981-08-18,'ettente','123abc');
 INSERT INTO `admins` (`username`,`pwd`) VALUES ('admin','admin');
+/*contact's images*/
 INSERT INTO `images`(`chemin`) VALUES ('facebook.png');
 INSERT INTO `images`(`chemin`) VALUES ('email.png');
 INSERT INTO `images`(`chemin`) VALUES ('instagram.png');
+/*marques's images*/
 INSERT INTO `images`(`chemin`) VALUES ('ford.png');
 INSERT INTO `images`(`chemin`) VALUES ('hyundai.png');
 INSERT INTO `images`(`chemin`) VALUES ('skoda.jpg');
@@ -15,9 +17,17 @@ INSERT INTO `images`(`chemin`) VALUES ('suzuki.png');
 INSERT INTO `images`(`chemin`) VALUES ('toyota.png');
 INSERT INTO `images`(`chemin`) VALUES ('ford.jpg');
 INSERT INTO `images`(`chemin`) VALUES ('hyundai.png');
-INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('facebook','facebook.com',1);
-INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('email','gmail.com',2);
-INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('instagram','intagram.com',3);
+/*caracteristiques's images*/
+INSERT INTO `images` (`chemin`) VALUES ('Price.png'); 
+INSERT INTO `images` (`chemin`) VALUES ('Fuel.png'); 
+INSERT INTO `images` (`chemin`) VALUES ('Engine.png'); 
+INSERT INTO `images` (`chemin`) VALUES ('Transmission.png'); 
+INSERT INTO `images` (`chemin`) VALUES ('Conso.png'); 
+
+INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('facebook','http://www.facebook.com',1);
+INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('email','http://www.gmail.com',2);
+INSERT INTO `contacts` (`contact_nom`,`value`,`image_id`) VALUES ('instagram','http://www.intagram.com',3);
+/*les marques*/
 INSERT INTO `marques` (`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`, `supp`, `principale`, `guide_id`, `image_id`) VALUES ('Skoda', 'Tchequie', 'Boleslav', '1895', '0', '1', NULL, '11');
 INSERT INTO `marques` (`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`, `supp`, `principale`, `guide_id`, `image_id`) VALUES ('Hyundai', 'États-Unis', 'Californie', '1986', '0', '1', NULL, '10');
 INSERT INTO `marques` (`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`, `supp`, `principale`, `guide_id`, `image_id`) VALUES ('Ford', 'États-Unis', 'Michigan', '1903', '0', '1', NULL, '9');
@@ -221,74 +231,98 @@ INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (3, 20, 4
 INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (1, 40, 4);
 INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (2, 55, 4);
 
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Type Moteur');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Puissance Moteur');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Eonsommation Essance');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Type Essance');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Hauteur');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Longeur');
-INSERT INTO `caracteristiques` (`carac_nom`) VALUES ('Prix');
+INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Type Moteur', '', 20);
+INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Consommation', 'kpl', 22);
+INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Transmission', '', 21);
+INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Type Essance', '', 19);
+INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Prix', 'dzd', 18);
 
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 1, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 7, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 13, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 19, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 25, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 31, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 37, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 43, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 49, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 55, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 61, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 67, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 73, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 79, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 81, 'Electric');
-
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 1, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 7, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 13, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 19, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 25, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 31, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 37, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 43, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 49, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 55, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 61, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 67, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 73, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 79, 'Electric');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (5, 81, 'Electric');
-
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 1, '1,8');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 7, '1,7');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 13, '1,6');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 19, '1,5');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 25, '1,4');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 31, '1,3');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 37, '1,2');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 43, '1,8');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 49, '1,7');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 55, '1,6');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 61, '1,5');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 67, '1,4');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 73, '1,3');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 79, '1,2');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (6, 81, '1,1');
-
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 1, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 1, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 1, 'Diesel');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 1, '150 000 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 7, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 7, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 7, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 7, 'Diesel');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 7, '900 500 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 13, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 13, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 13, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 13, 'Diesel');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 13, '879 560 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 19, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 19, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 19, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 19, 'Diesel');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 19, '675 990 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 25, '289 350 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 31, '379 560 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 37, '479 560 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 43, '579 960 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 49, '679 860 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 55, '829 760 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 61, '839 660 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 67, '849 560 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 73, '859 460 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 79, '869 360 000');
-INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 81, '889 260 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 5, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 5, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 5, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 5, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 5, '289 350 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 20, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 20, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 20, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 20, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 20, '379 560 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 25, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 25, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 25, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 25, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 25, '479 560 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 37, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 37, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 37, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 37, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 37, '579 960 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 43, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 43, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 43, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 43, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 43, '679 860 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 49, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 49, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 49, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 49, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 49, '829 760 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 3, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 3, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 3, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 3, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 3, '839 660 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 61, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 61, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 61, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 61, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 61, '849 560 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 10, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 10, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 10, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 10, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 10, '859 460 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 40, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 40, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 40, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 40, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 40, '869 360 000');
+
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 9, 'Electric');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 9, '10.13');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 9, 'Automatic');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (4, 9, 'Diesel');
+INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (7, 9, '889 260 000');

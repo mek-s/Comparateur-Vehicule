@@ -1,6 +1,7 @@
 html {
     padding-left: 5%;
     padding-right: 5%;
+    background-color: #fafafa;
 }
 
 header , footer , .right-content{
@@ -30,8 +31,9 @@ nav {
     padding: 10px;
     border-radius: 12px;
     gap: 50px;
-    position: relative;
-    z-index: 1;
+    position: sticky ;
+    top: 5%;
+    z-index: 2500;
 }
 
 nav ul , footer ul{
@@ -83,6 +85,13 @@ a{
     height: 30%;
 }
 
+.diaporama{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*************************style page acceuil***************************/
 .marques-zone , .vehic-principals{
     display: flex;
     flex-direction: row;
@@ -92,6 +101,8 @@ a{
     gap: 10px;
     padding: 3%;
 }
+
+/*************************style page marques***************************/
 
 .marque {
     display: flex;
@@ -137,8 +148,9 @@ a{
     gap: 50px;
     width: 800px;
     height: 180px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: 0 1px 3px rgba(36,39,44,.15);
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .vehicule .details{
@@ -151,24 +163,103 @@ a{
 .vehicule img , .principals-images img{
   width: 300px;
   height: auto;
+  border-radius: 12px;
 }
 
 .vehic-principals{
-    width: 100px;
     height: 210px;
     flex-wrap: nowrap;
-    /* overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scroll-snap-type: none; */
-    gap: 50px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(36,39,44,.15);
+    gap: 30px;
+    padding: 3%;
+}
+
+.principals-images{
+    border: 0.5px solid grey;
 }
 
 
-.diaporama{
+/***************************Style page details vehicule*****************************/
+.infos-vehic{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 1%;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(36,39,44,.15);
+}
+
+.infos-vehic a{
+justify-self:flex-end;
+align-self: flex-end;
+background-color:#ff9324;
+color: #fafafa;
+border: 1px solid #ff9324;
+border-radius: 12px;
+padding: 10px;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-left: 2%;
+}
+
+.note{
+    display: flex;
+    align-items:flex-end;
+    gap: 10px;
+}
+
+.note span{
+    font-size: 40px;
+    font-weight: bold;
+}
+.note p{
+    margin: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.key-caracs{
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  border-radius: 12px;
+}
+
+.carac{
+    color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 5px;
+}
+.carac p {
+    padding: 0px;
+    margin: 0px;
+    font-size: small;
+}
+
+.carac p:nth-child(2){
+    font-weight: bold;
+}
+
+.carac img{
+width: 40px;
+height: auto;
+}
+
+.image{
+    width: 50%;
+    height: auto;
 }
 
 

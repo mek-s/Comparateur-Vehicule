@@ -5,7 +5,8 @@ $GLOBALS['base-url']='http://' . $_SERVER['HTTP_HOST'] . '/Comparateur-Vehicule/
 $routes = [
     '/Comparateur-Vehicule/' => 'homeController@showHomeController',
     '/Comparateur-Vehicule/marques'=> 'marqueController@showMarquesController',
-    '/Comparateur-Vehicule/marques/details' => 'marqueController@showMarqueDetailsController'
+    '/Comparateur-Vehicule/marques/details' => 'marqueController@showMarqueDetailsController',
+    '/Comparateur-Vehicule/vehicules/details' => 'vehiculeController@showVehiculeDetailsController',
 ];
 
 

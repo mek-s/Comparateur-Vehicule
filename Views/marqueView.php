@@ -87,7 +87,7 @@ class marqueView{
               </div>
               <div class="caracteristiques">
               <?php
-                 $caracteristiques = $this->model->getVehiculeCracteristiques(array(1 => $vehicule['vehicule_id']));
+                 $caracteristiques = $this->model->getVehiculeCaracteristiques(array(1 => $vehicule['vehicule_id']));
 
                  foreach ($caracteristiques as $carac) {?>
                    <p><?php echo $carac['carac_nom'].':'.$carac['value']; ?> </p>
@@ -104,6 +104,7 @@ class marqueView{
   private function showPrincipalVehicules($id){?>
     <div class="vehic-principals">
         <?php
+          // BIG MISTAKE !!!!!!! VIEW IS COMMUNICATING DIRECTLY TO MODEL!!!!!
           $Pvehicules = $this->model->getPrincipalesVehiculesModel(array(1 => $id));
           foreach ($Pvehicules as $vehicule) {?>
           <div class="principals-images">

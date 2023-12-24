@@ -5,8 +5,6 @@ class userView{
      
     private $controller;
 
-
-
     public function createUserView(){
       $this->controller = new userController();
 
@@ -32,7 +30,7 @@ class userView{
         <input type="password" name="mdp" id="">
         <input type="submit" name="create-user"value="Enregistrer">
       </form>
-    <?php
+     <?php
     } 
 
     public function blockUserView(){
