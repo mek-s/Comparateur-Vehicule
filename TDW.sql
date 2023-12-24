@@ -66,7 +66,8 @@ CREATE TABLE vehicules(
 
 CREATE TABLE caracteristiques(
  carac_id INT PRIMARY KEY AUTO_INCREMENT,
- carac_nom VARCHAR(40)
+ carac_nom VARCHAR(40),
+ unite_mesure VARCHAR(10)
 );
 
 CREATE TABLE carac_vehicule(
