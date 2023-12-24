@@ -1,12 +1,10 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
-require_once "C:\wamp64\www\Comparateur-Vehicule\Models\/vehiculeModel.php";
 
 class marqueView{
 
     private $controller;
-    private $model;
     private $cheminM;
     private $cheminV;
 
@@ -70,50 +68,17 @@ class marqueView{
       echo '</div>';
   }
 
-  private function showAllVehicules($id){?>
 
-      <div class="vehicules">
-          <?php
-           $vehicules = $this->model->getMarquesVehiculesModel(array(1 => $id));
-           foreach ($vehicules as $vehicule) {?>
-            <div class="vehicule">
-              <a href="/Comparateur-Vehicule/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']?>">
-               <img src="<?php echo $this->cheminV.$vehicule['chemin'];?>">
-              </a>
-              <div class="details">
-                <p>Nom : <?php echo $vehicule['vehicule_nom']; ?></p>
-                <p>Modele: <?php echo $vehicule['modele_nom']; ?></p>
-                <p>Version :<?php echo $vehicule['version_nom']; ?></p>
-              </div>
-              <div class="caracteristiques">
-              <?php
-                 $caracteristiques = $this->model->getVehiculeCaracteristiques(array(1 => $vehicule['vehicule_id']));
-
-                 foreach ($caracteristiques as $carac) {?>
-                   <p><?php echo $carac['carac_nom'].':'.$carac['value']; ?> </p>
-                 <?php }
-              ?>
-            </div>
-         </div>
-          <?php }
-          ?>
-        </div>
-    <?php 
-  }
-
-  private function showPrincipalVehicules($id){?>
+  private function showPrincipalVehicules($Pvehicules){?>
     <div class="vehic-principals">
         <?php
-          // BIG MISTAKE !!!!!!! VIEW IS COMMUNICATING DIRECTLY TO MODEL!!!!!
-          $Pvehicules = $this->model->getPrincipalesVehiculesModel(array(1 => $id));
           foreach ($Pvehicules as $vehicule) {?>
           <div class="principals-images">
             <a href="/Comparateur-Vehicule/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']?>">
               <img src="<?php echo $this->cheminV.$vehicule['chemin']; ?>" alt="">
             </a>
             </div>
-            
-          <?php
+            <?php
           }
         ?> 
       </div>
@@ -141,18 +106,49 @@ class marqueView{
    <?php 
   }
 
-  public function showMarqueDetailsView($marque){
+  private function showAllVehicules($vehicules){
+    $this->controller = new marqueController(); ?>
+
+    <div class="vehicules">
+        <?php
+      
+         foreach ($vehicules as $vehicule) {?>
+          <div class="vehicule">
+            <a href="/Comparateur-Vehicule/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']?>">
+             <img src="<?php echo $this->cheminV.$vehicule['chemin'];?>">
+            </a>
+            <div class="details">
+              <p>Nom : <?php echo $vehicule['vehicule_nom']; ?></p>
+              <p>Modele: <?php echo $vehicule['modele_nom']; ?></p>
+              <p>Version :<?php echo $vehicule['version_nom']; ?></p>
+            </div>
+            <div class="caracteristiques">
+            <?php
+               $caracs = $this->controller->getVehiculeCaracsController(array(1 => $vehicule['vehicule_id']));
+               foreach ($caracs as $carac) {?>
+                 <p><?php echo $carac['carac_nom'].':'.$carac['value']; ?> </p>
+               <?php }
+            ?>
+          </div>
+       </div>
+        <?php }
+        ?>
+      </div>
+   <?php 
+  }
+
+  public function showMarqueDetailsView($marque,$Pvehicules,$vehicules){
 
     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
     $home = new homeView();
-    $this->model = new vehiculeModel();
+   
     $home->showMenu();?>
     <div class="details-container">
       <?php $this->showMarqueInfos($marque);?>
       <h1>Vehicules Principales</h1>
-      <?php $this->showPrincipalVehicules($marque['marque_id']);?>
+      <?php $this->showPrincipalVehicules($Pvehicules);?>
       <h1>Vehicules de la marques <?php echo $marque['marque_nom']; ?></h1>
-      <?php $this->showAllVehicules($marque['marque_id']);?>
+      <?php $this->showAllVehicules($vehicules);?>
     </div>
     <?php 
     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 

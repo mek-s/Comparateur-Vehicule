@@ -1,7 +1,9 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Models\marqueModel.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Models\/vehiculeModel.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\marqueView.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
+
 
 
 class marqueController{
@@ -34,23 +36,33 @@ class marqueController{
       
    }
 
-    public function showMarqueDetailsController(){
-      $this->model = new marqueModel();
-      $this->view = new marqueView();
-
-      $request_uri = $_SERVER['REQUEST_URI'];
-      $uri_parts = parse_url($request_uri);
-      parse_str($uri_parts['query'],$results);
+   public function getVehiculeCaracsController($params){
+      $this->model = new vehiculeModel();
+      return $this->model-> getVehiculeCaracteristiquesModel($params);
+   }
    
-      $params = array(
-         1=> $results['marque']
-      );
-      
-      $marque = $this->model-> getMarqueModel($params);
-        
-      $this->view->showMarqueDetailsView($marque[0]);
+   public function showMarqueDetailsController(){
+   $this->model = new marqueModel();
+   $this->view = new marqueView();
 
-    }
+   $request_uri = $_SERVER['REQUEST_URI'];
+   $uri_parts = parse_url($request_uri);
+   parse_str($uri_parts['query'],$results);
+
+   $params = array(
+      1=> $results['marque']
+   );
+   
+   $marque = $this->model-> getMarqueModel($params);
+
+   $this->model = new vehiculeModel();
+
+   $vehicules = $this->model->getMarquesVehiculesModel($params);
+   $Pvehicules = $this->model->getPrincipalesVehiculesModel($params);
+      
+   $this->view->showMarqueDetailsView($marque,$Pvehicules,$vehicules);
+
+   }
 }
 
 

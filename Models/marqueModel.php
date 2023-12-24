@@ -56,7 +56,7 @@ class marqueModel{
     
         $this->db->disconnect($cnx);
 
-        return $marque;
+        return $marque[0];
     }
 }
 
