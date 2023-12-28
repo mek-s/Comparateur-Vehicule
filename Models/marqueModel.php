@@ -21,6 +21,7 @@ class marqueModel{
 
     }
 
+    // Recuperer les marques principales
     public function getMarquesPrincipalesModel(){
        
         $cnx=$this->db->connect();
@@ -34,6 +35,7 @@ class marqueModel{
         return $principales;
     }
 
+    // Recuperer toutes les marques
     public function getMarquesModel(){
       
         $cnx=$this->db->connect();
@@ -47,6 +49,7 @@ class marqueModel{
         return $marques;
     }
 
+    // Recuperer une marque
     public function getMarqueModel($params){
        
         $cnx=$this->db->connect();
@@ -57,6 +60,17 @@ class marqueModel{
         $this->db->disconnect($cnx);
 
         return $marque[0];
+    }
+
+    // recuperer la note d'une marque
+    public function getMarqueNoteModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT ROUND(AVG(n.note),1) AS NoteMoy FROM ( SELECT n.note FROM `note_marques` n WHERE n.marque_id = ? ) n";
+        $note=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $note[0];
     }
 }
 

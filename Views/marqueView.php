@@ -13,6 +13,7 @@ class marqueView{
       $this->cheminV = $GLOBALS['base-url'] . 'Images/vehicules/';
     }
 
+  // Le formulaire de creation d'une nouvelle marque
   public function createMarqueView(){
     $this->controller = new marqueController();
     if (isset($_POST['create-marque'])) {
@@ -34,7 +35,8 @@ class marqueView{
     <?php 
   } 
 
-  public function getMarquesPrincipalesView(){
+  // Afficher les marques principales
+  public function showMarquesPrincipalesView(){
     $this->controller = new marqueController();
     $principales = $this->controller->getMarquesPrincipalesController();
 
@@ -49,6 +51,7 @@ class marqueView{
     }
   }
 
+  // afficher la page de marques 
   public function showMarquesView($marques){ ?>
     
     <div class="marques-zone">
@@ -68,7 +71,7 @@ class marqueView{
       echo '</div>';
   }
 
-
+  // afficher les principals vehicules d'une marque
   private function showPrincipalVehicules($Pvehicules){?>
     <div class="vehic-principals">
         <?php
@@ -86,26 +89,29 @@ class marqueView{
     <?php 
   }
   
-  private function showMarqueInfos($marque){ ?>
+  // afficher les informations d'une marque
+  private function showMarqueInfos($marque){ 
+    $this->controller = new marqueController();
+    $note = $this->controller->getMarqueNoteController($marque['marque_id']);?>
+
     <div class="marque-details">
-    <div class="marque">
-      <img src="<?php echo $this->cheminM.$marque['chemin']; ?>">
-    </div>
-    <div class="infos">
-      <h3>La marque <?php echo $marque['marque_nom']; ?></h3>
-      <h3>Fonde en <?php echo $marque['annee_creation']; ?></h3>
-      <h3>dans <?php echo $marque['pays_origine']; ?>,</h3>
-      <h3><?php echo $marque['siege_social']; ?></h3>
-      <p>dfdghjhkjgfghh
-        rtergjkhgfjdhbvfkj
-        dghjlkjytwrqiudhygv bdgjkflw
-      </p>
-    </div>
-    
+      <div class="marque">
+        <img src="<?php echo $this->cheminM.$marque['chemin']; ?>">
+      </div>
+      <div class="infos">
+        <h3>La marque <?php echo $marque['marque_nom']; ?> Fonde en <?php echo $marque['annee_creation']; ?> dans <?php echo $marque['pays_origine']; ?>,<?php echo $marque['siege_social']; ?></h3>
+        <div class="note">
+              <img src="<?php echo $GLOBALS['base-url'].'Images/star.png';?>" alt="">
+              <span><?php echo $note['NoteMoy']?></span>
+              <p>/ 5  base sur revues</p>
+        </div>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+      </div>
     </div>
    <?php 
   }
 
+  // afficher tous les vehicules d'une marque
   private function showAllVehicules($vehicules){
     $this->controller = new marqueController(); ?>
 
@@ -137,6 +143,7 @@ class marqueView{
    <?php 
   }
 
+  // Afficher les details d'une marque
   public function showMarqueDetailsView($marque,$Pvehicules,$vehicules){
 
     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");

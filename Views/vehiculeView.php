@@ -64,16 +64,8 @@ class vehiculeView{
     }
 
     private function showCaracteristiquesVehicule($caracs){?>
-      <?php print_r($caracs); ?>
-      <div class="key-caracs">
-      <?php 
-       foreach ($caracs as $carac) {?>
-         <div class="carac">
-           <p><?php echo $carac['carac_nom'];?> : <?php echo $carac['value'];?></p>
-         </div>
-      <?php }
+     <div>
       
-      ?>
      </div>
      <?php 
     }
@@ -87,6 +79,7 @@ class vehiculeView{
     }
 
     public function showVehiculeDetailsView($vehicule,$note,$caracs){
+     
       $home = new homeView();
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");

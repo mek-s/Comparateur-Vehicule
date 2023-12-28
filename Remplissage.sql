@@ -197,7 +197,27 @@ INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`, `princip
 INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`, `principal`, `supp`, `image_id`, `guide_id`) VALUES ('Santa Fe Limited 2.2 CRDi', 'voiture', 27, '2022', 1, 0, NULL, NULL);
 INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`, `principal`, `supp`, `image_id`, `guide_id`) VALUES ('Santa Fe Limited 2.2 CRDi', 'voiture', 27, '2023', 1, 0, NULL, NULL);
 
+/*Notes marques*/
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('1', '3', '3.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('2', '3', '2.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('3', '3', '4');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('1', '4', '2.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('2', '4', '3');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('3', '4', '3.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('1', '5', '5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('2', '5', '4');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('3', '5', '4.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('1', '6', '1.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('2', '6', '2.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('3', '6', '3.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('1', '7', '3');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('2', '7', '3.5');
+INSERT INTO `note_marques` (`user_id`, `marque_id`, `note`) VALUES ('3', '7', '5');
 
+
+
+
+/*Notes vehicules*/
 INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (1, 1, 4);
 INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (2, 4, 4);
 INSERT INTO `note_vehicules` (`user_id`, `vehicule_id`, `note`) VALUES (3, 7, 4);
