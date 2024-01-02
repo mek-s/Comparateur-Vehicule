@@ -92,6 +92,7 @@ body {
   /*****************style main content ***************************/
   #mainContent{
     grid-area: mainContent;
+    padding: 5%;
   }
   /*****************style Breadcrumb pagination ******************/
 
@@ -117,3 +118,41 @@ body {
     color: #01447e;
     text-decoration: underline;
   }
+
+  /****************style page principale***************************/
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items:center;
+  gap: 100px;
+}
+
+.col{
+  flex: 1;
+  position: relative;
+  margin: 0 0 10px;
+  padding: 20px;
+  width: 300px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(36,39,44,.15);
+}
+
+.col a{
+  width: 300px;
+  height: auto;
+  margin: auto;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  color: #0076A8;
+}
+.col img {
+  width: 100%;
+  height: auto;
+  max-width: fit-content;
+  max-height: fit-content;
+}

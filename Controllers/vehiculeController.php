@@ -30,6 +30,19 @@ class vehiculeController{
       $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
     }
 
+    public function showAdminVehiculeController() {
+      $this->model = new vehiculeModel();
+      $this->view = new vehiculeView();
+
+      $params= array();
+      $vehicules = $this->model-> getVehiculesModel($params);
+      
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+       $this->view->showVehiculeTableView($vehicules);
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+      
+    }
+
 
 }
 

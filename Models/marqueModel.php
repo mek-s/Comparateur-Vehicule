@@ -36,11 +36,10 @@ class marqueModel{
     }
 
     // Recuperer toutes les marques
-    public function getMarquesModel(){
+    public function getMarquesModel($params){
       
         $cnx=$this->db->connect();
-        $params=array();
-
+        
         $query = "SELECT * FROM marques NATURAL JOIN images WHERE supp = 0";
         $marques = $this->db->request($cnx,$query,$params);
     
@@ -71,6 +70,17 @@ class marqueModel{
     
         $this->db->disconnect($cnx);
         return $note[0];
+    }
+
+    // recuperer les modeles d'un marques
+    public function getModelesModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `modeles` WHERE supp = 0 AND marque_id =?";
+        $modeles=$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $modeles;
     }
 }
 
