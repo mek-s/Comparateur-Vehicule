@@ -6,6 +6,18 @@ body {
     grid-template-rows: auto; /* Allow rows to adjust based on content */
     grid-template-areas: "sidebar mainContent";
   }
+
+  /**********style logo ************/
+
+  #logo{
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-bottom: 80px;
+  }
+  #logo img{
+    width: 80px;
+    height: auto;
+}
   
   /*********************style sidebar ********************/
   .sidebar {
@@ -34,6 +46,9 @@ body {
   .sidebar a:hover:not(.active) , .dropdown-btn:hover{
     background-color: #0076A8;
     color: white;
+  }
+  .sidebar>a:last-child{
+    margin-top: 100px;
   }
   
   div.content {

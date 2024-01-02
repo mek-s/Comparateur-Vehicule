@@ -1,7 +1,7 @@
 <?php
 require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php");
 
-class homeController{
+class userHomeController{
 
     private $view;  
 

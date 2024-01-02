@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?php echo $GLOBALS['base-url']; ?>Views/adminViews/style.css">
     <title>Adminstration comparateur vehicules</title>
 </head>
 <body>
 <div class="sidebar">
-    <div class="logo">
-        <img src="Images/log.png" alt="">
+    <div id="logo">
+        <img src="<?php echo $GLOBALS['base-url'];?>Images/logo.png" alt="">
     </div>
   <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
   <a href="#vehicules"><i class="fa fa-car"></i> Vehicules</a>
@@ -26,6 +26,7 @@
     <a href="#"> Diaporama</a>
     <a href="#"> Style</a>
   </div>
+  <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
 </div>
 
 <script>
@@ -47,11 +48,6 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 <div id="mainContent">
-<ul class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Pictures</a></li>
-  <li><a href="#">Summer 15</a></li>
-  <li>Italy</li>
-</ul>
+
 
 
