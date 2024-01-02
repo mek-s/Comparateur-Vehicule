@@ -18,7 +18,7 @@ class homeView{
             <ul>
                <?php foreach ($links as $link) { ?>
                   <li>
-                     <a href="/Comparateur-Vehicule/<?php echo $link['link'] ?>" class=""><?php echo $link['name'] ?></a>
+                     <a href="/Comparateur-Vehicule/<?php echo $link['link'] ?>"><?php echo $link['name'] ?></a>
                   </li>
                <?php
             }
@@ -38,14 +38,14 @@ class homeView{
       <div class="marques-zone">
          <?php
          $v = new marqueView();
-         $v->getMarquesPrincipalesView();
+         $v->showMarquesPrincipalesView();
          ?>
       </div><?php
    }
 
    public function showZoneComparateur(){?>
       <div class="comparateur-zone">
-  
+         <h1>Comparateur</h1>
       </div><?php
    }
 
@@ -62,6 +62,7 @@ class homeView{
       $this->showDiaporama();
       $this->showMenu();
       $this->showZoneMarques();
+      $this->showZoneComparateur();
       $this->showZoneComparaisons();
       require_once("footer.php");
    }

@@ -12,19 +12,19 @@
     <div id="logo">
         <img src="<?php echo $GLOBALS['base-url'];?>Images/logo.png" alt="">
     </div>
-  <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="#vehicules"><i class="fa fa-car"></i> Vehicules</a>
-  <a href="#users"><i class="fa fa-users"></i> Utilisateurs</a>
-  <a href="#contact"><i class="fa fa-commenting-o"></i> Avis</a>
-  <a href="#contact"><i class="fa fa-newspaper-o"></i> News</a>
-  <button class="dropdown-btn"> <i class="fa fa-cog"></i>  Parametres
+  <a href="/Comparateur-Vehicule/admin"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="/Comparateur-Vehicule/admin/vehicules"><i class="fa fa-car"></i> Vehicules</a>
+  <a href="/Comparateur-Vehicule/admin/avis"><i class="fa fa-commenting-o"></i> Avis</a>
+  <a href="/Comparateur-Vehicule/admin/news"><i class="fa fa-newspaper-o"></i> News</a>
+  <a href="/Comparateur-Vehicule/admin/users"><i class="fa fa-users"></i> Utilisateurs</a>
+  <button class="dropdown-btn"> <i class="fa fa-sliders"></i>  Parametres
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="#"> Guides</a>
-    <a href="#"> Contacts</a>
-    <a href="#"> Diaporama</a>
-    <a href="#"> Style</a>
+    <a href="/Comparateur-Vehicule/admin/parametres/guides"> Guides</a>
+    <a href="/Comparateur-Vehicule/admin/parametres/contacts"> Contacts</a>
+    <a href="/Comparateur-Vehicule/admin/parametres/diaporama"> Diaporama</a>
+    <a href="/Comparateur-Vehicule/admin/parametres/style"> Style</a>
   </div>
   <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
 </div>

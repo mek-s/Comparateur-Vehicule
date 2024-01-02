@@ -3,10 +3,22 @@
 $GLOBALS['base-url']='http://' . $_SERVER['HTTP_HOST'] . '/Comparateur-Vehicule/';
 // Define routes
 $routes = [
-    '/Comparateur-Vehicule/' => 'homeController@showHomeController',
+    '/Comparateur-Vehicule/' => 'userHomeController@showHomeController',
     '/Comparateur-Vehicule/marques'=> 'marqueController@showMarquesController',
     '/Comparateur-Vehicule/marques/details' => 'marqueController@showMarqueDetailsController',
     '/Comparateur-Vehicule/vehicules/details' => 'vehiculeController@showVehiculeDetailsController',
+    '/Comparateur-Vehicule/compare' => 'compareController@showComparateurController',
+    '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/marques' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
+    '/Comparateur-Vehicule/admin/users' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/avis' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/news' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',
 ];
 
 
