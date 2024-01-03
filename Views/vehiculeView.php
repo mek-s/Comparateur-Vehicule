@@ -81,31 +81,86 @@ class vehiculeView{
     public function addVehiculeView(){
       $this->controller = new vehiculeController();
         if (isset($_POST['create-vehic'])) {
+    
           $params = array(
             1   => $_POST['nom'],
             2   => $_POST['type'],
-            3   => $_POST['marque']
+            3   => $_POST['version'],
+            4   => $_POST['annee']
           );
          
-          $this->controller->addVehiculeController($params);
+          $msg = $this->controller->addVehiculeController($params);
+          echo $msg;
         } ?>
-        <form method="POST">
-          <input type="text" name="nom">
-          <select name="type">
-              <option value="voiture">Voiture</option>
-              <option value="moto">Moto</option>
-              <option value="camion">Camion</option>
-          </select>
-          <input type="number" name="marque">
-          <input type="submit" name="create-vehic"value="Enregistrer">
+        <form method="POST" >
+          <div class="input">
+            <label>Nom vehicule</label>
+            <input type="text" name="nom" required>
+          </div>
+
+          <div class="input">
+            <label>Type vehicule</label>
+            <select name="type" required>
+                <option value="voiture">Voiture</option>
+                <option value="moto">Moto</option>
+                <option value="camion">Camion</option>
+            </select>
+          </div>
+          <div class="input">
+            <label>La marque du vehicule</label>
+            <input type="number" name="version" required>
+          </div>
+          <div class="input">
+            <label>L'annee de creation du vehicule</label>
+            <input type="number" name="annee" min="1900" max="2100" required>
+          </div>
+
+          <input type="submit" name="create-vehic" value="Enregistrer">
         </form>
       <?php 
       
     }
 
-    public function showVehiculeTableView($vehicules) {
-      echo '<h1>Vehicules table</h1>';
-    }
+    public function showVehiculeTableView($vehicules) {?>
+      <div class="">
+      <h1>Gestion des Vehicules</h1>
+      <button id="myBtn"><i class="fa fa-plus-circle"></i> Ajouter un vehicule</button>
+      </div>
+
+      <div class="AddForm">
+          <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h1>Ajouter un vehicule</h1>
+              <?php $this->addVehiculeView();?>
+            </div>
+
+          </div>
+      </div>
+
+      <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+         
+      </script>
+    <?php }
 }
 
 ?>

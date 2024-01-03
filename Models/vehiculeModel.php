@@ -14,11 +14,22 @@ class vehiculeModel{
         
         $cnx=$this->db->connect();
 
-        //$query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `marque_id`, `modele`, `version`, `annee`, `longueur`, `largeur`, `hauteur`, `moteur`, `consomation`, `performance`, `image_id`, `guide_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `marque_id`) VALUES (?,?,?)';
+        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`, `image_id`, `guide_id`) VALUES (?, ?, ? , ?, NULL, NULL)';
         $this->db->request($cnx,$query,$params);
     
         $this->db->disconnect($cnx);
+        return 'done';
+    }
+
+    // recuperer tous les vehicules 
+    public function getVehiculesModel($params)  {
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `vehicules`";
+        $vehicules =$this->db->request($cnx,$query,$params);
+    
+        $this->db->disconnect($cnx);
+        return $vehicules;
     }
      
     // recuperer les vehicules principals d'une marque
