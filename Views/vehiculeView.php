@@ -1,5 +1,6 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\/vehiculeController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\imageController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
 
 class vehiculeView{
@@ -79,20 +80,48 @@ class vehiculeView{
 
     
     public function addVehiculeView(){
-      $this->controller = new vehiculeController();
         if (isset($_POST['create-vehic'])) {
-    
-          $params = array(
-            1   => $_POST['nom'],
-            2   => $_POST['type'],
-            3   => $_POST['version'],
-            4   => $_POST['annee']
-          );
-         
-          $msg = $this->controller->addVehiculeController($params);
-          echo $msg;
+
+          // inserer l'imeg du vehicule
+          $this->controller = new imageController();
+          $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+          $dir = 'Images/vehicules';
+          
+          $imgId = $this->controller->createImageController($_FILES,$dir,$params);
+
+           echo "<p>Une erreur est suevenu : $imgId</p>";
+          
+            // inserer le vehicule
+            $this->controller = new vehiculeController();
+              $params = array(
+                1   => $_POST['nom'],
+                2   => $_POST['type'],
+                3   => $_POST['version'],
+                4   => $_POST['annee'],
+                5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+                6   => $imgId
+              );
+              $vehicId = $this->controller->createVehiculeController($params);
+
+              //inserer les caracteristiques du vehicule
+               
+              $caracIds = $_POST['carac_id'];
+              $values = $_POST['value'];
+
+              foreach ($caracIds as $index => $caracId) {
+                $params = array(
+                    1 => $caracId,
+                    2 => $vehicId,
+                    3 => $values[$index],
+                );
+
+                $this->controller->createVehiculeCaracsController($params);
+            }
+  
+          
         } ?>
-        <form method="POST" >
+        <h1>Ajouter un nouvel vehicule</h1>
+        <form method="POST" enctype="multipart/form-data" >
           <div class="input">
             <label>Nom vehicule</label>
             <input type="text" name="nom" required>
@@ -114,6 +143,26 @@ class vehiculeView{
             <label>L'annee de creation du vehicule</label>
             <input type="number" name="annee" min="1900" max="2100" required>
           </div>
+          <div class="input">
+            <label>Image du vehicule</label>
+            <input type="file" name="image" id="image" >
+          </div> 
+          <?php
+            $this->controller = new vehiculeController();
+
+            $caracs = $this->controller->getCaracsController();
+            foreach ($caracs as $carac) { ?>
+              <div class="input">
+                <label><?php echo $carac['carac_nom'];?></label>
+                <input type="hidden" name="carac_id[]" value="<?php echo $carac['carac_id']; ?>">
+                <input type="text" name="value[]">
+              </div> 
+           <?php }
+          ?>
+          <div class="input">
+            <label>Vehicule Principale ? </label>
+            <input type="checkbox" name="principal">
+          </div>
 
           <input type="submit" name="create-vehic" value="Enregistrer">
         </form>
@@ -123,42 +172,30 @@ class vehiculeView{
 
     public function showVehiculeTableView($vehicules) {?>
       <div class="">
-      <h1>Gestion des Vehicules</h1>
-      <button id="myBtn"><i class="fa fa-plus-circle"></i> Ajouter un vehicule</button>
+        <h1>Gestion des Vehicules</h1>
+        <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
       </div>
 
-      <div class="AddForm">
-          <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h1>Ajouter un vehicule</h1>
-              <?php $this->addVehiculeView();?>
-            </div>
-
-          </div>
+      <div class="vehic-table">
+        <table>
+          <thead>
+           <th>Nom</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>My name</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <script>
-        var modal = document.getElementById("myModal");
         var btn = document.getElementById("myBtn");
-        var span = document.getElementsByClassName("close")[0];
-
+  
         btn.onclick = function() {
           modal.style.display = "block";
         }
-        
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-         
+     
       </script>
     <?php }
 }

@@ -9,16 +9,26 @@ class vehiculeModel{
         $this->db = new bdd();
     }
 
-
-    public function addVehiculeModel($params){
+    // ajouter un nouvel vehicule
+    public function createVehiculeModel($params){
         
         $cnx=$this->db->connect();
 
-        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`, `image_id`, `guide_id`) VALUES (?, ?, ? , ?, NULL, NULL)';
-        $this->db->request($cnx,$query,$params);
+        $query = 'INSERT INTO `vehicules` (`vehicule_nom`, `type`, `version_id`, `annee`,`principal`, `image_id`, `guide_id`) VALUES (?, ?, ? , ?, ?, ?, NULL)';
+        $id = $this->db->request($cnx,$query,$params,true);
     
         $this->db->disconnect($cnx);
-        return 'done';
+        return $id;
+    }
+
+    // ajouter les caracteristiques du vehicule
+    public function createVehiculeCaracsModel($params){
+        $cnx=$this->db->connect();
+
+        $query = 'INSERT INTO `carac_vehicule` (`carac_id`, `vehicule_id`, `value`) VALUES (?,?,?)';
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
     }
 
     // recuperer tous les vehicules 
@@ -26,7 +36,7 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT * FROM `vehicules`";
-        $vehicules =$this->db->request($cnx,$query,$params);
+        $vehicules =$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $vehicules;
@@ -37,7 +47,7 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT i.chemin , veh.vehicule_id FROM `images` i JOIN( SELECT vh.image_id , vh.vehicule_id FROM `vehicules` vh JOIN( SELECT v.version_id FROM `versions` v JOIN ( SELECT md.modele_id FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 AND vh.principal=1 ) veh ON veh.image_id=i.image_id LIMIT 4";
-        $vehicules =$this->db->request($cnx,$query,$params);
+        $vehicules =$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $vehicules;
@@ -48,7 +58,7 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 ) veh ON veh.image_id=i.image_id";
-        $vehicules = $this->db->request($cnx,$query,$params);
+        $vehicules = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $vehicules;
@@ -59,18 +69,29 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom , v.marque_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom , m.marque_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.vehicule_id = ? AND vh.supp=0 ) veh ON veh.image_id=i.image_id; ";
-        $vehic=$this->db->request($cnx,$query,$params);
+        $vehic=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $vehic[0];
     }
 
+    //Recuperer toutes les caracteristiques 
+    public function getCaracteristiquesModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `caracteristiques`";
+        $caracs=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $caracs;
+    }
+    
     //Recuperer toutes les caracteristiques d'un vehicule
     public function getVehiculeCaracteristiquesModel($params){
         $cnx=$this->db->connect();
 
         $query = "SELECT value, carac_nom, unite_mesure, i.chemin FROM `carac_vehicule` cv NATURAL JOIN `caracteristiques` c NATURAL JOIN( SELECT vehicule_id FROM `vehicules` WHERE vehicule_id = ?) v NATURAL JOIN `images` i";
-        $caracs=$this->db->request($cnx,$query,$params);
+        $caracs=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $caracs;
@@ -81,7 +102,7 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT ROUND(AVG(n.note),1) AS NoteMoy FROM ( SELECT n.note FROM `note_vehicules` n WHERE n.vehicule_id = ? ) n";
-        $note=$this->db->request($cnx,$query,$params);
+        $note=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $note[0];
@@ -93,7 +114,7 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = "";
-        $avis=$this->db->request($cnx,$query,$params);
+        $avis=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $avis;

@@ -14,17 +14,17 @@ class imageModel{
         $cnx=$this->db->connect();
 
         $query = "INSERT INTO `images`(`chemin`) VALUES (?)";
-        $this->db->request($cnx,$query,$params);
+        $id =$this->db->request($cnx,$query,$params,true);
     
         $this->db->disconnect($cnx);
-
+        return $id;
     }
 
     public function getImageModel($params){
         $cnx=$this->db->connect();
         
         $query = "SELECT chemin FROM images WHERE image_id = ?";
-        $chemin = $this->db->request($cnx,$query,$params);
+        $chemin = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 

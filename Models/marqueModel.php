@@ -15,7 +15,7 @@ class marqueModel{
 
         //$query = "INSERT INTO `marques`(`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`, `image_id`, `guide_id`) VALUES (?,?,?,?,?,?)";
         $query = "INSERT INTO `marques`(`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`) VALUES (?,?,?,?)";
-        $this->db->request($cnx,$query,$params);
+        $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 
@@ -28,7 +28,7 @@ class marqueModel{
         $params=array();
 
         $query = "SELECT * FROM marques NATURAL JOIN images WHERE principale = 1 AND supp = 0";
-        $principales = $this->db->request($cnx,$query,$params);
+        $principales = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 
@@ -41,7 +41,7 @@ class marqueModel{
         $cnx=$this->db->connect();
         
         $query = "SELECT * FROM marques NATURAL JOIN images WHERE supp = 0";
-        $marques = $this->db->request($cnx,$query,$params);
+        $marques = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 
@@ -54,7 +54,7 @@ class marqueModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT * FROM marques NATURAL JOIN images WHERE supp = 0 AND marque_id=?";
-        $marque = $this->db->request($cnx,$query,$params);
+        $marque = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 
@@ -66,7 +66,7 @@ class marqueModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT ROUND(AVG(n.note),1) AS NoteMoy FROM ( SELECT n.note FROM `note_marques` n WHERE n.marque_id = ? ) n";
-        $note=$this->db->request($cnx,$query,$params);
+        $note=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $note[0];
@@ -77,7 +77,7 @@ class marqueModel{
         $cnx=$this->db->connect();
 
         $query = "SELECT * FROM `modeles` WHERE supp = 0 AND marque_id =?";
-        $modeles=$this->db->request($cnx,$query,$params);
+        $modeles=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         return $modeles;

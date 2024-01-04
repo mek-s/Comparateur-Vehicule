@@ -6,11 +6,42 @@ class vehiculeController{
  
     private $model;
 
-    public function addVehiculeController($params){
+    // afficher le formulaire de craetion de vehicule
+    public function showVehiculeFormController(){
+      $this->view = new vehiculeView();
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+       $this->view->addVehiculeView();
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+    }
+    
+    // creer un nouvel vehicule
+    public function createVehiculeController($params){
         $this->model = new vehiculeModel();
-        $this->model->addVehiculeModel($params);   
+        return $this->model->createVehiculeModel($params);   
     }
 
+    // enregistrer les caracteristiques du nouvel vehicule
+    public function createVehiculeCaracsController($params){
+      $this->model = new vehiculeModel();
+      return $this->model->createVehiculeCaracsModel($params);
+    }
+
+    // retourne toutes les caracteristiques
+    public function getCaracsController(){
+      $params= array();
+      
+      $this->model = new vehiculeModel();
+      return $this->model-> getCaracteristiquesModel($params);
+    }
+
+    // retourne les caracteristiques d'un vehicule
+    public function getVehiculeCaracsController($params){
+      $this->model = new vehiculeModel();
+      return $this->model-> getVehiculeCaracteristiquesModel($params);
+    }
+
+    // afficher le details du vehicule
     public function showVehiculeDetailsController(){
       $this->model = new vehiculeModel();
       $this->view = new vehiculeView();
@@ -30,6 +61,7 @@ class vehiculeController{
       $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
     }
 
+    // afficher la page vehicule pour admin
     public function showAdminVehiculeController() {
       $this->model = new vehiculeModel();
       $this->view = new vehiculeView();

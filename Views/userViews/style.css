@@ -282,8 +282,9 @@ width: 40px;
 height: auto;
 }
 
-.image{
-    width: 50%;
+
+.image img{
+    width: 500px;
     height: auto;
 }
 

@@ -11,6 +11,7 @@ $routes = [
     '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/marques' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
+    '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
     '/Comparateur-Vehicule/admin/users' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/avis' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/news' => 'adminHomeController@showHomeController',

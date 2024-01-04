@@ -7,6 +7,10 @@ body {
     grid-template-areas: "sidebar mainContent";
   }
 
+  a{
+    text-decoration: none;
+  }
+
   /****************style formulaire *********************/
   form , .input{
     display: flex;
@@ -33,13 +37,17 @@ body {
     border: 1px solid #0076A8;
   }
 
-  button , input[type=submit] {
+  button , .button , input[type=submit] {
     background-color: #0076A8;
     color: white;
     font-size: 15px;
     border-radius: 8px;
     border: none;
     padding: 10px;
+}
+
+.button{
+  border: 1px solid #0076A8;
 }
 
 
@@ -72,7 +80,7 @@ body {
     display: block;
     color: #343434;
     padding: 16px;
-    text-decoration: none;
+    
   }
    
   .sidebar a.active {
@@ -149,7 +157,6 @@ body {
   }
   ul.breadcrumb li a {
     color: #0275d8;
-    text-decoration: none;
   }
   ul.breadcrumb li a:hover {
     color: #01447e;
@@ -183,7 +190,6 @@ body {
   position: relative;
   cursor: pointer;
   font-weight: 600;
-  text-decoration: none;
   text-align: center;
   color: #0076A8;
 }

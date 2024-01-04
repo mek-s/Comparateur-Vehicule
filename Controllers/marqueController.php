@@ -17,12 +17,32 @@ class marqueController{
        $this->model-> createMarqueModel($params);
     }
 
+    public function getMarquesController(){
+       $this->model = new marqueModel();
+       $params=array();
+       return $this->model-> getMarquesModel($params);
+    }
+
+    // retourne les modeles d'un marque
+    public function getModelesController($id){
+      $this->model = new marqueModel();
+      $params = array(1=> $id); 
+      return $this->model->getModelesModel($params);
+    }
+
+
     // retourne les marques principales 
     public function getMarquesPrincipalesController(){
        $this->model = new marqueModel();
-       $principales = $this->model-> getMarquesPrincipalesModel();
-       return $principales;
+       return  $this->model-> getMarquesPrincipalesModel();
     }
+
+     //Retourne la note d'une marque
+   public function getMarqueNoteController($id){
+      $this->model = new marqueModel();
+      $params = array(1=> $id);  
+      return $this->model->getMarqueNoteModel($params);
+   }
 
     // afficher la page marques 
     public function showMarquesController(){
@@ -30,28 +50,13 @@ class marqueController{
       $this->view = new marqueView();
       $home = new homeView();
 
-      $marques = $this->model-> getMarquesModel();
+      $marques = $this->getMarquesController();
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu(); 
       $this->view->showMarquesView($marques);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
       
-   }
-
-   //Retourne la note d'une marque
-   public function getMarqueNoteController($id){
-      $this->model = new marqueModel();
-      $params = array(1=> $id);  
-      return $note = $this->model->getMarqueNoteModel($params);
-   }
-
-
-   // retourne les caracteristiques d'un vehicule
-   // it shouldn't be here !!
-   public function getVehiculeCaracsController($params){
-      $this->model = new vehiculeModel();
-      return $this->model-> getVehiculeCaracteristiquesModel($params);
    }
    
    // afficher la page details d'une marque

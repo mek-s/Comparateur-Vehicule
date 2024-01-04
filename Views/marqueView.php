@@ -1,5 +1,6 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\vehiculeController.php';
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
 
 class marqueView{
@@ -130,6 +131,7 @@ class marqueView{
             </div>
             <div class="caracteristiques">
             <?php
+               $this->controller = new vehiculeController();
                $caracs = $this->controller->getVehiculeCaracsController(array(1 => $vehicule['vehicule_id']));
                foreach ($caracs as $carac) {?>
                  <p><?php echo $carac['carac_nom'].':'.$carac['value']; ?> </p>

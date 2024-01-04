@@ -15,7 +15,7 @@ class homeModel{
         $params=array();
 
         $query = "SELECT * FROM `contacts` NATURAL JOIN `images`";
-        $contacts = $this->db->request($cnx,$query,$params);
+        $contacts = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once "C:\wamp64\www\Comparateur-Vehicule\Model\imageModel.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Models\imageModel.php";
 
 class imageController{
 
@@ -8,26 +8,18 @@ class imageController{
     private $model;
     
     
-    private function checkImage($image){
-        $target_dir = "Images/";
-
-        $target_file = $target_dir . basename($image["image"]["name"]);
+    private function checkImage($image,$target_dir){
+        
+        $target_file = $target_dir . (isset($image["image"]["name"]) ? basename($image["image"]["name"]) : '');
         $uploadOk = 1;
 
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
       
       // Check if file already exists
       if (file_exists($target_file)) {
         $error = "Sorry, file already exists.";
         $uploadOk = 0;
       }
-            
-      // Allow certain file formats
-      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-      && $imageFileType != "gif" ) {
-        $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-      }
+          
       
       // Check if $uploadOk is set to 0 by an error
       if ($uploadOk == 1){
@@ -41,14 +33,13 @@ class imageController{
       return [$uploadOk , $error];
     }
 
-    public function createImageController($image,$params){
+    public function createImageController($image,$directory,$params){
   
-      [$valid,$error]=$this->checkImage($image);
+      [$valid,$error]=$this->checkImage($image,$directory);
 
         if ($valid) {
           $this->model = new imageModel();
-            $this->model-> createImageModel($params);
-            return 'done';
+           return  $this->model-> createImageModel($params); 
         }else{
             return $error;
         }  

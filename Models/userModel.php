@@ -15,7 +15,7 @@ class userModel{
         $cnx=$this->db->connect();
 
         $query = "INSERT INTO `users` (`user_nom`, `user_prenom`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES (?,?,?,?,?,?)";
-        $this->db->request($cnx,$query,$params);
+        $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
         
@@ -38,7 +38,7 @@ class userModel{
 
         $query = "UPDATE `users` SET `status` = 'confirme' WHERE `user_id` = ?";
         $params = array($id);
-        $this->db->request($cnx,$query,$params);  
+        $this->db->request($cnx,$query,$params,false);  
 
         $this->db->disconnect($cnx);
     }
@@ -49,7 +49,7 @@ class userModel{
         
         $query= "SELECT user_id FROM users WHERE user_nom = ? AND mdp= ?";
         $params = array($nom,$mdp);
-        $result=$this->db->request($cnx,$query,$params);
+        $result=$this->db->request($cnx,$query,$params,false);
   
         if ($count($result) > 0){
             return true;
@@ -64,7 +64,7 @@ class userModel{
 
         $query = "SELECT * FROM `users`";
         $params=array();
-        return $this->db->request($cnx,$query,$params);  
+        return $this->db->request($cnx,$query,$params,false);  
 
         $this->db->disconnect($cnx);
 
