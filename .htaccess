@@ -1,5 +1,13 @@
-RewriteEngine On
-RewriteBase /Comparateur-Vehicule/
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ index.php [QSA,L]
+# Inside .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Comparateur-Vehicule/
+
+    # Redirect all requests to the index.php file
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [L]
+
+    # Add the following line to create a route for the AJAX endpoint
+    RewriteRule ^Controllers/compareController.php/getModelesController$ Controllers/compareController.php [L]
+</IfModule>

@@ -72,7 +72,7 @@ class marqueModel{
         return $note[0];
     }
 
-    // recuperer les modeles d'un marques
+    // recuperer les modeles d'une marques
     public function getModelesModel($params){
         $cnx=$this->db->connect();
 
@@ -81,6 +81,28 @@ class marqueModel{
     
         $this->db->disconnect($cnx);
         return $modeles;
+    }
+
+    // recuperer les versions d'un modele
+    public function getVersionsModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `versions` WHERE supp = 0 AND modele_id =?";
+        $versions=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $versions;
+    }
+
+    // recuperer une versions 
+    public function getVersionModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `versions` WHERE supp = 0 AND version_id =?";
+        $version=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $version[0];
     }
 }
 
