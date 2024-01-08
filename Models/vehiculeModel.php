@@ -64,11 +64,21 @@ class vehiculeModel{
         return $vehicules;
     }
     
-    //Recuperer un vehicule 
+    //Recuperer un vehicule  par vehicule_id
     public function getVehiculeModel($params){
         $cnx=$this->db->connect();
 
         $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom , v.marque_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom , m.marque_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.vehicule_id = ? AND vh.supp=0 ) veh ON veh.image_id=i.image_id; ";
+        $vehic=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $vehic[0];
+    }
+    //Recuperer un vehicule  par version_id  et annee
+    public function getVehiculeByVersionModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* FROM `vehicules` vh WHERE vh.supp=0 AND vh.version_id = ? AND vh.annee = ? ) veh ON veh.image_id=i.image_id";
         $vehic=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);

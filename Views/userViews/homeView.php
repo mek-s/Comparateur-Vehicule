@@ -1,5 +1,6 @@
 <?php
 require_once("C:\wamp64\www\Comparateur-Vehicule\Views\marqueView.php");
+require_once("C:\wamp64\www\Comparateur-Vehicule\Views\compareView.php");
 
 class homeView{
 
@@ -43,10 +44,9 @@ class homeView{
       </div><?php
    }
 
-   public function showZoneComparateur(){?>
-      <div class="comparateur-zone">
-         <h1>Comparateur</h1>
-      </div><?php
+   public function showZoneComparateur(){
+      $view = new compareView();
+      $view->showComparFormsView();
    }
 
    public function showZoneComparaisons(){?>

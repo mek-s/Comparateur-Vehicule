@@ -8,8 +8,11 @@ class compareController{
     private $model;
     
     public function showComparateurController(){
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $this->view = new compareView();
       $this->view->showComparateurView();
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
+      
     }
 
     public function getMarquesController(){
@@ -18,8 +21,6 @@ class compareController{
 
       $params=array();
       return $this->model->getMarquesModel($params);
-      // $this->view->showMarques($marques);
-
     }
 
     public function getModelesController($params){
@@ -36,6 +37,9 @@ class compareController{
       return $this->model->getVersionModel($params);
     }
     
+    public function showComparResultController(){
+      
+    }
 }
 
 

@@ -190,6 +190,8 @@ nav a:hover {
     box-shadow: 0 1px 3px rgba(36,39,44,.15);
     gap: 30px;
     padding: 3%;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .principals-images{
@@ -288,5 +290,55 @@ height: auto;
     height: auto;
 }
 
+
+
+/***********************style forms comparateur*****************************/
+.compar-forms{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  .compar-forms img{
+    width: 300px;
+    height: auto;
+    background-color: white;
+  }
+
+  .compar-forms .card{
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #0076a8;
+    padding: 30px;
+    background-color: white;
+  }
+  
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .compar-forms+button{
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff; 
+    border: 1px solid #0076a8; 
+    border-radius: 5px;
+    background-color: #0076a8; 
+    margin-top: 10px;
+    margin-left:90% ;
+  }
 
 
