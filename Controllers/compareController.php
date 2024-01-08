@@ -1,5 +1,6 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\compareView.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Models\marqueModel.php";
 
 class compareController{
@@ -9,6 +10,8 @@ class compareController{
     
     public function showComparateurController(){
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
+      $home = new homeView();
+      $home->showMenu();
       $this->view = new compareView();
       $this->view->showComparateurView();
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
