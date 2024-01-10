@@ -5,6 +5,7 @@ require_once "C:\wamp64\www\Comparateur-Vehicule\Views\/vehiculeView.php";
 class vehiculeController{
  
     private $model;
+    private $view;
 
     // afficher le formulaire de creation de vehicule
     public function showVehiculeFormController(){
@@ -53,6 +54,20 @@ class vehiculeController{
       return $this->model-> getVehiculeByVersionModel($params);
     }
 
+    //retourne tous les vehicules d'une marque
+    public function getVehiculesByMarque($params){
+      $this->model = new vehiculeModel();
+      return $this->model->getMarquesVehiculesModel($params);
+    }
+
+    
+    public function getCategoriesController(){
+      $params= array();
+      
+      $this->model = new vehiculeModel();
+      return $this->model-> getCategoriesModel($params);
+    }
+
     // afficher le details du vehicule
     public function showVehiculeDetailsController(){
       $this->model = new vehiculeModel();
@@ -71,9 +86,7 @@ class vehiculeController{
       $caracs = $this->model->getVehiculeCaracteristiquesModel($params);
     
       $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
-    }
-
-    
+    }    
 
     // afficher la page vehicule pour admin
     public function showAdminVehiculeController() {
@@ -88,9 +101,6 @@ class vehiculeController{
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
       
     }
-
-    
-
 
 }
 

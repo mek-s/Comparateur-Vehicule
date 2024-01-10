@@ -57,7 +57,7 @@ class vehiculeModel{
     public function getMarquesVehiculesModel($params){
         $cnx=$this->db->connect();
 
-        $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 ) veh ON veh.image_id=i.image_id";
+        $query = "SELECT i.chemin , veh.* FROM `images` i JOIN( SELECT vh.* , v.version_nom , v.modele_nom , v.marque_nom FROM `vehicules` vh JOIN( SELECT v.* , m.modele_nom , m.marque_nom FROM `versions` v JOIN ( SELECT md.* ,mr.marque_nom FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 ) veh ON veh.image_id=i.image_id";
         $vehicules = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
@@ -128,6 +128,16 @@ class vehiculeModel{
     
         $this->db->disconnect($cnx);
         return $avis;
+    }
+
+    public function getCategoriesModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `categories`";
+        $categories=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $categories;
     }
 }
 

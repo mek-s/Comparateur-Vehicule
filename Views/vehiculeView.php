@@ -170,33 +170,85 @@ class vehiculeView{
       
     }
 
-    public function showVehiculeTableView($vehicules) {?>
+    public function showVehiculeTableView($vehicules) {
+      $this->controller= new vehiculeController();
+      $result =$this->controller -> getVehiculesByMarque(array(1=> 5));
+      ?>
+      <style>
+        .vehic-table {
+            margin-top: 20px;
+        }
+
+        #myTable th,
+        #myTable td {
+            text-align: center;
+        }
+
+        #myTable th {
+            background-color: #0076a8; 
+            color: #fff;
+        }
+
+        #myTable tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            margin: 2px;
+        }
+        
+      </style>
       <div class="">
         <h1>Gestion des Vehicules</h1>
         <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
       </div>
 
       <div class="vehic-table">
-        <table>
-          <thead>
-           <th>Nom</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>My name</td>
-            </tr>
-          </tbody>
-        </table>
+        
+       <table id="myTable" class="table table-striped" style="width:100%">
+              <thead>
+                  <tr>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Marque</th>
+                      <th scope="col">Modele</th>
+                      <th scope="col">Version</th>
+                      <th scope="col">Annee</th>
+                      <th scope="col">Modifier</th>
+                      <th scope="col">Supprimer</th>
+                      
+                  </tr>
+              </thead>
+                
+              <tbody>
+                  <?php foreach($result as $row) { ?>
+                         
+                          <tr>
+                              <td><?php echo $row['vehicule_nom']; ?></td>
+                              <td><?php echo $row['marque_nom']; ?></td>
+                              <td><?php echo $row['modele_nom']; ?></td>
+                              <td><?php echo $row['version_nom']; ?></td>
+                              <td><?php echo $row['annee']; ?></td>
+                              <td>
+                                  <!-- Bouton de MODIFICATION -->
+                                  <a href="" class="btn btn-warning rounded-pill">Modifier</a>
+                              </td>
+                              <td>
+                                  <!-- Bouton de SUPPRESSION -->
+                                  <form action="code.php" method="POST">
+                                      <button type="submit" name="delete_operateur" value="" class="btn btn-danger rounded-pill">Supprimer</button>
+                                  </form>
+                              </td>
+                          </tr>
+                  <?php
+                          }
+                  ?>
+              </tbody>
+       </table>
+        
       </div>
 
-      <script>
-        var btn = document.getElementById("myBtn");
   
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-     
-      </script>
     <?php }
 }
 
