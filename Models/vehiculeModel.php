@@ -21,6 +21,16 @@ class vehiculeModel{
         return $id;
     }
 
+    // supp un vehicule
+    public function deleteVehiculeModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "UPDATE `vehicules` SET `supp` = '1' WHERE `vehicule_id` = ?";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+    }
+
     // ajouter les caracteristiques du vehicule
     public function createVehiculeCaracsModel($params){
         $cnx=$this->db->connect();

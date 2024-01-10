@@ -55,12 +55,7 @@ class vehiculeView{
         echo 'PopularVehiculeComparaisons';
     }
 
-    public function showVehiculeDetailsView($vehicule,$note,$caracs){
-     
-      $home = new homeView();
-
-      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
-      $home->showMenu();?>
+    public function showVehiculeDetailsView($vehicule,$note,$caracs){?>
 
       <div class="details-container">
         <?php $this->showInfosVehicule($vehicule,$note,$caracs);?>
@@ -72,7 +67,7 @@ class vehiculeView{
         <?php $this->showPopularVehiculeComparaisons();?>
       </div>
 
-      <?php require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 
+      <?php 
 
     }
 
@@ -170,7 +165,12 @@ class vehiculeView{
       
     }
 
-    public function showVehiculeTableView($vehicules) {?>
+    public function showVehiculeTableView($vehicules) {
+      if (isset($_POST['supp_vehic'])) {
+        $this->controller= new vehiculeController();
+        $this->controller->deleteVehiculeController(array(1=> $_POST['vehic_id']));
+      }
+      ?>
       <style>
         .vehic-table {
             margin-top: 20px;
@@ -213,27 +213,27 @@ class vehiculeView{
                       <th scope="col">Annee</th>
                       <th scope="col"></th>
                       <th scope="col"></th>
+                      <th scope="col"></th>
+
                       
                   </tr>
               </thead>
                 
               <tbody>
-                  <?php  foreach($vehicules as $row) { ?>
+                  <?php  foreach($vehicules as $vehicule) { ?>
                          
                           <tr>
-                              <td><?php echo $row['vehicule_nom']; ?></td>
-                              <td><?php echo $row['marque_nom']; ?></td>
-                              <td><?php echo $row['modele_nom']; ?></td>
-                              <td><?php echo $row['version_nom']; ?></td>
-                              <td><?php echo $row['annee']; ?></td>
+                              <td><?php echo $vehicule['vehicule_nom']; ?></td>
+                              <td><?php echo $vehicule['marque_nom']; ?></td>
+                              <td><?php echo $vehicule['modele_nom']; ?></td>
+                              <td><?php echo $vehicule['version_nom']; ?></td>
+                              <td><?php echo $vehicule['annee']; ?></td>
+                              <td><a href="/Comparateur-Vehicule/admin/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']; ?>" class="btn btn-warning rounded-pill">Voir details</a></td>
+                              <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
                               <td>
-                                  <!-- Bouton de MODIFICATION -->
-                                  <a href="" class="btn btn-warning rounded-pill">Modifier</a>
-                              </td>
-                              <td>
-                                  <!-- Bouton de SUPPRESSION -->
-                                  <form action="code.php" method="POST">
-                                      <button type="submit" name="delete_operateur" value="" class="btn btn-danger rounded-pill">Supprimer</button>
+                                  <form method="POST">
+                                      <input type="hidden" name="vehic_id" value="<?php echo $vehicule['vehicule_id'];?>">
+                                      <button type="submit" name="supp_vehic" >Supprimer</button>
                                   </form>
                               </td>
                           </tr>

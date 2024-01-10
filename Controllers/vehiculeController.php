@@ -22,6 +22,12 @@ class vehiculeController{
         return $this->model->createVehiculeModel($params);   
     }
 
+    // supprimer un vehicule
+    public function deleteVehiculeController($params){
+      $this->model = new vehiculeModel();
+      $this->model-> deleteVehiculeModel($params);
+    }
+
     // enregistrer les caracteristiques du nouvel vehicule
     public function createVehiculeCaracsController($params){
       $this->model = new vehiculeModel();
@@ -60,7 +66,6 @@ class vehiculeController{
       return $this->model->getMarquesVehiculesModel($params);
     }
 
-    
     public function getCategoriesController(){
       $params= array();
       
@@ -84,8 +89,14 @@ class vehiculeController{
       $vehicule = $this-> getVehiculeController($params);
       $note = $this->model-> getVehiculeNoteModel($params);
       $caracs = $this->model->getVehiculeCaracteristiquesModel($params);
-    
+
+      $home = new homeView();
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
+      $home->showMenu();
       $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 
     }    
 
     // afficher la page vehicule pour admin
@@ -103,6 +114,30 @@ class vehiculeController{
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
        $this->view->showVehiculeTableView($vehicules);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+      
+    }
+
+    public function showAdminVehiculeDetailsController(){
+      $this->model = new vehiculeModel();
+      $this->view = new vehiculeView();
+
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
+      $params = array(
+        1=> $results['vehicule']
+     );
+    
+     $vehicule = $this-> getVehiculeController($params);
+     $note = $this->model-> getVehiculeNoteModel($params);
+     $caracs = $this->model->getVehiculeCaracteristiquesModel($params);
+   
+     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+     echo '<h1>Details vehicule</h1>';
+     $this->view->showVehiculeDetailsView($vehicule,$note,$caracs);
+     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+
       
     }
 

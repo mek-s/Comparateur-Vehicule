@@ -197,7 +197,7 @@ class marqueView{
         
       </style>
       <div class="">
-        <h1>Gestion des Vehicules</h1>
+        <h1>Gestion des Marques</h1>
         <a class="button" href="/Comparateur-Vehicule/admin/marques/new" ><i class="fa fa-plus-circle"></i> Ajouter une marque</a>
       </div>
 

@@ -265,3 +265,97 @@ body {
   padding: 8px 16px;
   margin: 2px;
 }
+
+/************************Style page details vehicule*************************/
+.infos-vehic{
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 1%;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(36,39,44,.15);
+}
+
+.infos-vehic a {
+justify-self:flex-end;
+align-self: flex-end;
+background-color:#ff9324;
+color: #fafafa;
+border: 1px solid #ff9324;
+border-radius: 12px;
+padding: 10px;
+}
+
+.infos{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-left: 2%;
+}
+
+/****************style de la note ********************/
+
+.note{
+  display: flex;
+  align-items:flex-end;
+  gap: 5px;
+}
+
+.note span{
+  font-size: 40px;
+  font-weight: bold;
+}
+.note p{
+  margin: 0px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.note img{
+ align-self: center;
+ width: 35px;
+ height: auto;
+}
+
+/********************style des caracteristiques **************************/
+.key-caracs{
+margin-top: 5%;
+display: flex;
+justify-content: space-between;
+padding: 2%;
+border-radius: 12px;
+}
+
+.carac{
+  color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 5px;
+}
+.carac p {
+  padding: 0px;
+  margin: 0px;
+  font-size: small;
+}
+
+.carac p:nth-child(2){
+  font-weight: bold;
+}
+
+.carac img{
+width: 40px;
+height: auto;
+}
+
+
+.image img{
+  width: 500px;
+  height: auto;
+}
+
+

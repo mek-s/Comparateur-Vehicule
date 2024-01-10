@@ -16,7 +16,7 @@
         <img src="<?php echo $GLOBALS['base-url'];?>Images/logo.png" alt="">
     </div>
   <a href="/Comparateur-Vehicule/admin"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="/Comparateur-Vehicule/admin/vehicules"><i class="fa fa-car"></i> Vehicules</a>
+  <a href="/Comparateur-Vehicule/admin/marques"><i class="fa fa-car"></i> Vehicules</a>
   <a href="/Comparateur-Vehicule/admin/avis"><i class="fa fa-commenting-o"></i> Avis</a>
   <a href="/Comparateur-Vehicule/admin/news"><i class="fa fa-newspaper-o"></i> News</a>
   <a href="/Comparateur-Vehicule/admin/users"><i class="fa fa-users"></i> Utilisateurs</a>
