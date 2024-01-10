@@ -17,7 +17,7 @@ class adminHomeView{
    public function showMain(){ ?>
       <div class="categories">
          <div class="col">
-				<a href="/Comparateur-Vehicule/admin/vehicules">
+				<a href="/Comparateur-Vehicule/admin/marques">
 					<img src="<?php echo $GLOBALS['base-url'];?>Images/admin/cars.png" alt="vehicules" width="273" height="168">
 					<p>Gestion des vehicules</p>
 				</a>

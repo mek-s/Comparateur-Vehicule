@@ -83,6 +83,21 @@ class marqueController{
 
    }
 
+   // afficher la page marque pour admin
+   public function showAdminMarqueController(){
+      
+      $this->view = new marqueView();
+
+      $params= array();
+      $marques = $this->getMarquesController($params);
+      
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+       $this->view->showMarquesTableView($marques);
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+      
+    
+   }
+
 }
 
 

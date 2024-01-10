@@ -87,7 +87,8 @@ class router{
     '/Comparateur-Vehicule/compare' => 'compareController@showComparateurController',
     '/Comparateur-Vehicule/compare/result' => 'compareController@showComparResultController',
     '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
-    '/Comparateur-Vehicule/admin/marques' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/marques' => 'marqueController@showAdminMarqueController',
+    '/Comparateur-Vehicule/admin/marques/new' => 'marqueController@showMarqueFormController',
     '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
     '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
     '/Comparateur-Vehicule/admin/users' => 'adminHomeController@showHomeController',
@@ -105,18 +106,15 @@ class router{
     if (array_key_exists($path, $this->routes)) {
 
         list($controllerName, $method) = explode('@', $this->routes[$path]);
-    
+
         
         include_once __DIR__ . "/Controllers/{$controllerName}.php";
-    
-        
         $controller = new $controllerName();
-    
         $controller->$method();
+
     } else {
         header("HTTP/1.0 404 Not Found");
         echo '404 Not Found';
-        // You can include a 404.php file or handle it as you see fit
     }
   }
 }

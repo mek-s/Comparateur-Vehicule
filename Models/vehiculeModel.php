@@ -46,7 +46,7 @@ class vehiculeModel{
     public function getPrincipalesVehiculesModel($params){
         $cnx=$this->db->connect();
 
-        $query = "SELECT i.chemin , veh.vehicule_id FROM `images` i JOIN( SELECT vh.image_id , vh.vehicule_id FROM `vehicules` vh JOIN( SELECT v.version_id FROM `versions` v JOIN ( SELECT md.modele_id FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 AND vh.principal=1 ) veh ON veh.image_id=i.image_id LIMIT 4";
+        $query = "SELECT i.chemin , veh.vehicule_id FROM `images` i JOIN( SELECT vh.image_id , vh.vehicule_id FROM `vehicules` vh JOIN( SELECT v.version_id FROM `versions` v JOIN ( SELECT md.modele_id FROM `modeles` md JOIN `marques` mr ON md.marque_id = mr.marque_id WHERE (mr.marque_id= ? AND md.supp= 0 AND mr.supp= 0) ) m ON v.modele_id = m.modele_id WHERE v.supp = 0 ) v ON v.version_id=vh.version_id WHERE vh.supp=0 AND vh.principal=1 ) veh ON veh.image_id=i.image_id ";
         $vehicules =$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);

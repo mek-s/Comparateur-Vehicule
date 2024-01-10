@@ -85,11 +85,11 @@ class vehiculeView{
           // inserer l'imeg du vehicule
           $this->controller = new imageController();
           $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
-          $dir = 'Images/vehicules';
+          $dir = 'Images/vehicules/';
           
           $imgId = $this->controller->createImageController($_FILES,$dir,$params);
 
-           echo "<p>Une erreur est suevenu : $imgId</p>";
+           
           
             // inserer le vehicule
             $this->controller = new vehiculeController();
@@ -170,10 +170,7 @@ class vehiculeView{
       
     }
 
-    public function showVehiculeTableView($vehicules) {
-      $this->controller= new vehiculeController();
-      $result =$this->controller -> getVehiculesByMarque(array(1=> 5));
-      ?>
+    public function showVehiculeTableView($vehicules) {?>
       <style>
         .vehic-table {
             margin-top: 20px;
@@ -214,14 +211,14 @@ class vehiculeView{
                       <th scope="col">Modele</th>
                       <th scope="col">Version</th>
                       <th scope="col">Annee</th>
-                      <th scope="col">Modifier</th>
-                      <th scope="col">Supprimer</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
                       
                   </tr>
               </thead>
                 
               <tbody>
-                  <?php foreach($result as $row) { ?>
+                  <?php  foreach($vehicules as $row) { ?>
                          
                           <tr>
                               <td><?php echo $row['vehicule_nom']; ?></td>

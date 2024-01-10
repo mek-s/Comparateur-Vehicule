@@ -163,6 +163,82 @@ class marqueView{
     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 
   }
 
+  //Affechier la table des marques pour admin
+  public function showMarquesTableView($marques){?>
+      <style>
+        .vehic-table {
+            margin-top: 20px;
+        }
+
+        #myTable th,
+        #myTable td {
+            text-align: center;
+        }
+
+        #myTable th {
+            background-color: #0076a8; 
+            color: #fff;
+        }
+
+        #myTable tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            margin: 2px;
+        }
+        
+      </style>
+      <div class="">
+        <h1>Gestion des Vehicules</h1>
+        <a class="button" href="/Comparateur-Vehicule/admin/marques/new" ><i class="fa fa-plus-circle"></i> Ajouter une marque</a>
+      </div>
+
+      <div class="vehic-table">
+        
+       <table id="myTable" class="table table-striped" style="width:100%">
+              <thead>
+                  <tr>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Pays</th>
+                      <th scope="col">Annee</th>
+                      <th scope="col">Voir vehicules</th>
+                      <th scope="col">Modifier</th>
+                      <th scope="col">Supprimer</th>
+                      
+                  </tr>
+              </thead>
+                
+              <tbody>
+                  <?php 
+                  // change result var to vehicules 
+                  //this method should be called from marque 
+                  //so i get first the vehicules and pass them here
+                  foreach($marques as $marque) { ?>
+                         
+                          <tr>
+                              <td><?php echo $marque['marque_nom']; ?></td>
+                              <td><?php echo $marque['pays_origine'].','.$marque['siege_social']; ?></td>
+                              <td><?php echo $marque['annee_creation']; ?></td>
+                              <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
+                              <td><a href="/Comparateur-Vehicule/admin/vehicules?marque=<?php echo $marque['marque_id']?>" class="btn btn-warning rounded-pill">Voir vehicules</a></td>
+                              <td>
+                                <form action="code.php" method="POST">
+                                      <button type="submit" name="delete_operateur" value="" class="btn btn-danger rounded-pill">Supprimer</button>
+                                  </form>
+                              </td>
+                          </tr>
+                  <?php
+                          }
+                  ?>
+              </tbody>
+       </table>
+        
+      </div>
+    <?php
+  }
+
 }
 
 ?>

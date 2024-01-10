@@ -93,8 +93,12 @@ class vehiculeController{
       $this->model = new vehiculeModel();
       $this->view = new vehiculeView();
 
-      $params= array();
-      $vehicules = $this->model-> getVehiculesModel($params);
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$param);
+
+      $params= array(1=> $param['marque']);
+      $vehicules = $this->getVehiculesByMarque($params);
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
        $this->view->showVehiculeTableView($vehicules);
