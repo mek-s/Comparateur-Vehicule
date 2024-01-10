@@ -1,7 +1,7 @@
 <?php
 require_once('bdd.php');
 
-class userModel{
+class usersModel{
 
     private $db;
 
@@ -32,12 +32,11 @@ class userModel{
         $this->db->disconnect($cnx);
     }
 
-    public function confirmUserModel($id){
+    public function validateUsersModel($params){
        
         $cnx=$this->db->connect();
 
         $query = "UPDATE `users` SET `status` = 'confirme' WHERE `user_id` = ?";
-        $params = array($id);
         $this->db->request($cnx,$query,$params,false);  
 
         $this->db->disconnect($cnx);
