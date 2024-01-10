@@ -122,9 +122,13 @@ nav a:hover {
     gap: 5px;
     width: 170px;
     height: 100px;
+    background-color: white;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 1%;
     margin-top: 50px;
+    overflow: hidden; 
+    max-width: 100%;  
+    max-height: 100%;
 }
 
 .marque span{
@@ -134,8 +138,6 @@ nav a:hover {
 .marque img , .vehicule img {
     width: 100%;
     height: auto;
-    max-width: fit-content;
-    max-height: fit-content;
 }
 
 .marque-details{
@@ -345,7 +347,6 @@ height: auto;
   }
 
   /*****************style resultat comparaison********************/
-  body {font-family: Arial;}
 
 /* Style the tab */
 .tab {

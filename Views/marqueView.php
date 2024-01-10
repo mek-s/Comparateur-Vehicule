@@ -239,6 +239,62 @@ class marqueView{
     <?php
   }
 
+  // afficher le formulaire d'ajout d'une nouvelle marque
+  public function addMarqueView(){
+    if (isset($_POST['create-mrq'])) {
+
+      // inserer l'imeg du vehicule
+      $this->controller = new imageController();
+      $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+      $dir = 'Images/marques/';
+      
+      $imgId = $this->controller->createImageController($_FILES,$dir,$params);
+      
+        // inserer le vehicule
+        $this->controller = new marqueController();
+          $params = array(
+            1   => $_POST['nom'],
+            2   => $_POST['pays'],
+            3   => $_POST['siege'],
+            4   => $_POST['annee'],
+            5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+            6   => $imgId
+          );
+          $vehicId = $this->controller->createMarqueController($params);  
+    } ?>
+    <h1>Ajouter une nouvelle marque</h1>
+    <form method="POST" enctype="multipart/form-data" >
+      <div class="input">
+        <label>Nom de la marque</label>
+        <input type="text" name="nom" required>
+      </div>
+
+      <div class="input">
+        <label>Le pays de la marque</label>
+        <input type="text" name="pays" required>
+      </div>
+      <div class="input">
+        <label>Le siege social de la marque</label>
+        <input type="text" name="siege" required>
+      </div>
+      <div class="input">
+        <label>L'annee de creation de la marque</label>
+        <input type="number" name="annee" min="1900" max="2100" required>
+      </div>
+      <div class="input">
+        <label>Image de la marque</label>
+        <input type="file" name="image" id="image" >
+      </div> 
+      <div class="input">
+        <label>Marque Principale ? </label>
+        <input type="checkbox" name="principal">
+      </div>
+
+      <input type="submit" name="create-mrq" value="Enregistrer">
+    </form>
+  <?php 
+  }
+
 }
 
 ?>

@@ -13,8 +13,7 @@ class marqueModel{
     public function createMarqueModel($params){
         $cnx=$this->db->connect();
 
-        //$query = "INSERT INTO `marques`(`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`, `image_id`, `guide_id`) VALUES (?,?,?,?,?,?)";
-        $query = "INSERT INTO `marques`(`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`) VALUES (?,?,?,?)";
+        $query = "INSERT INTO `marques`(`marque_nom`, `pays_origine`, `siege_social`, `annee_creation`,`supp`, `principale`, `guide_id`, `image_id`) VALUES (?,?,?,?,0,?,NULL,?)";
         $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);

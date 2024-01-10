@@ -98,6 +98,16 @@ class marqueController{
     
    }
 
+   // afficher le formulaire pour ajouter une marque
+   public function showMarqueFormController(){
+      $this->view = new marqueView();
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+       $this->view->addMarqueView();
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+  
+   }
+
 }
 
 
