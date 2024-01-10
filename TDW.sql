@@ -68,8 +68,15 @@ CREATE TABLE IF NOT EXISTS caracteristiques(
  carac_id INT PRIMARY KEY AUTO_INCREMENT,
  carac_nom VARCHAR(40),
  unite_mesure VARCHAR(10),
+ categ_id INT,
  image_id INT ,
- FOREIGN KEY(image_id) REFERENCES images(image_id)
+ FOREIGN KEY(image_id) REFERENCES images(image_id),
+ FOREIGN KEY(categ_id) REFERENCES categories(categ_id)
+);
+
+CREATE TABLE IF NOT EXISTS categories(
+categ_id INT PRIMARY KEY AUTO_INCREMENT,
+categ_nom VARCHAR(40)
 );
 
 CREATE TABLE IF NOT EXISTS carac_vehicule(

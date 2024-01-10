@@ -257,6 +257,8 @@ INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES 
 INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Type Essance', '', 19);
 INSERT INTO `caracteristiques` (`carac_nom`, `unite_mesure`, `image_id`) VALUES ('Prix', 'dzd', 18);
 
+INSERT INTO `categories` (`categ_nom`) VALUES ('Motor'), ('Dimensions') , ('Autre'); 
+
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (1, 1, 'Electric');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (2, 1, '10.13');
 INSERT INTO `carac_vehicule`  (`carac_id`, `vehicule_id`, `value`) VALUES (3, 1, 'Automatic');
