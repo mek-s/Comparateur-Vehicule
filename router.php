@@ -93,7 +93,7 @@ class router{
     '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
     '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
     '/Comparateur-Vehicule/admin/users' => 'adminHomeController@showHomeController',
-    '/Comparateur-Vehicule/admin/avis' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
     '/Comparateur-Vehicule/admin/news' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',

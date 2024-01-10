@@ -73,7 +73,6 @@ class vehiculeView{
 
     //admin views
 
-    
     public function addVehiculeView(){
         if (isset($_POST['create-vehic'])) {
 

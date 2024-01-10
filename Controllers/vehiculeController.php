@@ -117,6 +117,7 @@ class vehiculeController{
       
     }
 
+    // afficher details vehicule pour admin
     public function showAdminVehiculeDetailsController(){
       $this->model = new vehiculeModel();
       $this->view = new vehiculeView();

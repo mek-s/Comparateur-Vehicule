@@ -1,5 +1,5 @@
 <?php
-require_once "C:\wamp64\www\Comparateur-Vehicule\Model\userModel.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Models\userModel.php";
 
 class userController{
 
@@ -10,15 +10,15 @@ class userController{
         $this->model = new userModel();
         $result=$model->createUserModel($params);   
     }
-
-    public function blockUserController($id){
+    
+    public function blockUserController($params){
         $this->model = new userModel();
-        $this->model->blockUserModel($id);
+        $this->model->blockUserModel($params);
     }
 
-    public function confirmUserController($id){
+    public function confirmUserController($params){
         $this->model = new userModel();
-        $this->model->confirmUserModel($id);
+        $this->model->confirmUserModel($params);
     }
 
     public function authenticateUserController($nom,$mdp){
