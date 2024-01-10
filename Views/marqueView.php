@@ -164,7 +164,13 @@ class marqueView{
   }
 
   //Affechier la table des marques pour admin
-  public function showMarquesTableView($marques){?>
+  public function showMarquesTableView($marques){
+    if (isset($_POST['supp_mrq'])) {
+      $this->controller= new marqueController();
+      $this->controller->deleteMarqueController(array(1=> $_POST['marque_id']));
+    }
+    
+    ?>
       <style>
         .vehic-table {
             margin-top: 20px;
@@ -224,8 +230,9 @@ class marqueView{
                               <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
                               <td><a href="/Comparateur-Vehicule/admin/vehicules?marque=<?php echo $marque['marque_id']?>" class="btn btn-warning rounded-pill">Voir vehicules</a></td>
                               <td>
-                                <form action="code.php" method="POST">
-                                      <button type="submit" name="delete_operateur" value="" class="btn btn-danger rounded-pill">Supprimer</button>
+                                <form method="POST">
+                                      <input type="hidden" name="marque_id" value="<?php echo $marque['marque_id'];?>">
+                                      <button type="submit" name="supp_mrq" >Supprimer</button>
                                   </form>
                               </td>
                           </tr>

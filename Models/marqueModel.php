@@ -20,6 +20,15 @@ class marqueModel{
 
     }
 
+    public function deleteMarqueModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "UPDATE `marques` SET `supp` = '1' WHERE `marque_id` = ?";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+    }
+
     // Recuperer les marques principales
     public function getMarquesPrincipalesModel(){
        

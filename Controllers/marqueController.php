@@ -17,6 +17,11 @@ class marqueController{
        $this->model-> createMarqueModel($params);
     }
 
+    public function deleteMarqueController($params){
+      $this->model = new marqueModel();
+       $this->model-> deleteMarqueModel($params);
+    }
+
     public function getMarquesController(){
        $this->model = new marqueModel();
        $params=array();
