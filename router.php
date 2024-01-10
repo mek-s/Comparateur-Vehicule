@@ -81,6 +81,7 @@ class router{
 
     private $routes = [
     '/Comparateur-Vehicule/' => 'userHomeController@showHomeController',
+    '/Comparateur-Vehicule/contact-us' => 'userHomeController@showContactPageController',
     '/Comparateur-Vehicule/marques'=> 'marqueController@showMarquesController',
     '/Comparateur-Vehicule/marques/details' => 'marqueController@showMarqueDetailsController',
     '/Comparateur-Vehicule/vehicules/details' => 'vehiculeController@showVehiculeDetailsController',
@@ -94,7 +95,8 @@ class router{
     '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
     '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
     '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
-    '/Comparateur-Vehicule/admin/news' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
+    '/Comparateur-Vehicule/admin/news/new' => 'newsController@',
     '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showHomeController',
