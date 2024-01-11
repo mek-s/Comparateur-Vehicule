@@ -250,14 +250,14 @@ class marqueView{
   public function addMarqueView(){
     if (isset($_POST['create-mrq'])) {
 
-      // inserer l'imeg du vehicule
+      // inserer l'image de la marque
       $this->controller = new imageController();
       $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
       $dir = 'Images/marques/';
       
       $imgId = $this->controller->createImageController($_FILES,$dir,$params);
       
-        // inserer le vehicule
+        // inserer la marque
         $this->controller = new marqueController();
           $params = array(
             1   => $_POST['nom'],
@@ -267,7 +267,7 @@ class marqueView{
             5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
             6   => $imgId
           );
-          $vehicId = $this->controller->createMarqueController($params);  
+          $this->controller->createMarqueController($params);  
     } ?>
     <h1>Ajouter une nouvelle marque</h1>
     <form method="POST" enctype="multipart/form-data" >
