@@ -36,31 +36,6 @@ class usersView{
       } 
       
       ?>
-            <style>
-        .vehic-table {
-            margin-top: 20px;
-        }
-
-        #myTable th,
-        #myTable td {
-            text-align: center;
-        }
-
-        #myTable th {
-            background-color: #0076a8; 
-            color: #fff;
-        }
-
-        #myTable tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            margin: 2px;
-        }
-        
-      </style>
 
        <div class="users-table">
             
