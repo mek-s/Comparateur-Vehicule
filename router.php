@@ -96,10 +96,11 @@ class router{
     '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
     '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
     '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
-    '/Comparateur-Vehicule/admin/news/new' => 'newsController@',
+    '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',
     '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
-    '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showContactsController',
+    '/Comparateur-Vehicule/admin/parametres/contacts/new' => 'adminHomeController@showContactsFormController',
     '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',
 ];
