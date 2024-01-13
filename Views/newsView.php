@@ -7,9 +7,42 @@ class newsView{
      
     private $controller;
 
-    public function createNewsView(){
-    
+    public function showNewsView($news){?>
+      <div class="news-container">
+       <h1>News</h1>
+         <div class="cards-container"><?php
+          foreach ($news as $nw) {?>
+             <a href="/Comparateur-Vehicule/news/details?news=<?php echo $nw['news_id'];?>" class="news-card">
+              <img src="<?php echo $GLOBALS['base-url'].'Images/news/'.$nw['chemin'];?>" alt="">
+              <h2><?php echo $nw['title'];?></h3>
+              <h3><?php echo $nw['subtitle'];?></h3>
+              <span>Published on : <?php echo $nw['date_publication'];?></span>
+             </a>
+          <?php }
+         
+          ?>
+         </div>
+      </div>
+    <?php
     }
+
+    public function showNewsDeatilsView($news){?>
+      <div class="article">
+        <h1><?php echo $news['title'] ?></h1>
+        <p><strong>Publie en :</strong> <?php echo (new DateTime($news['date_publication']))->format('Y-m-d'); ?></p>
+        <img src="<?php echo $GLOBALS['base-url'].'Images/news/'.$news['chemin1'];?>" alt="Land Rover Defender Left Side View">
+
+        <div class="content">
+            <h2><?php echo $news['subtitle'];?></h2>
+            <p><?php echo $news['description']?></p>
+           
+            <img src="<?php echo $GLOBALS['base-url'].'Images/news/'.$news['chemin2'];?>" alt="">
+          
+  
+        </div>
+    </div>
+   <?php }
+
 
     public function showNewsTableView($news){
         if (isset($_POST['mdf_nws'])) {
@@ -19,9 +52,7 @@ class newsView{
           if (isset($_POST['supp_nws'])) {
             $this->controller= new newsController();
             $this->controller->deleteNewsController(array(1=> $_POST['nw_id']));
-          } 
-          
-          ?>
+          } ?>
         
 
       <div class="">
@@ -40,7 +71,7 @@ class newsView{
                   $item = [
                     'param1' => $nw['title'], 
                     'param2' => $nw['subtitle'] , 
-                    'param3' =>$nw['descprition'],
+                    'param3' =>$nw['description'],
                     'actions' => [
                       ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'mdf_nws', 'button_text' => 'Modifier'],
                       ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'supp_nws', 'button_text' => 'Supprimer'],
@@ -62,7 +93,7 @@ class newsView{
             // inserer l'imeg du vehicule
             $this->controller = new imageController();
             $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
-            $dir = 'Images/marques/';
+            $dir = 'Images/news/';
             
             $imgId = $this->controller->createImageController($_FILES,$dir,$params);
             

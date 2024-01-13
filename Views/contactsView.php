@@ -48,11 +48,11 @@ class contactsView{
 
     public function showContactsView($contacts){
             if (isset($_POST['mdf_contact'])) {
-                $this->controller= new newsController();
+                $this->controller= new adminHomeController();
                 $this->controller->updateContactController(array(1=> $_POST['contact_id']));
               } 
               if (isset($_POST['supp_contact'])) {
-                $this->controller= new newsController();
+                $this->controller= new adminHomeController();
                 $this->controller->deleteContactController(array(1=> $_POST['contact_id']));
               } 
               
