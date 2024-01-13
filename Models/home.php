@@ -9,18 +9,15 @@ class homeModel{
         $this->db = new bdd();
     }
 
-    public function getContacts(){
-        $cnx=$this->db->connect();
+    // public function getDiaporama(){
+    //     $cnx=$this->db->connect();
 
-        $params=array();
-
-        $query = "SELECT * FROM `contacts` NATURAL JOIN `images`";
-        $contacts = $this->db->request($cnx,$query,$params,false);
+    //     $query = "SELECT FROM `` "
+    //     $images =$this->db->request($cnx,$query,$params,false);
     
-        $this->db->disconnect($cnx);
-
-        return $contacts;
-    }
+    //     $this->db->disconnect($cnx);
+    //     return $images;
+    // }
 
 }
 ?>

@@ -11,7 +11,7 @@ class contactsModel{
     public function getContactsModel($params){
         $cnx=$this->db->connect();
 
-        $query = "SELECT * FROM `contacts` c JOIN `images` i ON i.image_id = c.image_id";
+        $query = "SELECT * FROM `contacts` c JOIN `images` i ON i.image_id = c.image_id WHERE c.supp = 0";
         $contacts =$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);

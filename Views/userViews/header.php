@@ -19,8 +19,8 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
     <div class="right-content">
     <div class="contacts">
         <?php
-          $m = new homeModel();
-          $contacts = $m->getContacts();
+          $c = new userHomeController();
+          $contacts = $c->getContactsController();
           foreach ($contacts as $contact) {
            echo '<a href="'.$contact['value'].'">
                      <img src="'.$GLOBALS['base-url'].'Images/contacts/'.$contact['chemin'].'"/>
