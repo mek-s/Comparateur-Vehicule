@@ -41,7 +41,7 @@ class adminHomeView{
 				</a>
 			</div>
          <div class="col">
-				<a href="/Comparateur-Vehicule/admin/parametres">
+				<a href="/Comparateur-Vehicule/admin/parametres/contacts">
 					<img src="<?php echo $GLOBALS['base-url'];?>Images/admin/settings.png" alt="vehicules" width="273" height="168">
 					<p>Gestion des parametres</p>
 				</a>
