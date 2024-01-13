@@ -14,10 +14,11 @@ class usersModel{
        
         $cnx=$this->db->connect();
 
-        $query = "INSERT INTO `users` (`user_nom`, `user_prenom`, `sexe`, `date_naissance`, `status`, `mdp`) VALUES (?,?,?,?,?,?)";
-        $this->db->request($cnx,$query,$params,false);
+        $query = "INSERT INTO `users` (`user_nom`, `user_prenom`,`email`, `sexe`, `date_naissance`,`mdp`) VALUES (?,?,?,?,?,?)";
+        $id = $this->db->request($cnx,$query,$params,true);
     
         $this->db->disconnect($cnx);
+        return $id;
         
     }
 
@@ -50,7 +51,10 @@ class usersModel{
         $result=$this->db->request($cnx,$query,$params,false);
            
         $this->db->disconnect($cnx);
-        return $result;
+        if ($result) {
+            return $result[0]['user_id'];
+        } else return $result;
+        
     }
 
     public function authenticateAdminModel($params){
@@ -61,7 +65,9 @@ class usersModel{
         $result=$this->db->request($cnx,$query,$params,false);
 
         $this->db->disconnect($cnx);
-        return $result;
+        if ($result) {
+            return $result[0]['username'];
+        } else return $result;
     }
 
     public function getAllUsersModel(){

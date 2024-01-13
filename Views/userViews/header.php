@@ -29,9 +29,19 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
         ?>
     </div>
     <div class="connexion">
-       <a href="/Comparateur-Vehicule/signin" style="color:black;">Sign in</a>
-       <a href="/Comparateur-Vehicule/signup" style="color:black;">Sign in</a>
-    </div>
+    <?php 
+   
+    if (isset($_SESSION['auth_u']) && isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+        echo '<a href="/Comparateur-Vehicule/profil?user=' . $user_id . '" style="color:black;">Profil</a>';
+        echo '<a href="/Comparateur-Vehicule/logout" style="color:black;">Logout</a>';
+    } else {
+        echo '<a href="/Comparateur-Vehicule/signin" style="color:black;">Sign in</a>';
+        echo '<a href="/Comparateur-Vehicule/signup" style="color:black;">Sign up</a>';
+    }
+    ?>
+</div>
+
     </div>   
 </header>
 <div class="content">

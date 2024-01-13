@@ -92,49 +92,48 @@ class router{
     '/Comparateur-Vehicule/signin' => 'usersController@showSigninFormController',
     '/Comparateur-Vehicule/signup'=>  'usersController@showSignupFormController',
     '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/marques' => 'marqueController@showAdminMarqueController',
-      '/Comparateur-Vehicule/admin/marques/new' => 'marqueController@showMarqueFormController',
-      '/Comparateur-Vehicule/admin/marques/modifier' => 'marqueController@showModifMarqueFormController',
-      '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
-      '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
-      '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
-      '/Comparateur-Vehicule/admin/vehicules/modifier' => 'vehiculeController@showModifVehiculeFormController',
-      '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
-      '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
-      '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
-      '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',
-      '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showContactsController',
-      '/Comparateur-Vehicule/admin/parametres/contacts/new' => 'adminHomeController@showContactsFormController',
-      '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/profil' => 'usersController@showUserProfilController',
-      '/Comparateur-Vehicule/logout' => 'usersController@logoutController'
+    '/Comparateur-Vehicule/admin/marques' => 'marqueController@showAdminMarqueController',
+    '/Comparateur-Vehicule/admin/marques/new' => 'marqueController@showMarqueFormController',
+    '/Comparateur-Vehicule/admin/marques/modifier' => 'marqueController@showModifMarqueFormController',
+    '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
+    '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
+    '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
+    '/Comparateur-Vehicule/admin/vehicules/modifier' => 'vehiculeController@showModifVehiculeFormController',
+    '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
+    '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
+    '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
+    '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',
+    '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showContactsController',
+    '/Comparateur-Vehicule/admin/parametres/contacts/new' => 'adminHomeController@showContactsFormController',
+    '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',
+    '/Comparateur-Vehicule/profil' => 'usersController@showUserProfilController',
+    '/Comparateur-Vehicule/logout' => 'usersController@logoutController'
     ];
 
   private function isProtectedRoute($path) {
     $protectedRoutes = [
-      '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/marques' => 'marqueController@showAdminMarqueController',
-      '/Comparateur-Vehicule/admin/marques/new' => 'marqueController@showMarqueFormController',
-      '/Comparateur-Vehicule/admin/marques/modifier' => 'marqueController@showModifMarqueFormController',
-      '/Comparateur-Vehicule/admin/vehicules' => 'vehiculeController@showAdminVehiculeController',
-      '/Comparateur-Vehicule/admin/vehicules/new' => 'vehiculeController@showVehiculeFormController',
-      '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
-      '/Comparateur-Vehicule/admin/vehicules/modifier' => 'vehiculeController@showModifVehiculeFormController',
-      '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
-      '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
-      '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
-      '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',
-      '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showContactsController',
-      '/Comparateur-Vehicule/admin/parametres/contacts/new' => 'adminHomeController@showContactsFormController',
-      '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',
-      '/Comparateur-Vehicule/profil' => 'usersController@showUserProfilController',
-      '/Comparateur-Vehicule/logout' => 'usersController@logoutController'
+      '/Comparateur-Vehicule/admin',
+      '/Comparateur-Vehicule/admin/marques',
+      '/Comparateur-Vehicule/admin/marques/new',
+      '/Comparateur-Vehicule/admin/marques/modifier',
+      '/Comparateur-Vehicule/admin/vehicules',
+      '/Comparateur-Vehicule/admin/vehicules/new' ,
+      '/Comparateur-Vehicule/admin/vehicules/details',
+      '/Comparateur-Vehicule/admin/vehicules/modifier',
+      '/Comparateur-Vehicule/admin/users',
+      '/Comparateur-Vehicule/admin/avis',
+      '/Comparateur-Vehicule/admin/news',
+      '/Comparateur-Vehicule/admin/news/new',
+      '/Comparateur-Vehicule/admin/parametres',
+      '/Comparateur-Vehicule/admin/parametres/guides',
+      '/Comparateur-Vehicule/admin/parametres/contacts',
+      '/Comparateur-Vehicule/admin/parametres/contacts/new',
+      '/Comparateur-Vehicule/admin/parametres/diaporama',
+      '/Comparateur-Vehicule/admin/parametres/style',
+      '/Comparateur-Vehicule/profil'
     ];
 
     return in_array($path, $protectedRoutes);
@@ -142,9 +141,9 @@ class router{
 
   public function get($path){
 
-        session_start(); 
+       
 
-        if ($this->isProtectedRoute($path) && !isset($_SESSION['authenticated'])) {
+        if ($this->isProtectedRoute($path) && !isset($_SESSION['auth_a']) && !isset($_SESSION['auth_u'])) {
             header('Location: /Comparateur-Vehicule/signin');
             exit();
         }

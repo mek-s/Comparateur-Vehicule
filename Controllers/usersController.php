@@ -10,7 +10,13 @@ class usersController{
 
     public function createUserController($params){ 
         $this->model = new usersModel();
-        $result=$model->createusersModel($params);   
+        $result = $this->model->createUserModel($params);
+        if ($result) {
+            $_SESSION['auth_u'] = true;
+            $_SESSION['user_id'] = $result;
+            header('Location: '.'/Comparateur-Vehicule/');
+            exit();        
+        }
     }
     
     public function blockUserController($params){
@@ -27,14 +33,14 @@ class usersController{
         $this->model = new usersModel();
         $result = $this->model->authenticateAdminModel($params);
         if ($result) {
-            session_start();
-            $_SESSION['authenticated'] = true;
+            
+            $_SESSION['auth_a'] = true;
             $_SESSION['user_id'] = $result;
             header('Location: '.'/Comparateur-Vehicule/admin');
             exit();
         } else if($result = $this->model->authenticateUserModel($params)){
-            session_start();
-            $_SESSION['authenticated'] = true;
+           
+            $_SESSION['auth_u'] = true;
             $_SESSION['user_id'] = $result;
             header('Location: '.'/Comparateur-Vehicule/');
             exit();
@@ -42,7 +48,6 @@ class usersController{
     }
 
     public function logoutController(){
-        session_start();
         session_unset(); 
         session_destroy(); 
         header('Location: /Comparateur-Vehicule/');
@@ -76,7 +81,7 @@ class usersController{
       );
   
       echo 'Page profil : '.$results['user'];
-      
+
     }
 
     public function showSigninFormController(){
