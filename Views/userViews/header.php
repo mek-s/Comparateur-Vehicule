@@ -8,6 +8,7 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo $GLOBALS['base-url']; ?>Views/userViews/style.css">
+    <link rel="stylesheet" href="<?php echo $GLOBALS['base-url']; ?>Views/assets/style.css">
     <title>Comparateur Vehicules</title>
 </head>
 <body>

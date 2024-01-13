@@ -21,8 +21,8 @@ class compareView{
        <div class="compare-container">
             <h1>Comparateur les vehicules</h1>
             <div class="compar-forms">
-                    <script type="text/javascript" src="<?php echo $GLOBALS['base-url'];?>Views/jquery-3.6.0.js"></script>
-                    <script type="text/javascript" src="<?php echo$GLOBALS['base-url'];?>Views/script.js"></script>
+                    <script type="text/javascript" src="<?php echo $GLOBALS['base-url'];?>Views/assets/jquery-3.6.0.js"></script>
+                    <script type="text/javascript" src="<?php echo$GLOBALS['base-url'];?>Views/assets/script.js"></script>
                     <?php for ($i=1; $i <= 4  ; $i++) { ?>
                     <div id="form-container-<?php echo $i;?>">
                         <form id="form<?php echo $i;?>">
