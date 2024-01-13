@@ -42,19 +42,26 @@ class usersModel{
         $this->db->disconnect($cnx);
     }
 
-    public function authenticateUserModel($nom , $mdp){
+    public function authenticateUserModel($params){
        
         $cnx=$this->db->connect();
         
-        $query= "SELECT user_id FROM users WHERE user_nom = ? AND mdp= ?";
-        $params = array($nom,$mdp);
+        $query= "SELECT user_id FROM users WHERE email = ? AND mdp= ?";
         $result=$this->db->request($cnx,$query,$params,false);
-  
-        if ($count($result) > 0){
-            return true;
-        } else return false; 
            
         $this->db->disconnect($cnx);
+        return $result;
+    }
+
+    public function authenticateAdminModel($params){
+       
+        $cnx=$this->db->connect();
+        
+        $query= "SELECT username FROM admins WHERE username = ? AND pwd= ?";
+        $result=$this->db->request($cnx,$query,$params,false);
+
+        $this->db->disconnect($cnx);
+        return $result;
     }
 
     public function getAllUsersModel(){

@@ -23,11 +23,30 @@ class usersController{
         $this->model->validateUsersModel($params);
     }
 
-    public function authenticateUserController($nom,$mdp){
+    public function authenticateUserController($params){
         $this->model = new usersModel();
-        if ($this->model->authenticateusersModel($nom,$mdp)) {
-           return true;
+        $result = $this->model->authenticateAdminModel($params);
+        if ($result) {
+            session_start();
+            $_SESSION['authenticated'] = true;
+            $_SESSION['user_id'] = $result;
+            header('Location: '.'/Comparateur-Vehicule/admin');
+            exit();
+        } else if($result = $this->model->authenticateUserModel($params)){
+            session_start();
+            $_SESSION['authenticated'] = true;
+            $_SESSION['user_id'] = $result;
+            header('Location: '.'/Comparateur-Vehicule/');
+            exit();
         } else return false;
+    }
+
+    public function logoutController(){
+        session_start();
+        session_unset(); 
+        session_destroy(); 
+        header('Location: /Comparateur-Vehicule/');
+        exit();
     }
 
     public function getAllUsersController(){
@@ -58,6 +77,16 @@ class usersController{
   
       echo 'Page profil : '.$results['user'];
       
+    }
+
+    public function showSigninFormController(){
+        $this->view = new usersView();
+        $this->view->showSigninFormView();
+    }
+
+    public function showSignupFormController(){
+        $this->view = new usersView();
+        $this->view->showSignupFormView();
     }
 }
 ?>

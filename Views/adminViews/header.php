@@ -29,7 +29,7 @@
     <a href="/Comparateur-Vehicule/admin/parametres/diaporama"> Diaporama</a>
     <a href="/Comparateur-Vehicule/admin/parametres/style"> Style</a>
   </div>
-  <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+  <a href="/Comparateur-Vehicule/logout"><i class="fa fa-sign-out"></i> Logout</a>
 </div>
 
 <div id="mainContent">

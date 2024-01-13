@@ -29,8 +29,8 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
         ?>
     </div>
     <div class="connexion">
-       <button>Sign in</button>
-       <button>Sign up</button>
+       <a href="/Comparateur-Vehicule/signin" style="color:black;">Sign in</a>
+       <a href="/Comparateur-Vehicule/signup" style="color:black;">Sign in</a>
     </div>
     </div>   
 </header>

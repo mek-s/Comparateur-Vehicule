@@ -7,24 +7,7 @@ class usersView{
     private $controller;
 
 
-    public function authenticateUserView(){
-      $this->controller = new usersController();
-
-      if (isset($_POST['auth-user'])) {
-        $nom=$_POST['nom'];
-        $mdp=$_POST['mdp'];
-        if ($this->controller->authenticateUserController($nom,$mdp)) {
-          echo '<h1>Authenticated</h1>';
-        }
-      } ?>
-      <form method="POST">
-        <input type="text" name="nom">
-        <input type="password" name="mdp" >
-        <input type="submit" name="auth-user"value="Login">
-      </form>
-     <?php
-
-    } 
+  
 
     public function showUsersTableView($users){
       if (isset($_POST['user_profil'])) {
@@ -66,6 +49,27 @@ class usersView{
       <?php
     }
 
+    public function showSigninFormView(){
+      $this->controller = new usersController();
+
+      if (isset($_POST['auth-user'])) {
+        
+        $params = array( 1 => $_POST['nom'], 2 => $_POST['mdp']);
+        if ($this->controller->authenticateUserController($params)) {
+          echo '<h1>Authenticated</h1>';
+        } else echo '<h1>Username ou mot de passe incorecte</h1>';
+      } ?>
+      <form method="POST">
+        <input type="text" name="nom" required>
+        <input type="password" name="mdp" required>
+        <input type="submit" name="auth-user"value="Login">
+      </form>
+     <?php
+    }
+
+    public function showSignupFormView(){
+
+    }
     
 }
 
