@@ -358,4 +358,40 @@ height: auto;
   height: auto;
 }
 
+/*********************************style page profile**************************/
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 400px; 
+  margin: 20px auto; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.profile-container h1 {
+  color: #333; 
+}
+
+.profile-container img {
+  align-self: center;
+  max-width: 100%; 
+  border-radius: 50%; 
+  margin-bottom: 10px; 
+}
+
+.profile-container p {
+  margin: 10px 0; 
+  color: #555; 
+}
+.profile-container span{
+  font-weight: bold;
+  color: black;
+}
+
+
+
 

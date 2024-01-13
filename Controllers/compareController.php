@@ -9,10 +9,11 @@ class compareController{
     private $model;
     
     public function showComparateurController(){
-      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home = new homeView();
-      $home->showMenu();
       $this->view = new compareView();
+      
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
+      $home->showMenu();
       $this->view->showComparateurView();
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
       

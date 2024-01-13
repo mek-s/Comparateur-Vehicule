@@ -1,6 +1,7 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Models\usersModel.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\usersView.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
 
 class usersController{
 
@@ -56,7 +57,7 @@ class usersController{
 
     public function getAllUsersController(){
         $this->model = new usersModel();
-        return $this->model->getAllUsersModel();    
+        return $this->model->getAllUsersModel(array());    
     }
 
     public function showAdminUsersController() {
@@ -72,6 +73,10 @@ class usersController{
     }
 
     public function showUserProfilController(){
+        $this->view = new usersView();
+        $this->model = new usersModel();
+        $home = new homeView();
+
       $request_uri = $_SERVER['REQUEST_URI'];
       $uri_parts = parse_url($request_uri);
       parse_str($uri_parts['query'],$results);
@@ -79,8 +84,14 @@ class usersController{
       $params = array(
          1=> $results['user']
       );
-  
-      echo 'Page profil : '.$results['user'];
+ 
+      $user = $this->model->getUserModel($params);
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
+      $home->showMenu();
+      $this->view->showUserProfilView($user);
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
+    
 
     }
 

@@ -1,7 +1,8 @@
 <?php
-require_once("C:\wamp64\www\Comparateur-Vehicule\Views\marqueView.php");
-require_once("C:\wamp64\www\Comparateur-Vehicule\Views\compareView.php");
-require_once("C:\wamp64\www\Comparateur-Vehicule\Controllers\userHomeController.php");
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Views\marqueView.php';
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Views\compareView.php';
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\userHomeController.php';
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\newsController.php';
 
 class homeView{
 
@@ -30,10 +31,15 @@ class homeView{
    }
 
    public function showDiaporama(){
+      $controller = new newsController();
+      $news = $controller->getAllNewsController();
+      // $pubs = $controller-> getAllPubsController();
     ?>
-      <div class="diaporama">
-         <img src="<?php echo $GLOBALS['base-url'];?>Images/images.png" alt="">
-      </div>
+      <div class="diaporama"><?php
+         foreach ($news as $nw) {
+            echo '<a href="/Comparateur-Vehicule/news/details?news='.$nw['news_id'].'"><img src="'.$GLOBALS['base-url'].'Images/news/'.$nw['chemin'].'" ></a>';
+         }
+      ?></div>
     <?php
    }
 

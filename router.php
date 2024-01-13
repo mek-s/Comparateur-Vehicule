@@ -100,6 +100,7 @@ class router{
     '/Comparateur-Vehicule/admin/vehicules/details' => 'vehiculeController@showAdminVehiculeDetailsController',
     '/Comparateur-Vehicule/admin/vehicules/modifier' => 'vehiculeController@showModifVehiculeFormController',
     '/Comparateur-Vehicule/admin/users' => 'usersController@showAdminUsersController',
+    '/Comparateur-Vehicule/admin/users/profil' => 'adminHomeController@showAdminUserProfilController',
     '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
     '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
     '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',

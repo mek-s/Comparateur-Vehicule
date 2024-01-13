@@ -14,7 +14,7 @@ class usersModel{
        
         $cnx=$this->db->connect();
 
-        $query = "INSERT INTO `users` (`user_nom`, `user_prenom`,`email`, `sexe`, `date_naissance`,`mdp`) VALUES (?,?,?,?,?,?)";
+        $query = "INSERT INTO `users` (`user_nom`, `user_prenom`,`email`, `sexe`, `date_naissance`,`mdp` , `image_id`) VALUES (?,?,?,?,?,?,?)";
         $id = $this->db->request($cnx,$query,$params,true);
     
         $this->db->disconnect($cnx);
@@ -70,16 +70,26 @@ class usersModel{
         } else return $result;
     }
 
-    public function getAllUsersModel(){
+    public function getAllUsersModel($params){
        
         $cnx=$this->db->connect();
 
         $query = "SELECT * FROM `users`";
-        $params=array();
-        return $this->db->request($cnx,$query,$params,false);  
+        $users= $this->db->request($cnx,$query,$params,false);  
 
         $this->db->disconnect($cnx);
+        return $users;
 
+    }
+
+    public function getUserModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `users` u JOIN `images` i ON i.image_id = u.image_id WHERE user_id = ?";
+        $user= $this->db->request($cnx,$query,$params,false);  
+
+        $this->db->disconnect($cnx);
+        return $user[0];
     }
 
   
