@@ -46,5 +46,18 @@ class usersController{
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
         
     }
+
+    public function showUserProfilController(){
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
+      $params = array(
+         1=> $results['user']
+      );
+  
+      echo 'Page profil : '.$results['user'];
+      
+    }
 }
 ?>

@@ -69,7 +69,7 @@ body {
     grid-area: sidebar;
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 250px;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
@@ -243,7 +243,7 @@ body {
 
 
 /****************style datatable ***************************/
-.vehic-table  , .news-table , .users-table{
+.vehic-table , .marque-table , .news-table , .users-table {
   margin-top: 20px;
 }
 

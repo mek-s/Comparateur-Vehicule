@@ -2,6 +2,7 @@
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
 require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\vehiculeController.php';
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
 class marqueView{
 
@@ -177,46 +178,30 @@ class marqueView{
         <a class="button" href="/Comparateur-Vehicule/admin/marques/new" ><i class="fa fa-plus-circle"></i> Ajouter une marque</a>
       </div>
 
-      <div class="vehic-table">
-        
-       <table id="myTable" class="table table-striped" style="width:100%">
-              <thead>
-                  <tr>
-                      <th scope="col">Nom</th>
-                      <th scope="col">Pays</th>
-                      <th scope="col">Annee</th>
-                      <th scope="col">Voir vehicules</th>
-                      <th scope="col">Modifier</th>
-                      <th scope="col">Supprimer</th>
-                      
-                  </tr>
-              </thead>
+      <div class="marque-table">
+
+      <?php
+                 $columns = array( 1 => 'Nom',
+                                   2 => 'Pays',
+                                   3 => 'Annee' );
+                 $items = array();
+
+                 foreach($marques as $marque) {
+                  $item = [
+                    'param1' => $marque['marque_nom'], 
+                    'param2' => $marque['pays_origine'].','.$marque['siege_social'], 
+                    'param3' => $marque['annee_creation'],
+                    'actions' => [
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/marques/modifier?marque='.$marque['marque_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules?marque='.$marque['marque_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Voir vehicules'],
+                      ['type' => 'form', 'hidden_name' => 'marque_id', 'hidden_value' => $marque['marque_id'], 'button_name' => 'supp_mrq', 'button_text' => 'Supprimer'],
+                  ]];
+                  $items[] = $item;
+                 }
                 
-              <tbody>
-                  <?php 
-                  // change result var to vehicules 
-                  //this method should be called from marque 
-                  //so i get first the vehicules and pass them here
-                  foreach($marques as $marque) { ?>
-                         
-                          <tr>
-                              <td><?php echo $marque['marque_nom']; ?></td>
-                              <td><?php echo $marque['pays_origine'].','.$marque['siege_social']; ?></td>
-                              <td><?php echo $marque['annee_creation']; ?></td>
-                              <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
-                              <td><a href="/Comparateur-Vehicule/admin/vehicules?marque=<?php echo $marque['marque_id']?>" class="btn btn-warning rounded-pill">Voir vehicules</a></td>
-                              <td>
-                                <form method="POST">
-                                      <input type="hidden" name="marque_id" value="<?php echo $marque['marque_id'];?>">
-                                      <button type="submit" name="supp_mrq" >Supprimer</button>
-                                  </form>
-                              </td>
-                          </tr>
-                  <?php
-                          }
-                  ?>
-              </tbody>
-       </table>
+                 $table = new dataTable($columns,$items,3);
+                 $table->render();
+                ?>
         
       </div>
     <?php

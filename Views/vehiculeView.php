@@ -2,6 +2,7 @@
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\/vehiculeController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\imageController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
 class vehiculeView{
 
@@ -177,33 +178,42 @@ class vehiculeView{
       </div>
 
       <div class="vehic-table">
+
+
+      <?php
+                 $columns = array( 1 => 'Nom',
+                                   2 => 'Marque',
+                                   3 => 'Modele',
+                                   4 => 'Version',
+                                   5 => 'Annee' );
+                 $items = array();
+
+                 foreach($vehicules as $vehicule) {
+                  $item = [
+                    'param1' => $vehicule['vehicule_nom'], 
+                    'param2' => $vehicule['marque_nom'], 
+                    'param3' => $vehicule['modele_nom'],
+                    'param4' => $vehicule['version_nom'],
+                    'param5' => $vehicule['annee'],
+                    'actions' => [
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/details?vehicule='.$vehicule['vehicule_id'] , 'class' => 'btn btn-warning rounded-pill' , 'text' => 'Voir details'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'] ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
+                      ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer'],
+                  ]];
+                  $items[] = $item;
+                 }
+                
+                 $table = new dataTable($columns,$items,3);
+                 $table->render();
+                ?>
         
        <table id="myTable" class="table table-striped" style="width:100%">
-              <thead>
-                  <tr>
-                      <th scope="col">Nom</th>
-                      <th scope="col">Marque</th>
-                      <th scope="col">Modele</th>
-                      <th scope="col">Version</th>
-                      <th scope="col">Annee</th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-
-                      
-                  </tr>
-              </thead>
-                
+              
               <tbody>
                   <?php  foreach($vehicules as $vehicule) { ?>
                          
-                          <tr>
-                              <td><?php echo $vehicule['vehicule_nom']; ?></td>
-                              <td><?php echo $vehicule['marque_nom']; ?></td>
-                              <td><?php echo $vehicule['modele_nom']; ?></td>
-                              <td><?php echo $vehicule['version_nom']; ?></td>
-                              <td><?php echo $vehicule['annee']; ?></td>
-                              <td><a href="/Comparateur-Vehicule/admin/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']; ?>" class="btn btn-warning rounded-pill">Voir details</a></td>
+                        
+                             
                               <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
                               <td>
                                   <form method="POST">

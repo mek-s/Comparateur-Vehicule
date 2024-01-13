@@ -142,6 +142,18 @@ class vehiculeController{
       
     }
 
+    public function showModifVehiculeFormController(){
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
+      $params = array(
+         1=> $results['vehicule']
+      );
+
+      echo 'modifier vehicule : '.$results['vehicule'];
+    }
+
 }
 
 ?>

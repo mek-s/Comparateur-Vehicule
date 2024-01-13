@@ -65,44 +65,27 @@ class contactsView{
           </div>
         
             <div class="news-table">
-                    
-                    <table id="myTable" class="table table-striped" style="width:100%">
-                           <thead>
-                               <tr>
-                                   <th scope="col">Nom</th>
-                                   <th scope="col">Valeur</th>
-                                   <th scope="col"></th>
-                                   <th scope="col"></th>
-             
-                                   
-                               </tr>
-                           </thead>
-                             
-                           <tbody>
-                               <?php  foreach($contacts as $contact) { ?>
-                                      
-                                       <tr>
-                                           <td><?php echo $contact['contact_nom']; ?></td>
-                                           <td><?php echo $contact['value']; ?></td>
-                                           <td>
-                                               <form method="POST">
-                                                   <input type="hidden" name="contact_id" value="<?php echo $contact['contact_id'];?>">
-                                                   <button type="submit" name="mdf_contact" >Modifier</button>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form method="POST">
-                                                   <input type="hidden" name="contact_id" value="<?php echo $contact['contact_id'];?>">
-                                                   <button type="submit" name="supp_contact" >Supprimer</button>
-                                               </form>
-                                           </td>
+
+            <?php
+                 $columns = array( 1 => 'Nom',
+                                   2 => 'Valeur' );
+                 $items = array();
+
+                 foreach($contacts as $contact) {
+                  $item = [
+                    'param1' => $contact['contact_nom'], 
+                    'param2' => $contact['value'], 
+                    'actions' => [
+                      ['type' => 'form', 'hidden_name' => 'contact_id', 'hidden_value' => $contact['contact_id'], 'button_name' => 'mdf_contact', 'button_text' => 'Modifier'],
+                      ['type' => 'form', 'hidden_name' => 'contact_id', 'hidden_value' => $contact['contact_id'], 'button_name' => 'supp_contact', 'button_text' => 'Supprimer'],
+                  ]];
+                  $items[] = $item;
+                 }
                 
-                                       </tr>
-                               <?php
-                                       }
-                               ?>
-                           </tbody>
-                    </table>
+                 $table = new dataTable($columns,$items,2);
+                 $table->render();
+                ?>
+                  
                      
             </div>
          <?php

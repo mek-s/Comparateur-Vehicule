@@ -1,6 +1,7 @@
 <?php
 
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\usersController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
 class avisView{
 
@@ -25,57 +26,33 @@ class avisView{
             <h1>Gestion des Avis</h1>
           </div>
     
-          <div class="vehic-table">
-            
-           <table id="myTable" class="table table-striped" style="width:100%">
-                  <thead>
-                      <tr>
-                          <th scope="col">Nom utilisateur</th>
-                          <th scope="col">Nom Vehicule</th>
-                          <th scope="col">Commentaire</th>
-                          <th scope="col">Status</th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-    
-                          
-                      </tr>
-                  </thead>
-                    
-                  <tbody>
-                      <?php  foreach($avis as $av) { ?>
-                             
-                              <tr>
-                                  <td><?php echo $av['user_nom'].' '.$av['user_prenom']; ?></td>
-                                  <td><?php echo $av['vehicule_nom']; ?></td>
-                                  <td><?php echo $av['commentaire']; ?></td>
-                                  <td><?php echo $av['status']; ?></td>
-                                  <td>
-                                      <form method="POST">
-                                          <input type="hidden" name="avis_id" value="<?php echo $av['avis_id'];?>">
-                                          <button type="submit" name="valid_avis" >Valider</button>
-                                      </form>
-                                  </td>
-                                  <td>
-                                      <form method="POST">
-                                          <input type="hidden" name="avis_id" value="<?php echo $av['avis_id'];?>">
-                                          <button type="submit" name="refus_avis" >Refuser</button>
-                                      </form>
-                                  </td>
-                                  
-                                  
-                                  <td>
-                                      <form method="POST">
-                                          <input type="hidden" name="user_id" value="<?php echo $av['user_id'];?>">
-                                          <button type="submit" name="block_user" >Bloquer utilisateur</button>
-                                      </form>
-                                  </td>
-                              </tr>
-                      <?php
-                              }
-                      ?>
-                  </tbody>
-           </table>
+          <div class="avis-table">
+
+          <?php
+                 $columns = array( 1 => 'Nom utilisateur',
+                                   2 => 'Nom Vehicule',
+                                   3 => 'Commentaire',
+                                   4 => 'Status');
+                 $items = array();
+
+                 foreach($avis as $av) {
+                  $item = [
+                    'param1' => $av['user_nom'].' '.$av['user_prenom'], 
+                    'param2' => $av['vehicule_nom'], 
+                    'param3' => $av['commentaire'],
+                    'param4' => $av['status'],
+                    'actions' => [
+                      ['type' => 'form', 'hidden_name' => 'avis_id', 'hidden_value' => $av['avis_id'], 'button_name' => 'valid_avis', 'button_text' => 'Valider'],
+                      ['type' => 'form', 'hidden_name' => 'avis_id', 'hidden_value' => $av['avis_id'], 'button_name' => 'refus_avis', 'button_text' => 'Refuser'],
+                      ['type' => 'form', 'hidden_name' => 'user_id', 'hidden_value' => $av['user_id'], 'button_name' => 'block_user', 'button_text' => 'Bloquer utilisateur'],
+                  ]];
+                  $items[] = $item;
+                 }
+                
+                 $table = new dataTable($columns,$items,3);
+                 $table->render();
+                ?>
+         
             
           </div>
     

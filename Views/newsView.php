@@ -1,6 +1,7 @@
 <?php
 require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\newsController.php';
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\imageController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
 class newsView{
      
@@ -29,47 +30,28 @@ class newsView{
       </div>
     
         <div class="news-table">
+                <?php
+                 $columns = array( 1 => 'Titre',
+                                   2 => 'Sous titre',
+                                   3 => 'Description' );
+                 $items = array();
+
+                 foreach($news as $nw) {
+                  $item = [
+                    'param1' => $nw['title'], 
+                    'param2' => $nw['subtitle'] , 
+                    'param3' =>$nw['descprition'],
+                    'actions' => [
+                      ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'mdf_nws', 'button_text' => 'Modifier'],
+                      ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'supp_nws', 'button_text' => 'Supprimer'],
+                  ]];
+                  $items[] = $item;
+                 }
                 
-                <table id="myTable" class="table table-striped" style="width:100%">
-                       <thead>
-                           <tr>
-                               <th scope="col">Titre</th>
-                               <th scope="col">Sous titre</th>
-                               <th scope="col">Description</th>
-                               <th scope="col"></th>
-                               <th scope="col"></th>
-         
-                               
-                           </tr>
-                       </thead>
-                         
-                       <tbody>
-                           <?php  foreach($news as $nw) { ?>
-                                  
-                                   <tr>
-                                       <td><?php echo $nw['title']; ?></td>
-                                       <td><?php echo $nw['subtitle']; ?></td>
-                                       <td><?php echo $nw['descprition']; ?></td>
-                                       <td>
-                                           <form method="POST">
-                                               <input type="hidden" name="nw_id" value="<?php echo $nw['news_id'];?>">
-                                               <button type="submit" name="mdf_nws" >Modifier</button>
-                                           </form>
-                                       </td>
-                                       <td>
-                                           <form method="POST">
-                                               <input type="hidden" name="nw_id" value="<?php echo $nw['news_id'];?>">
-                                               <button type="submit" name="supp_nws" >Supprimer</button>
-                                           </form>
-                                       </td>
-            
-                                   </tr>
-                           <?php
-                                   }
-                           ?>
-                       </tbody>
-                </table>
-                 
+                 $table = new dataTable($columns,$items,2);
+                 $table->render();
+                ?>
+                     
         </div>
      <?php
     }

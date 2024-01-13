@@ -1,5 +1,6 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\usersController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
 class usersView{
      
@@ -38,47 +39,29 @@ class usersView{
       ?>
 
        <div class="users-table">
+
+       <?php
+                 $columns = array( 1 => 'Nom utilisateur',
+                                   2 => 'Email',
+                                   3 => 'Status' );
+                 $items = array();
+
+                 foreach($users as $user) {
+                  $item = [
+                    'param1' => $user['user_nom'].' '.$user['user_prenom'], 
+                    'param2' => $user['email'], 
+                    'param3' => $user['status'],
+                    'actions' => [
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/profil?user='.$user['user_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Voir profil'],
+                      ['type' => 'form', 'hidden_name' => 'user_id', 'hidden_value' => $user['user_id'], 'button_name' => 'valid_user', 'button_text' => 'Valider inscription'],
+                  ]];
+                  $items[] = $item;
+                 }
+                
+                 $table = new dataTable($columns,$items,2);
+                 $table->render();
+                ?>
             
-            <table id="myTable" class="table table-striped" style="width:100%">
-                   <thead>
-                       <tr>
-                           <th scope="col">Nom utilisateur</th>
-                           <th scope="col">Email</th>
-                           <th scope="col">Status</th>
-                           <th scope="col"></th>
-                           <th scope="col"></th>
-     
-                           
-                       </tr>
-                   </thead>
-                     
-                   <tbody>
-                       <?php  foreach($users as $user) { ?>
-                              
-                               <tr>
-                                   <td><?php echo $user['user_nom'].' '.$user['user_prenom']; ?></td>
-                                   <td><?php echo $user['email']; ?></td>
-                                   <td><?php echo $user['status']; ?></td>
-                                   <td>
-                                       <form method="POST">
-                                           <input type="hidden" name="user_id" value="<?php echo $user['user_id'];?>">
-                                           <button type="submit" name="user_profil" >Voir profil</button>
-                                       </form>
-                                   </td>
-                                   <td>
-                                       <form method="POST">
-                                           <input type="hidden" name="user_id" value="<?php echo $user['user_id'];?>">
-                                           <button type="submit" name="valid_user" >Valider inscription</button>
-                                       </form>
-                                   </td>
-        
-                               </tr>
-                       <?php
-                               }
-                       ?>
-                   </tbody>
-            </table>
-             
            </div>
       <?php
     }
