@@ -14,9 +14,36 @@ class compareController{
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu();
-      $this->view->showComparateurView();
+      $this->view->showComparateurView(array());
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
       
+    }
+
+    public function showComparController(){
+      $home = new homeView();
+      $this->view = new compareView();
+
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
+      $params = array(
+          1 => $results['v1'],
+          2 => $results['v2']
+      );
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
+      $home->showMenu();
+      $this->view->showComparateurView($params);
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
+    }
+
+    public function showVehiculComparaisons($params){
+      $this->view = new compareView();
+      $this->model = new vehiculeModel();
+
+      $cmps = $this->model->getPopularVahicComparModel($params);
+      $this->view->showComparaisonsCards($cmps);
     }
 
     public function getMarquesController(){
@@ -41,9 +68,7 @@ class compareController{
       return $this->model->getVersionModel($params);
     }
     
-    public function showComparResultController(){
-      
-    }
+
 }
 
 

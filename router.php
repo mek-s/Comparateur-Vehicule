@@ -74,7 +74,7 @@ class router{
     '/Comparateur-Vehicule/marques/details' => 'marqueController@showMarqueDetailsController',
     '/Comparateur-Vehicule/vehicules/details' => 'vehiculeController@showVehiculeDetailsController',
     '/Comparateur-Vehicule/compare' => 'compareController@showComparateurController',
-    '/Comparateur-Vehicule/compare/result' => 'compareController@showComparResultController',
+    '/Comparateur-Vehicule/compareV'=> 'compareController@showComparController',
     '/Comparateur-Vehicule/news' => 'newsController@showNewsController',
     '/Comparateur-Vehicule/news/details' => 'newsController@showNewsDeatailsController',
     '/Comparateur-Vehicule/signin' => 'usersController@showSigninFormController',

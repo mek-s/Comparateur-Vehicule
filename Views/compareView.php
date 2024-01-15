@@ -16,29 +16,26 @@ class compareView{
         }
     }       
     
-    public function showCompar(){
-        echo "this is me ";
-    }
-    
-    public function showComparFormsView($v1,$v2,$v3,$v4){
+    public function showComparFormsView($params){
         if (isset($_POST['cmp_submit'])) {
            $this->controller =new vehiculeController();
 
            $idS = array();
 
-        //    for ($i=1; $i <= 4; $i++) { 
-        //      if (!empty($_POST['vehicles'][$i]['version'])) {
-        //         $params = array( 1 => $_POST['vehicles'][$i]['version'] , 2 => $_POST['vehicles'][$i]['annee']);
-        //         $vehic = $this->controller->getVehicByVersionController($params);
-        //         $idS[$i] = $vehic['vehicule_id']; 
-        //     }
-        $idS[1]=20;
-        $idS[2]=25;
-        $idS[3]=37;
-        $idS[4]=43;
+           for ($i=1; $i <= 4; $i++) { 
+             if (!empty($_POST['vehicles'][$i]['version']) && $_POST['vehicles'][$i]['version'] != 'default'){
+                $params = array( 1 => $_POST['vehicles'][$i]['version'] , 2 => $_POST['vehicles'][$i]['annee']);
+                $vehic = $this->controller->getVehicByVersionController($params);
+                $idS[$i] = $vehic['vehicule_id']; 
+             } else $idS[$i] = null; 
+        // for testing affichage
+        // $idS[1]=20;
+        // $idS[2]=25;
+        // $idS[3]=37;
+        // $idS[4]=43;
              
-          // }
-            // $this->controller->createComparaisonController($idS);
+          }
+            $this->controller->createComparaisonController($idS);
 
         }
 
@@ -47,9 +44,11 @@ class compareView{
        
        ?>
        <div class="compare-container">
-            <h1>Comparateur des vehicules</h1>
+          <h1>Comparateur des vehicules</h1>
             <div class="compar-forms">
-                    <form method="POST">
+             
+                    <form method="POST" onsubmit="return validateForm()">
+                     <div class="vehic-forms">
                       <?php for ($i=1; $i <= 4  ; $i++) { ?>
                     
                         <div class="vehicle-form" id="form<?php echo $i; ?>">
@@ -74,12 +73,13 @@ class compareView{
                                 <select name="vehicles[<?php echo $i; ?>][annee]" id="annee<?php echo $i; ?>">
                                     <option value="default">Annee</option>
                                 </select>
-                                <!-- <button onclick="getVehicule(<?php echo $i; ?>,event)">Ajouter</button> -->
+                               
                       </div>
                             
-                    
+                      
                     <?php } ?>
-                    <input type="submit" name="cmp_submit" value="Comparer" />
+                    </div>
+                    <input id="submit-form" type="submit" name="cmp_submit" value="Comparer" />
                 </form>
             </div>
             
@@ -138,8 +138,8 @@ class compareView{
                             
                        <?php }
                         } 
-                    echo '</tr>';
-                }
+                       echo '</tr>';
+                    }
                 }?>
                 </tbody>
             </table>
@@ -147,16 +147,12 @@ class compareView{
         <?php }
     }
 
-    public function showTopComparaisonsView(){
+    public function showComparaisonsCards($params){
         
     }
 
-    public function showVehiculeTopComparView(){
-
-    }
-
-    public function showComparateurView(){
-        $this->showComparFormsView(NULL,NULL,NULL,NULL);
+    public function showComparateurView($params){
+        $this->showComparFormsView($params);
     }
 
 }

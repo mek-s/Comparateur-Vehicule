@@ -35,7 +35,7 @@ class vehiculeView{
             
             ?>
            </div>
-           <a href="/Comparateur-Vehicule/comparaisons?vehic-1=<?php echo $vehicule['vehicule_id'];?>">Comparer</a>
+           <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $vehicule['vehicule_id'];?>&v2=">Comparer</a>
          </div>
        </div>
       <?php
@@ -52,8 +52,9 @@ class vehiculeView{
       echo 'AvisVehicule';
     }
 
-    private function showPopularVehiculeComparaisons(){
-        echo 'PopularVehiculeComparaisons';
+    private function showPopularVehiculeComparaisons($params){
+        $this->controller = new compareController();
+        $this->controller->showVehiculComparaisons($params);
     }
 
     public function showVehiculeDetailsView($vehicule,$note,$caracs){?>
@@ -65,7 +66,7 @@ class vehiculeView{
         <h1>Les avis des clients</h1>
         <?php $this->showAvisVehicule($note);?>
         <h1>Les comparaisons populaires</h1>
-        <?php $this->showPopularVehiculeComparaisons();?>
+        <?php $this->showPopularVehiculeComparaisons(array( 1=> $vehicule['vehicule_id'] ,2=> $vehicule['vehicule_id']));?>
       </div>
 
       <?php 
