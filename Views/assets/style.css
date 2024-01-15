@@ -1,11 +1,11 @@
 /************************Style page details vehicule*************************/
 
-.details-container{
+.details-container , compare-container{
   max-width: 1000px;
   margin: 20px auto;
 }
 
-.infos-vehic{
+.infos-vehic , .marque-details , .vehic-principals , .vehicule{
   display: flex;
   justify-content: flex-start;
   gap: 10px;

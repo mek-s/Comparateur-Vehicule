@@ -17,6 +17,13 @@ header , footer , .right-content{
 }
 
 /*****************************style diaporama **************************/
+.diaporama{
+position: relative;
+width: 100%;
+height: 400px;
+margin-bottom: 20px;
+overflow: hidden;
+}
 @keyframes animation1 {
             from {
                 transform: translateX(-85px);
@@ -38,7 +45,7 @@ header , footer , .right-content{
             }
         }
 
-.diaporama a , .diaporama  img{
+/* .diaporama a , .diaporama  img{
   width: 100%;
   height: 100%;
   position: absolute;
@@ -48,7 +55,7 @@ header , footer , .right-content{
 .diaporama:hover {
  
   animation-play-state: paused;
-}
+} */
 
 
 /*********************************style footer*****************************/
@@ -150,7 +157,7 @@ nav a:hover {
 
 /*************************style page marques***************************/
 
-.marque {
+/* .marque {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,7 +171,7 @@ nav a:hover {
     overflow: hidden; 
     max-width: 100%;  
     max-height: 100%;
-}
+} */
 
 .marque span{
     font-size: large;
@@ -175,13 +182,7 @@ nav a:hover {
     height: auto;
 }
 
-.marque-details{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 100px;
-    width: 100%;
-}
+
 
 .marque-details .marque {  
     width: 351px;
@@ -191,7 +192,7 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     align-items:start;
-    gap: 100px;
+    gap: 20px;
 }
 
 .vehicule{
@@ -251,24 +252,28 @@ nav a:hover {
     gap: 20px;
   }
   .compar-forms img{
-    width: 300px;
+    width: 80px;
     height: auto;
     background-color: white;
   }
 
-  .compar-forms .card{
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-  }
   form{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .vehic-forms{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
     border: 1px solid #0076a8;
     padding: 30px;
     background-color: white;
   }
+
   
   select {
     width: 100%;
@@ -440,7 +445,7 @@ tr:nth-child(even) {
   display: inline-block;
   margin-top: 12px;
 }
-.right-side .button input[type="button"] {
+.right-side .button input[type="button"] , input[type="submit"] {
   color: #fff;
   font-size: 18px;
   outline: none;
@@ -459,6 +464,7 @@ tr:nth-child(even) {
 .cards-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items:stretch;
   gap: 20px;
@@ -466,8 +472,7 @@ tr:nth-child(even) {
   padding: 20px;
 }
 
-
-.news-card {
+.news-card , .marque-card {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -482,11 +487,18 @@ tr:nth-child(even) {
   display: block;
 }
 
+.marque-card {
+  width: 300px;
+  height: 220px;
+  text-align: center;
+}
+
+
 .news-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.news-card img {
+.news-card img , .marque-card img{
   max-width: 100%;
   height: 200px;
   object-fit: cover; 
@@ -513,6 +525,13 @@ tr:nth-child(even) {
   display: block;
   font-size: 14px;
   color: #888;
+}
+
+.marque-card span {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .article {
@@ -546,5 +565,42 @@ tr:nth-child(even) {
   height: auto;
   margin: 20px 0;
   border-radius: 8px;
+}
+
+/*************************style modal form*********************************/
+
+
+.vehicle-form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.vehicle-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.vehicle-form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.vehicle-form input[type="submit"]:hover {
+  background-color: #45a049;
 }
 

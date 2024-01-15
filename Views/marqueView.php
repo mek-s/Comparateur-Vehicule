@@ -56,19 +56,14 @@ class marqueView{
   // afficher la page de marques 
   public function showMarquesView($marques){ ?>
     
-    <div class="marques-zone">
-    <?php foreach ($marques as $marque) { ?>
-
-        <div class="marque" id="marque<?php echo $marque['marque_id'];?>">
-          
-          <a href="/Comparateur-Vehicule/marques/details?marque=<?php echo $marque['marque_id']?>">
-            <img src="<?php echo $this->cheminM.$marque['chemin'] ;?>" alt="">
+    <div class="cards-container">
+      <?php foreach ($marques as $marque) { ?>
+             
+              <a href="/Comparateur-Vehicule/marques/details?marque=<?php echo $marque['marque_id']?>" class="marque-card">
+              <img src="<?php echo $this->cheminM.$marque['chemin'] ;?>" alt="">
+              <span><?php echo $marque['marque_nom'];?></span>
           </a>
-          
-          <span><?php echo $marque['marque_nom'];?></span>
-        </div>
-
-    <?php
+        <?php
     }
       echo '</div>';
   }
