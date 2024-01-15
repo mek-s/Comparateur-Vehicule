@@ -36,10 +36,8 @@ class vehiculeController{
 
     // retourne toutes les caracteristiques
     public function getCaracsController(){
-      $params= array();
-      
       $this->model = new vehiculeModel();
-      return $this->model-> getCaracteristiquesModel($params);
+      return $this->model-> getCaracteristiquesModel(array());
     }
 
     // retourne les caracteristiques d'un vehicule
@@ -67,10 +65,13 @@ class vehiculeController{
     }
 
     public function getCategoriesController(){
-      $params= array();
-      
       $this->model = new vehiculeModel();
-      return $this->model-> getCategoriesModel($params);
+      return $this->model-> getCategoriesModel(array());
+    }
+
+    public function getCaracsByCategController($params){
+      $this->model = new vehiculeModel();
+      return $this->model->getCaracsByCategModel($params);
     }
 
     // afficher le details du vehicule
@@ -152,6 +153,11 @@ class vehiculeController{
       );
 
       echo 'modifier vehicule : '.$results['vehicule'];
+    }
+
+    public function createComparaisonController($params){
+      $this->model = new vehiculeModel();
+      $this->model-> createComparaisonModel($params);
     }
 
 }

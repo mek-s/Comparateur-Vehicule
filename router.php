@@ -32,46 +32,34 @@ if (isset($_POST['versionId'])) {
   exit();
 }
 
-if (isset($_POST['vehic'])) {
-  require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\vehiculeController.php';
-  $controller = new vehiculeController();
-
-  $params=array(
-    1 => $_POST['version'] ,
-    2 => $_POST['annee'] ,
-  );
-  $result = $controller->getVehicByVersionController($params);
-  echo json_encode($result);
-  exit();
-}
 
 if (isset($_POST['formData'])) {
     $data = $_POST['formData'];
 
-    $params1 = array(1 => $data[0]['vehic_id']);
-    $params2 = array(1 => $data[1]['vehic_id']);
-    $params3 = array(1 => $data[2]['vehic_id']);
-    $params4 = array(1 => $data[3]['vehic_id']);
+    $params1 = array(1 => $data[0]['version_id'] , 2 => $data[0]['annee']);
+    $params2 = array(1 => $data[1]['version_id'] , 2 => $data[1]['annee']);
+    if (!empty($data[2])) { $params3 = array(1 => $data[2]['version_id'] , 2 => $data[2]['annee']);}
+    if (!empty($data[3])) {
+      $params4 = array(1 => $data[3]['version_id'] , 2 => $data[3]['annee']);
+    }
 
     require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\vehiculeController.php';
     $controller = new vehiculeController();
 
-    
-    $vehic1Caracs = $controller->getVehiculeCaracsController($params1);
-    $vehic2Caracs = $controller->getVehiculeCaracsController($params2);
-    $vehic3Caracs = $controller->getVehiculeCaracsController($params3);
-    $vehic4Caracs = $controller->getVehiculeCaracsController($params4);
+   // get the vehicules by version_id and annee    
+    $vehic1 = $controller->getVehicByVersionController($params1);
+    $vehic2 = $controller->getVehicByVersionController($params2);
+    $vehic3 = $controller->getVehicByVersionController($params3);
+    $vehic4 = $controller->getVehicByVersionController($params4);
 
-    // Example: Send the data as JSON
-    //the result is emty !!!
-    $result = array(
-        'vehic1Data' => $vehic1Caracs,
-        'vehic2Data' => $vehic2Caracs,
-        'vehic3Data' => $vehic3Caracs,
-        'vehic4Data' => $vehic4Caracs
-    );
+     $controller->createComparaisonController(array(
+      1 => $vehic1['vehicule_id'] , 
+      2 => $vehic2['vehicule_id'] , 
+      3 => $vehic3['vehicule_id'] , 
+      4 => $vehic4['vehicule_id'] ));
 
-    echo json_encode($result);
+
+    $controller->showComparResult();
     exit();
 }
 

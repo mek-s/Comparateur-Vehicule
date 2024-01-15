@@ -82,73 +82,46 @@
                 });
             } 
 
-            function getVehicule(formIndex , event){   
-                event.preventDefault();
-                selectedVersion = $("#version" + formIndex).val();
-                selectedAnnee = $("#annee" + formIndex).val();
+            // function getVehicule(formIndex , event){   
+            //     event.preventDefault();
+            //     selectedVersion = $("#version" + formIndex).val();
+            //     selectedAnnee = $("#annee" + formIndex).val();
                 
 
-                    $.ajax({
-                        type: 'POST',
-                        url : 'router.php',
-                        data: {
-                            vehic : "vehic",
-                            version : selectedVersion,
-                            annee : selectedAnnee
-                         },
-                        success: function(data){
-                            try {
-                                var vehic = JSON.parse(data);
-                                 $("#form" + formIndex).css("display", "none");
-                                var container = $("#form-container-" + formIndex );
+            //         $.ajax({
+            //             type: 'POST',
+            //             url : 'router.php',
+            //             data: {
+            //                 vehic : "vehic",
+            //                 version : selectedVersion,
+            //                 annee : selectedAnnee
+            //              },
+            //             success: function(data){
+            //                 try {
+            //                     var vehic = JSON.parse(data);
+                            
+                               
                               
     
-                                var cardHtml = '<div class="card">';
-                                cardHtml += '<p id="vehic_id'+formIndex+'" style="display:none">'+vehic.vehicule_id+'</p>'
-                                cardHtml += '<img src="Images/vehicules/' + vehic.chemin + '">';
-                                cardHtml += '<div class="card-body">';
-                                cardHtml += '<h5 class="card-title">' + vehic.vehicule_nom + '</h5>';
-                                cardHtml += '</div></div>';
+            //                     var cardHtml = '<div class="card">';
+            //                     cardHtml += '<p id="vehic_id'+formIndex+'" style="display:none">'+vehic.vehicule_id+'</p>'
+            //                     cardHtml += '<img src="Images/vehicules/' + vehic.chemin + '">';
+            //                     cardHtml += '<div class="card-body">';
+            //                     cardHtml += '<h5 class="card-title">' + vehic.vehicule_nom + '</h5>';
+            //                     cardHtml += '</div></div>';
 
-                                container.append(cardHtml);
+            //                     container.append(cardHtml);
                                
-                            } catch (error) {
-                                console.log("Error parsing JSON:", error);
-                            }
+            //                 } catch (error) {
+            //                     console.log("Error parsing JSON:", error);
+            //                 }
                             
-                        }
-                    });
+            //             }
+            //         });
                 
-            }
+            // }
 
-            function submitAllForms() {
-                var allFormData = [];
-                for (var i = 1; i <= 4; i++) {
-                    var formData = {
-                        vehic_id: $("#vehic_id"+i).text()
-                    };
-                    console.log(formData);
             
-                    allFormData.push(formData);
-                }
-                
-                    $.ajax({
-                        type: 'POST',
-                        url : 'router.php',
-                        data: {formData : allFormData},
-                        success: function(data){
-                            try {
-                                console.log(data);
-                               
-                            } catch (error) {
-                                console.log("Error parsing JSON:", error);
-                            }
-                            
-                        }
-                    });
-
-            }
-
             function openCity(evt, cityName) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
@@ -162,3 +135,31 @@
                 document.getElementById(cityName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
+
+            function submitAllForms() {
+                var allFormData = [];
+                for (var i = 1; i <= 4; i++) {
+                    var formData = {
+                        version_id : $("#version" + i).val(),
+                        annee : $("#annee" + i).val(),
+                    };
+                    allFormData.push(formData);
+                }
+                
+                    $.ajax({
+                        type: 'POST',
+                        url : 'router.php',
+                        data: {formData : allFormData},
+                        success: function(data){
+                            try {
+                               var compId = JSON.parse(data);
+                               console.log(compId);     
+                            } catch (error) {
+                                console.log("Error parsing JSON:", error);
+                            }
+                            
+                        }
+                    });
+
+            }
+

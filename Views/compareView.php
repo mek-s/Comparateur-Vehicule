@@ -1,6 +1,7 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\compareController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
+require_once 'C:\wamp64\www\Comparateur-Vehicule\Controllers\vehiculeController.php';
 
 
 class compareView{
@@ -13,142 +14,138 @@ class compareView{
         foreach ($marques as $marque) {
             echo '<option value="'.$marque['marque_id'].'">'.$marque['marque_nom'].'</option>';
         }
-    }         
+    }       
     
-    public function showComparFormsView(){
+    public function showCompar(){
+        echo "this is me ";
+    }
+    
+    public function showComparFormsView($v1,$v2,$v3,$v4){
+        if (isset($_POST['cmp_submit'])) {
+           $this->controller =new vehiculeController();
+
+           $idS = array();
+
+        //    for ($i=1; $i <= 4; $i++) { 
+        //      if (!empty($_POST['vehicles'][$i]['version'])) {
+        //         $params = array( 1 => $_POST['vehicles'][$i]['version'] , 2 => $_POST['vehicles'][$i]['annee']);
+        //         $vehic = $this->controller->getVehicByVersionController($params);
+        //         $idS[$i] = $vehic['vehicule_id']; 
+        //     }
+        $idS[1]=20;
+        $idS[2]=25;
+        $idS[3]=37;
+        $idS[4]=43;
+             
+          // }
+            // $this->controller->createComparaisonController($idS);
+
+        }
+
        $this->controller = new marqueController();
-       $marques = $this->controller->getMarquesController();?>
+       $marques = $this->controller->getMarquesController(); 
+       
+       ?>
        <div class="compare-container">
-            <h1>Comparateur les vehicules</h1>
+            <h1>Comparateur des vehicules</h1>
             <div class="compar-forms">
-                    <script type="text/javascript" src="<?php echo $GLOBALS['base-url'];?>Views/assets/jquery-3.6.0.js"></script>
-                    <script type="text/javascript" src="<?php echo$GLOBALS['base-url'];?>Views/assets/script.js"></script>
-                    <?php for ($i=1; $i <= 4  ; $i++) { ?>
-                    <div id="form-container-<?php echo $i;?>">
-                        <form id="form<?php echo $i;?>">
+                    <form method="POST">
+                      <?php for ($i=1; $i <= 4  ; $i++) { ?>
+                    
+                        <div class="vehicle-form" id="form<?php echo $i; ?>">
                             <h3>Selectionner un vehicule</h3>
 
                                 <label>Marque</label>
-                                <select name="marque" id="marque<?php echo $i; ?>" onchange="getModeles(<?php echo $i; ?>)">
+                                <select name="vehicles[<?php echo $i; ?>][marque]"id="marque<?php echo $i; ?>" onchange="getModeles(<?php echo $i; ?>)">
                                     <?php $this->showMarques($marques); ?>   
                                 </select>
 
                                 <label >Modele</label>
-                                <select name="modele" id="modele<?php echo $i; ?>" onchange="getVersions(<?php echo $i; ?>)">
+                                <select name="vehicles[<?php echo $i; ?>][modele]" id="modele<?php echo $i; ?>" onchange="getVersions(<?php echo $i; ?>)">
                                 <option value="default">Modele</option>    
                                 </select>
 
                                 <label>Version</label>
-                                <select name="version" id="version<?php echo $i; ?>" onchange="getAnnees(<?php echo $i; ?>)">
+                                <select name="vehicles[<?php echo $i; ?>][version]" id="version<?php echo $i; ?>" onchange="getAnnees(<?php echo $i; ?>)">
                                     <option value="default">Version</option>
                                 </select>
 
                                 <label>Annee</label>
-                                <select name="annee" id="annee<?php echo $i; ?>">
+                                <select name="vehicles[<?php echo $i; ?>][annee]" id="annee<?php echo $i; ?>">
                                     <option value="default">Annee</option>
                                 </select>
-                                <button onclick="getVehicule(<?php echo $i; ?>,event)">Ajouter</button>
-                            </form>
-                    </div>
+                                <!-- <button onclick="getVehicule(<?php echo $i; ?>,event)">Ajouter</button> -->
+                      </div>
+                            
                     
                     <?php } ?>
+                    <input type="submit" name="cmp_submit" value="Comparer" />
+                </form>
             </div>
-            <button onclick="submitAllForms()">Comparer</button>
             
+            <div id="comparaison">
+                <?php if (isset($_POST['cmp_submit'])) { 
+                    $this->controller =new vehiculeController();
+                    $categ = $this->controller->getCategoriesController();
+                    $caracs = $this->controller->getCaracsController();
+                    $this->showComparResult($categ,$caracs,$idS);
+                } 
+                ?>
+            </div>
         </div>
-       
+        
       <?php 
     }
 
-    public function showComparResult(){?>
-     
-
-        <div class="tab">
-             foreach category create a button 
-            <button class="tablinks" onclick="openCity(event, 'Dimensions')">Dimensions</button>
-            <button class="tablinks" onclick="openCity(event, 'Motor')">Motor</button>
-            <button class="tablinks" onclick="openCity(event, 'Autre')">Autre</button>
+    public function showComparResult($categories,$caracs,$idS){
+        
+        echo '<div class="tab">';
+        foreach ($categories as $categorie) {?>
+            <button class="tablinks" onclick="openCity(event, '<?php echo $categorie['categ_nom'] ; ?>')"><?php echo $categorie['categ_nom'] ; ?></button>
+       <?php }  ?>
         </div>
-       forech category create a div and table
-      <div id="Dimensions" class="tabcontent">
-        <h3>Dimensions</h3>
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Points</th>
-            </tr>
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
-            </tr>
-            <tr>
-                <td>Adam</td>
-                <td>Johnson</td>
-                <td>67</td>
-            </tr>
-        </table>
-      </div>
-      
-      <div id="Motor" class="tabcontent">
-        <h3>Motor</h3>
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Points</th>
-            </tr>
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
-            </tr>
-            <tr>
-                <td>Adam</td>
-                <td>Johnson</td>
-                <td>67</td>
-            </tr>
-        </table>
-      </div>
-      
-      <div id="Autre" class="tabcontent">
-        <h3>Autre Specifications</h3>
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Points</th>
-            </tr>
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
-            </tr>
-            <tr>
-                <td>Adam</td>
-                <td>Johnson</td>
-                <td>67</td>
-            </tr>
-        </table>
-      </div>
+        <?php 
+        foreach ($categories as $categorie) { 
+            $this->controller = new vehiculeController();
+            $vehicules = $this->controller->getCaracsByCategController(array(1 => $categorie['categ_id']));
+            ?>
+            <div id="<?php echo $categorie['categ_nom'] ; ?>" class="tabcontent">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <?php 
 
-    <?php }
+                        // the images are duplicated !!!
+                        foreach ($vehicules as $vehic) {
+                        if ($vehic['categ_id'] == $categorie['categ_id'] && in_array($vehic['vehicule_id'],$idS) ) {?>
+                          <th><a href="/Comparateur-Vehicule/vehicules/details?vehicule=<?php echo $vehic['vehicule_id']?>"><img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$vehic['chemin'];?>" alt=""></a></th>
+                  <?php } 
+                        }
+                    ?>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                 <?php 
+                 foreach ($caracs as $carac) {
+                    if ($carac['categ_id'] == $categorie['categ_id']) {
+                        echo '<tr>';
+                        echo '<td>'.$carac['carac_nom'].'</td>';
+                        foreach ($vehicules as $vehic) {
+                            if ($vehic['carac_id'] == $carac['carac_id'] && in_array($vehic['vehicule_id'],$idS)) {?>
+                              <td><?php echo $vehic['value']; ?></td>
+                            
+                       <?php }
+                        } 
+                    echo '</tr>';
+                }
+                }?>
+                </tbody>
+            </table>
+          </div>
+        <?php }
+    }
 
     public function showTopComparaisonsView(){
         
@@ -159,8 +156,7 @@ class compareView{
     }
 
     public function showComparateurView(){
-        $this->showComparFormsView();
-        $this->showComparResult();
+        $this->showComparFormsView(NULL,NULL,NULL,NULL);
     }
 
 }

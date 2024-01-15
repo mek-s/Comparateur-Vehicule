@@ -117,6 +117,16 @@ class vehiculeModel{
         return $caracs;
     }
 
+    public function getCaracsByCategModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `images` i JOIN ( SELECT v.image_id , j.* FROM `vehicules` v JOIN( SELECT cv.*, c.* FROM `carac_vehicule` cv JOIN ( SELECT car.carac_id as caracId ,car.categ_id , car.carac_nom , car.unite_mesure FROM `caracteristiques` car JOIN `categories` cat ON cat.categ_id = car.categ_id WHERE cat.categ_id = ? ) c ON cv.carac_id = c.caracId) j ON v.vehicule_id = j.vehicule_id ) K ON k.image_id = i.image_id;";
+        $caracs=$this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $caracs;
+    }
+
     // recuperer la note d'un vehicule
     public function getVehiculeNoteModel($params){
         $cnx=$this->db->connect();
@@ -148,6 +158,16 @@ class vehiculeModel{
     
         $this->db->disconnect($cnx);
         return $categories;
+    }
+
+    public function createComparaisonModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "INSERT INTO `comparaisons` (`vehicule_1`, `vehicule_2`, `vehicule_3`, `vehicule_4`, `rech`, `supp`) VALUES (?,?, ?,?,1, 0) ";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        
     }
 }
 

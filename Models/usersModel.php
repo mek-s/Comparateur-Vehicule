@@ -47,7 +47,7 @@ class usersModel{
        
         $cnx=$this->db->connect();
         
-        $query= "SELECT user_id FROM users WHERE email = ? AND mdp= ?";
+        $query= "SELECT user_id FROM users WHERE email = ? AND mdp= ? AND status = 'confirme' ";
         $result=$this->db->request($cnx,$query,$params,false);
            
         $this->db->disconnect($cnx);

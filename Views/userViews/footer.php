@@ -27,5 +27,8 @@ $links = [
         </ul>
     </div>
 </footer>
+
+<script type="text/javascript" src="<?php echo $GLOBALS['base-url'];?>Views/assets/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="<?php echo$GLOBALS['base-url'];?>Views/assets/script.js"></script>
 </body>
 </html>
