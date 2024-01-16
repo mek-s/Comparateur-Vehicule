@@ -9,6 +9,7 @@ class avisModel{
         $this->db = new bdd();
     }
 
+    // creer un avis
     public function createAvisModel($params){
         $cnx=$this->db->connect();
 
@@ -19,6 +20,7 @@ class avisModel{
 
     }
 
+    // recuperer tous les avis d'un vehicule
     public function getAllAvisModel($params){
         $cnx=$this->db->connect();
 
@@ -30,6 +32,7 @@ class avisModel{
     }
 
 
+    //valider un avis sur un vehicule par admin
     public function validateAvisModel($params){
         $cnx=$this->db->connect();
 
@@ -40,6 +43,7 @@ class avisModel{
 
     }
 
+    // refuser un avis sur un vehicule par admin
     public function refuseAvisModel($params){
         $cnx=$this->db->connect();
 

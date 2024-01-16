@@ -7,7 +7,7 @@ class avisController{
     private $view;
     private $model;
 
-    // afficher la page avis pour admin
+    // appel a la vue d'affichage de la page avis pour admin
     public function showAdminAvisController() {
       $this->model = new avisModel();
       $this->view = new avisView();
@@ -20,11 +20,13 @@ class avisController{
       
     }
 
+    // appel au model pour valider un avis
     public function validateAvisController($params){
       $this->model = new avisModel();
       $this->model->validateAvisModel($params);
     }
 
+    // appel au model pour refuser un avis
     public function refuseAvisController($params){
       $this->model = new avisModel();
       $this->model->refuseAvisModel($params);

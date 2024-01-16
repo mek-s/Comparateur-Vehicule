@@ -10,6 +10,7 @@ class marqueModel{
     }
 
 
+    // creer une marque id 
     public function createMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -20,7 +21,7 @@ class marqueModel{
 
     }
 
-    // modifier une marque
+    // modifier une marque id
     public function modifMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -30,6 +31,7 @@ class marqueModel{
         $this->db->disconnect($cnx);
     }
 
+    // supprimer une marque id 
     public function deleteMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -40,11 +42,10 @@ class marqueModel{
     }
 
     // Recuperer les marques principales
-    public function getMarquesPrincipalesModel(){
+    public function getMarquesPrincipalesModel($params){
        
         $cnx=$this->db->connect();
-        $params=array();
-
+        
         $query = "SELECT * FROM marques NATURAL JOIN images WHERE principale = 1 AND supp = 0";
         $principales = $this->db->request($cnx,$query,$params,false);
     
@@ -66,7 +67,7 @@ class marqueModel{
         return $marques;
     }
 
-    // Recuperer une marque
+    // Recuperer une marque par id 
     public function getMarqueModel($params){
        
         $cnx=$this->db->connect();
@@ -112,7 +113,7 @@ class marqueModel{
         return $versions;
     }
 
-    // recuperer une versions 
+    // recuperer une version par id 
     public function getVersionModel($params){
         $cnx=$this->db->connect();
 

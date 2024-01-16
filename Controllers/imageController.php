@@ -7,21 +7,21 @@ class imageController{
 
     private $model;
     
-    
+    // verifier la validite de l'image
     private function checkImage($image,$target_dir){
         
         $target_file = $target_dir . (isset($image["image"]["name"]) ? basename($image["image"]["name"]) : '');
         $uploadOk = 1;
 
       
-      // Check if file already exists
+      // verifier si l'image existe deja
       if (file_exists($target_file)) {
         $error = "Sorry, file already exists.";
         $uploadOk = 0;
       }
           
       
-      // Check if $uploadOk is set to 0 by an error
+      // si iploadOk alors tout va bien 
       if ($uploadOk == 1){
         if (move_uploaded_file($image["image"]["tmp_name"], $target_file)) {
           $error = "The file ". htmlspecialchars( basename( $image["image"]["name"])). " has been uploaded.";
@@ -33,6 +33,7 @@ class imageController{
       return [$uploadOk , $error];
     }
 
+    // appel au model pour creer une image
     public function createImageController($image,$directory,$params){
   
       [$valid,$error]=$this->checkImage($image,$directory);
@@ -45,16 +46,7 @@ class imageController{
         }  
     }
 
-    public function getImageController($id){
   
-      $params=array(
-        1 => $id
-     );
-     $this->model = new imageModel();
-     $chemin = $this->model->getImageModel($params);
-    
-     return $chemin['chemin'];
-    }
 
 }
 

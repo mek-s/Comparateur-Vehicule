@@ -9,6 +9,7 @@ class newsModel{
         $this->db = new bdd();
     }
 
+    // creer un news
     public function createNewsModel($params){
         $cnx=$this->db->connect();
 
@@ -18,6 +19,7 @@ class newsModel{
         $this->db->disconnect($cnx);
     }
 
+    // modifier un news
     public function modifNewsModel($params){
         $cnx=$this->db->connect();
 
@@ -27,6 +29,7 @@ class newsModel{
         $this->db->disconnect($cnx);
     }
 
+    // supprimer un news
     public function deleteNewsModel($params){
         $cnx=$this->db->connect();
 
@@ -36,6 +39,7 @@ class newsModel{
         $this->db->disconnect($cnx);
     }
 
+    // recuperer tous les news
     public function getAllNewsModel($params){
         $cnx=$this->db->connect();
 
@@ -46,6 +50,7 @@ class newsModel{
         return $news;
     }
 
+    // recuperer un news par id 
     public function getNewsByIdModel($params){
         $cnx=$this->db->connect();
 

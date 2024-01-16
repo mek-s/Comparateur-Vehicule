@@ -8,6 +8,9 @@ class newsController{
     private $model;
     private $view;
 
+    /**************** les controlleurs de l'utilisateur ********************/
+
+    // appel a la vue d'affichage de la page news
     public function showNewsController(){
         $home = new homeView();
         $news =$this->getAllNewsController();
@@ -19,7 +22,8 @@ class newsController{
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
     }
 
-    public function showNewsDeatailsController(){
+    // appel a la vue d'affichage de la page details de news
+    public function showNewsDetailsController(){
         $home = new homeView();
         $this->model = new newsModel();
         $this->view = new newsView();
@@ -40,26 +44,33 @@ class newsController{
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
     }
 
+    /*********************** les controlleurs de l'admin ***********************/
+
+    // appel au model pour creer un news
     public function createNewsController($params){
         $this->model = new newsModel();
         $this->model->createNewsModel($params);
     }
 
+    // appel au model pour recuperer tous les news
     public function getAllNewsController(){
         $this->model = new newsModel();
         return $this->model->getAllNewsModel(array());
     }
 
+    // appel au model pour supprimer un news
     public function deleteNewsController($params){
         $this->model = new newsModel();
         $this->model->deleteNewsModel($params);
     }
 
+    // appel au model pour modifier un news
     public function modifNewsController($params){
         $this->model = new newsModel();
         $this->model->modifNewsModel($params);
     }
 
+    // appel a la vue d'affichage de la page news pour admin
     public function showAdminNewsController() {
         $this->view = new newsView();
   
@@ -71,6 +82,7 @@ class newsController{
         
     }
 
+    // appel a la vue d'affichage du formulaire de creation de news
     public function showNewsFormController(){
         $this->view = new newsView();
 
@@ -80,6 +92,7 @@ class newsController{
        
     }
 
+    // appel a la vue d'affichage du formulaire de modification de news
     public function showModifNewsController(){
         $this->view = new newsView();
         $this->model = new newsModel();

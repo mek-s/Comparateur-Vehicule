@@ -3,18 +3,9 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Views\marqueView.php");
 
 class adminHomeView{
 
-   public function showBreadcrumb(){?>
-         
-        <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Pictures</a></li>
-            <li><a href="#">Summer 15</a></li>
-            <li>Italy</li>
-        </ul>
 
-   <?php }
-
-   public function showMain(){ ?>
+   // afficher les 5 images de categories
+    public function showMain(){ ?>
       <div class="categories">
          <div class="col">
 				<a href="/Comparateur-Vehicule/admin/marques">
@@ -45,11 +36,11 @@ class adminHomeView{
 					<img src="<?php echo $GLOBALS['base-url'];?>Images/admin/settings.png" alt="vehicules" width="273" height="168">
 					<p>Gestion des parametres</p>
 				</a>
-			</div>
-         
-   <?php }
-
-   
+			</div><?php 
+			
+	}
+	
+	//afficher la page principale de l'admin
    public function showHome(){
       require_once("header.php");
       $this->showMain();

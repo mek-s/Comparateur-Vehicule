@@ -11,30 +11,31 @@ class marqueController{
     private $model;
     private $view;
 
-    // creer une nouvelle marque
+    // appel au model pour creer une nouvelle marque
     public function createMarqueController($params){
        $this->model = new marqueModel();
        $this->model-> createMarqueModel($params);
     }
 
-    // supprimer une marque
+    // appel au model pour supprimer une marque
     public function deleteMarqueController($params){
       $this->model = new marqueModel();
        $this->model-> deleteMarqueModel($params);
     }
 
-    // modifier une  marque
+    // appel au model pour modifier une  marque
     public function modifMarqueController($params){
       $this->model = new marqueModel();
       $this->model-> modifMarqueModel($params);
    }
 
-    public function getMarquesController(){
+   // appel au model pour recuperer les marques
+   public function getMarquesController(){
        $this->model = new marqueModel();
        return $this->model-> getMarquesModel(array());
-    }
+   }
 
-    // retourne les modeles d'une marque
+    // appel au model pour recuperer les modeles d'une marque
     public function getModelesController($id){
       $this->model = new marqueModel();
       $params = array(1=> $id); 
@@ -42,20 +43,20 @@ class marqueController{
     }
 
 
-    // retourne les marques principales 
+    // appel au model pour recuperer les marques principales 
     public function getMarquesPrincipalesController(){
-       $this->model = new marqueModel();
-       return  $this->model-> getMarquesPrincipalesModel();
+      $this->model = new marqueModel();
+      return  $this->model-> getMarquesPrincipalesModel(array());
     }
 
-     //Retourne la note d'une marque
+    // appel au model pour recuperer la note d'une marque
    public function getMarqueNoteController($id){
       $this->model = new marqueModel();
       $params = array(1=> $id);  
       return $this->model->getMarqueNoteModel($params);
    }
 
-    // afficher la page marques 
+    // appel a la vue d'affichage de la page marques 
     public function showMarquesController(){
       $this->model = new marqueModel();   
       $this->view = new marqueView();
@@ -70,7 +71,7 @@ class marqueController{
       
    }
    
-   // afficher la page details d'une marque
+   // appel a la vue d'affichage de la page details d'une marque
    public function showMarqueDetailsController(){
       $this->model = new marqueModel();
       $this->view = new marqueView();
@@ -94,7 +95,7 @@ class marqueController{
 
    }
 
-   // afficher la page marque pour admin
+   // appel a la vue d'affichage de la page marque pour admin
    public function showAdminMarqueController(){
       
       $this->view = new marqueView();
@@ -107,16 +108,17 @@ class marqueController{
     
    }
 
-   // afficher le formulaire pour ajouter une marque
+   // appel a la vue d'affichage du formulaire de creation d'une marque
    public function showMarqueFormController(){
       $this->view = new marqueView();
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-       $this->view->addMarqueView();
+       $this->view->showMarqueFormView();
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
   
    }
 
+   // appel a la vue d'affichage du formulaire de modification d'une marque
    public function showModifMarqueFormController(){
       $this->view = new marqueView();
       $this->model = new marqueModel();

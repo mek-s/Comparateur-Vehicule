@@ -15,134 +15,8 @@ class marqueView{
       $this->cheminV = $GLOBALS['base-url'] . 'Images/vehicules/';
     }
 
-    // Le formulaire de creation d'une nouvelle marque
-    public function addMarqueView(){
-      if (isset($_POST['create-mrq'])) {
-  
-        // inserer l'image de la marque
-        $this->controller = new imageController();
-        $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
-        $dir = 'Images/marques/';
-        
-        $imgId = $this->controller->createImageController($_FILES,$dir,$params);
-        
-          // inserer la marque
-          $this->controller = new marqueController();
-            $params = array(
-              1   => $_POST['nom'],
-              2   => $_POST['pays'],
-              3   => $_POST['siege'],
-              4   => $_POST['annee'],
-              5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
-              6   => $imgId
-            );
-            $this->controller->createMarqueController($params);  
-
-            header('Location: /Comparateur-Vehicule/admin/marques');
-           
-      } ?>
-      <h1>Ajouter une nouvelle marque</h1>
-      <form method="POST" enctype="multipart/form-data" >
-        <div class="input">
-          <label>Nom de la marque</label>
-          <input type="text" name="nom" required>
-        </div>
-  
-        <div class="input">
-          <label>Le pays de la marque</label>
-          <input type="text" name="pays" required>
-        </div>
-        <div class="input">
-          <label>Le siege social de la marque</label>
-          <input type="text" name="siege" required>
-        </div>
-        <div class="input">
-          <label>L'annee de creation de la marque</label>
-          <input type="number" name="annee" min="1900" max="2100" required>
-        </div>
-        <div class="input">
-          <label>Image de la marque</label>
-          <input type="file" name="image" id="image" >
-        </div> 
-        <div class="input">
-          <label>Marque Principale ? </label>
-          <input type="checkbox" name="principal">
-        </div>
-  
-        <input type="submit" name="create-mrq" value="Enregistrer">
-      </form>
-    <?php 
-    }
-    // le formulaire de modification d'une marque
-    public function modifMarqueView($marque){
-
-      $imgId = $marque['image_id'];
-
-      if (isset($_POST['mdf-mrq'])) {
-        // if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        //   $this->controller = new imageController();
-        //   $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
-        //   $dir = 'Images/marques/';
-        //   $imgId = $this->controller->createImageController($_FILES,$dir,$params);
-        //  }
-
-
-         $params = array(
-              
-              1   => $_POST['nom'],
-              2   => $_POST['pays'],
-              3   => $_POST['siege'],
-              4   => $_POST['annee'],
-              5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
-              6   => $imgId,
-              7   => $_POST['id'],
-         );
-
-         $this->controller = new marqueController();
-         $this->controller->modifMarqueController($params);
-
-         header('Location: /Comparateur-Vehicule/admin/marques');
-         
-      }
-      
-      
-      ?>
-      <form  method="POST">
-        <h2>Modifier une Marque</h2>
-        <input type="hidden" name="id" value="<?php echo $marque['marque_id'];?>">
+    /*********************les vues de l;utilisateur *******************/
     
-        <div class="input">
-          <label>Nom de la marque</label>
-          <input type="text" name="nom" value="<?php echo $marque['marque_nom'];?>" required>
-        </div>
-  
-        <div class="input">
-          <label>Le pays de la marque</label>
-          <input type="text" name="pays" value="<?php echo $marque['pays_origine'];?>" required>
-        </div>
-        <div class="input">
-          <label>Le siege social de la marque</label>
-          <input type="text" name="siege"value="<?php echo $marque['siege_social'];?>"  required>
-        </div>
-        <div class="input">
-          <label>L'annee de creation de la marque</label>
-          <input type="number" name="annee" min="1900" max="2100" value="<?php echo $marque['annee_creation'];?>" required>
-        </div>
-        <!-- <div class="input">
-          <label>Image de la marque</label>
-          <input type="file" name="image" id="image" >
-        </div>  -->
-        <div class="input">
-          <label>Marque Principale ? </label>
-          <input type="checkbox" name="principal" <?php echo ($marque['principale'] == 1) ? 'checked' : ''; ?>>
-        </div>
-  
-        <input type="submit" name="mdf-mrq" value="Enregistrer">
-      </form>
-   <?php }
-
-
-
   // Afficher les marques principales
   public function showMarquesPrincipalesView(){
     $this->controller = new marqueController();
@@ -265,7 +139,132 @@ class marqueView{
     require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php"); 
   }
 
-  //Affechier la table des marques pour admin
+  /*********************les vues de l'admin *******************/
+
+  // Le formulaire de creation d'une nouvelle marque
+  public function showMarqueFormView(){
+    if (isset($_POST['create-mrq'])) {
+
+      // inserer l'image de la marque
+      $this->controller = new imageController();
+      $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+      $dir = 'Images/marques/';
+      
+      $imgId = $this->controller->createImageController($_FILES,$dir,$params);
+      
+        // inserer la marque
+        $this->controller = new marqueController();
+          $params = array(
+            1   => $_POST['nom'],
+            2   => $_POST['pays'],
+            3   => $_POST['siege'],
+            4   => $_POST['annee'],
+            5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+            6   => $imgId
+          );
+          $this->controller->createMarqueController($params);  
+
+          header('Location: /Comparateur-Vehicule/admin/marques');
+         
+    } ?>
+    <h1>Ajouter une nouvelle marque</h1>
+    <form method="POST" enctype="multipart/form-data" >
+      <div class="input">
+        <label>Nom de la marque</label>
+        <input type="text" name="nom" required>
+      </div>
+
+      <div class="input">
+        <label>Le pays de la marque</label>
+        <input type="text" name="pays" required>
+      </div>
+      <div class="input">
+        <label>Le siege social de la marque</label>
+        <input type="text" name="siege" required>
+      </div>
+      <div class="input">
+        <label>L'annee de creation de la marque</label>
+        <input type="number" name="annee" min="1900" max="2100" required>
+      </div>
+      <div class="input">
+        <label>Image de la marque</label>
+        <input type="file" name="image" id="image" >
+      </div> 
+      <div class="input">
+        <label>Marque Principale ? </label>
+        <input type="checkbox" name="principal">
+      </div>
+
+      <input type="submit" name="create-mrq" value="Enregistrer">
+    </form><?php 
+  }
+  // le formulaire de modification d'une marque
+  public function modifMarqueView($marque){
+
+    $imgId = $marque['image_id'];
+
+    if (isset($_POST['mdf-mrq'])) {
+      // if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+      //   $this->controller = new imageController();
+      //   $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+      //   $dir = 'Images/marques/';
+      //   $imgId = $this->controller->createImageController($_FILES,$dir,$params);
+      //  }
+
+
+       $params = array(
+            
+            1   => $_POST['nom'],
+            2   => $_POST['pays'],
+            3   => $_POST['siege'],
+            4   => $_POST['annee'],
+            5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+            6   => $imgId,
+            7   => $_POST['id'],
+       );
+
+       $this->controller = new marqueController();
+       $this->controller->modifMarqueController($params);
+
+       header('Location: /Comparateur-Vehicule/admin/marques');
+       
+    } ?>
+    <form  method="POST">
+      <h2>Modifier une Marque</h2>
+      <input type="hidden" name="id" value="<?php echo $marque['marque_id'];?>">
+  
+      <div class="input">
+        <label>Nom de la marque</label>
+        <input type="text" name="nom" value="<?php echo $marque['marque_nom'];?>" required>
+      </div>
+
+      <div class="input">
+        <label>Le pays de la marque</label>
+        <input type="text" name="pays" value="<?php echo $marque['pays_origine'];?>" required>
+      </div>
+      <div class="input">
+        <label>Le siege social de la marque</label>
+        <input type="text" name="siege"value="<?php echo $marque['siege_social'];?>"  required>
+      </div>
+      <div class="input">
+        <label>L'annee de creation de la marque</label>
+        <input type="number" name="annee" min="1900" max="2100" value="<?php echo $marque['annee_creation'];?>" required>
+      </div>
+      <!-- <div class="input">
+        <label>Image de la marque</label>
+        <input type="file" name="image" id="image" >
+      </div>  -->
+      <div class="input">
+        <label>Marque Principale ? </label>
+        <input type="checkbox" name="principal" <?php echo ($marque['principale'] == 1) ? 'checked' : ''; ?>>
+      </div>
+
+      <input type="submit" name="mdf-mrq" value="Enregistrer">
+    </form><?php 
+  }
+
+
+  //Afficher la table des marques pour admin
   public function showMarquesTableView($marques){
     if (isset($_POST['supp_mrq'])) {
       $this->controller= new marqueController();

@@ -9,7 +9,7 @@ class usersModel{
         $this->db = new bdd();
     }
 
-
+    // creer un utilisateur
     public function createUserModel($params){
        
         $cnx=$this->db->connect();
@@ -22,6 +22,7 @@ class usersModel{
         
     }
 
+    // bloquer un utilisateur 
     public function blockUserModel($id){
        
         $cnx=$this->db->connect();
@@ -33,6 +34,7 @@ class usersModel{
         $this->db->disconnect($cnx);
     }
 
+    // valider l'inscription d'un utilisateur 
     public function validateUsersModel($params){
        
         $cnx=$this->db->connect();
@@ -43,6 +45,7 @@ class usersModel{
         $this->db->disconnect($cnx);
     }
 
+    // authentifie un utilisateur
     public function authenticateUserModel($params){
        
         $cnx=$this->db->connect();
@@ -57,6 +60,7 @@ class usersModel{
         
     }
 
+    // authentifie un admin
     public function authenticateAdminModel($params){
        
         $cnx=$this->db->connect();
@@ -70,6 +74,7 @@ class usersModel{
         } else return $result;
     }
 
+    // recuperer tous les utilisateurs 
     public function getAllUsersModel($params){
        
         $cnx=$this->db->connect();
@@ -82,6 +87,7 @@ class usersModel{
 
     }
 
+    // recuperer un utilisateur par id 
     public function getUserModel($params){
         $cnx=$this->db->connect();
 
@@ -92,6 +98,7 @@ class usersModel{
         return $user[0];
     }
 
+    // recuperer les vehicules favoris d'un utilisateur
     public function getUserVehiculesModel($params){
         $cnx=$this->db->connect();
 

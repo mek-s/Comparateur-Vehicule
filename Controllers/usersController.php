@@ -9,6 +9,7 @@ class usersController{
     private $view;
 
 
+    // appel au model pour creer un utilisateur
     public function createUserController($params){ 
         $this->model = new usersModel();
         $result = $this->model->createUserModel($params);
@@ -20,16 +21,19 @@ class usersController{
         }
     }
     
+    // appel au model pour bloquer un utilisateur
     public function blockUserController($params){
         $this->model = new usersModel();
         $this->model->blockusersModel($params);
     }
 
+    // appel au model pour valider un utilisateur
     public function validateUserController($params){
         $this->model = new usersModel();
         $this->model->validateUsersModel($params);
     }
 
+    // appel au model pour authentifier un utilisateur
     public function authenticateUserController($params){
         $this->model = new usersModel();
         $result = $this->model->authenticateAdminModel($params);
@@ -48,6 +52,7 @@ class usersController{
         } else return false;
     }
 
+    // appel au model pour deconnecter un utilisateur
     public function logoutController(){
         session_unset(); 
         session_destroy(); 
@@ -55,11 +60,13 @@ class usersController{
         exit();
     }
 
+    // appel au model pour recuperer tous les utilisateurs
     public function getAllUsersController(){
         $this->model = new usersModel();
         return $this->model->getAllUsersModel(array());    
     }
 
+    // appel a la vue d'affichage de la page utilisateur
     public function showAdminUsersController() {
         $this->view = new usersView();
   
@@ -72,6 +79,7 @@ class usersController{
         
     }
 
+    // appel a la vue d'affichage du profil utilisateur
     public function showUserProfilController(){
         $this->view = new usersView();
         $this->model = new usersModel();
@@ -96,6 +104,7 @@ class usersController{
 
     }
 
+    // appel a la vue d'affichage du formulaire de connexion
     public function showSigninFormController(){
         $this->view = new usersView();
         $home = new homeView();
@@ -106,6 +115,7 @@ class usersController{
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
     }
 
+    // appel a la vue d'affichage du formulaire d'inscription
     public function showSignupFormController(){
         $this->view = new usersView();
         $home = new homeView();

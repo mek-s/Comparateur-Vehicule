@@ -8,6 +8,7 @@ class userHomeController{
     private $view;  
     private $model;
 
+    // appel a la vue d'affichage de la page d'acceuil utilisateur
     public function showHomeController(){
         $this->view = new homeView();
         $this->view->showHome();

@@ -8,6 +8,7 @@ class contactsModel{
         $this->db = new bdd();
     }
 
+    // recuperer tous les contacts 
     public function getContactsModel($params){
         $cnx=$this->db->connect();
 
@@ -19,6 +20,7 @@ class contactsModel{
         return $contacts;
     }
 
+    // recuperer un contact par id
     public function getContactModel($params){
         $cnx=$this->db->connect();
 
@@ -30,6 +32,7 @@ class contactsModel{
         return $contact[0];
     }
 
+    // creer un contact par admin
     public function createContactModel($params){
         $cnx=$this->db->connect();
 
@@ -39,6 +42,7 @@ class contactsModel{
         $this->db->disconnect($cnx);
     }
 
+    // modifier un contact par admin
     public function modifContactModel($params){
         $cnx=$this->db->connect();
 
@@ -48,6 +52,7 @@ class contactsModel{
         $this->db->disconnect($cnx);
     }
 
+    // supprimer un contact par admin
     public function deleteContactModel($params){
         $cnx=$this->db->connect();
 

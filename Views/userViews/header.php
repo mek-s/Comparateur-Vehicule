@@ -1,6 +1,4 @@
-<?php
-require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
-?>
+<?php ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +30,13 @@ require_once("C:\wamp64\www\Comparateur-Vehicule\Models\home.php");
     <div class="connexion">
     <?php 
    
+   // afficher boutons signin / signup si l'utilisateur n'est pas connecte
     if (isset($_SESSION['auth_u']) && isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
         echo '<a href="/Comparateur-Vehicule/profil?user=' . $user_id . '" style="color:black;" class="button">Profil</a>';
         echo '<a href="/Comparateur-Vehicule/logout" style="color:black;" class="button">Logout</a>';
     } else {
+        // sinon afficher boutons profil et logout
         echo '<a href="/Comparateur-Vehicule/signin" style="color:black;" class="button">Sign in</a>';
         echo '<a href="/Comparateur-Vehicule/signup" style="color:black;" class="button">Sign up</a>';
     }

@@ -9,8 +9,9 @@ class vehiculeView{
 
     private $controller;
 
-   // user views
+   /*********************les vues d'utilisateur *******************/
 
+    // afficher les informations d'un vehicules
     private function showInfosVehicule($vehicule,$note,$caracs){
       if (isset($_POST['fv'])) {
          $params = array(
@@ -47,18 +48,21 @@ class vehiculeView{
             
             ?>
            </div>
-           <?php if (!isset($_SESSION['auth_a'] )) {?>
+           <?php
+           // dans le cas d'admin ne pas afficher le bouton favoris 
+           if (!isset($_SESSION['auth_a'] )){?>
             <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $vehicule['vehicule_id'];?>&v2=&v3=&v4=&result=false">Comparer</a>
             <form method="POST">
               <input type="hidden" name="id" value="<?php echo $vehicule['vehicule_id']; ?>">
               <input type="submit" name="fv" value="Ajouter au favoris">
-            </form>
-          <?php }?>
+            </form><?php 
+           }?>
          </div>
        </div>
       <?php
     }
 
+    // afficher les caracteristiques d'un vehicule
     private function showCaracteristiquesVehicule($caracs){?>
      <div>
       
@@ -66,15 +70,18 @@ class vehiculeView{
      <?php 
     }
 
+    // afficher les avis sur un vehicule
     private function showAvisVehicule(){
       echo 'AvisVehicule';
     }
 
+    // afficher les comparaisons populaires d'un vehicule
     private function showPopularVehiculeComparaisons($params){
         $this->controller = new compareController();
         $this->controller->showVehiculComparaisons($params);
     }
 
+    // afficher page details d'un vehicule
     public function showVehiculeDetailsView($vehicule,$note,$caracs){?>
 
       <div class="details-container">
@@ -91,6 +98,9 @@ class vehiculeView{
 
     }
 
+    /*********************les vues de l'admin*******************/
+
+    // afficher element select pour modeles
     public function showModeles($modeles){
       echo'<option value="default">Modele</option>';
         foreach ($modeles as $modele) {
@@ -98,16 +108,16 @@ class vehiculeView{
         }
     }
 
-    //admin views
-
-    public function addVehiculeView($mrqId){
+    // afficher le formulaire de creation d'un vehicule
+    public function showVehiculeFormView($mrqId){
 
       $this->controller= new marqueController();
       $modeles = $this->controller->getModelesController($mrqId);
 
+        // soumettre le formulaire
         if (isset($_POST['create-vehic'])) {
 
-          // inserer l'imeg du vehicule
+          // inserer l'imeg du vehicule d'abord
           $this->controller = new imageController();
           $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
           $dir = 'Images/vehicules/';
@@ -116,35 +126,36 @@ class vehiculeView{
 
            
           
-            // inserer le vehicule
-            $this->controller = new vehiculeController();
-              $params = array(
-                1   => $_POST['nom'],
-                2   => $_POST['type'],
-                3   => $_POST['version'],
-                4   => $_POST['annee'],
-                5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
-                6   => $imgId
-              );
-              $vehicId = $this->controller->createVehiculeController($params);
+          // inserer le vehicule
+          $this->controller = new vehiculeController();
+          $params = array(
+            1   => $_POST['nom'],
+            2   => $_POST['type'],
+            3   => $_POST['version'],
+            4   => $_POST['annee'],
+            5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+            6   => $imgId
+          );
+          $vehicId = $this->controller->createVehiculeController($params);
 
-              //inserer les caracteristiques du vehicule
-               
-              $caracIds = $_POST['carac_id'];
-              $values = $_POST['value'];
+          //inserer les caracteristiques du vehicule
+            
+          $caracIds = $_POST['carac_id'];
+          $values = $_POST['value'];
 
-              foreach ($caracIds as $index => $caracId) {
-                $params = array(
-                    1 => $caracId,
-                    2 => $vehicId,
-                    3 => $values[$index],
-                );
+          foreach ($caracIds as $index => $caracId) {
+            $params = array(
+                1 => $caracId,
+                2 => $vehicId,
+                3 => $values[$index],
+            );
 
                 $this->controller->createVehiculeCaracsController($params);
-            }
-  
-          
+          }
+   
         } ?>
+
+
         <h1>Ajouter un nouvel vehicule</h1>
         <form method="POST" enctype="multipart/form-data" >
           <div class="input">
@@ -203,6 +214,7 @@ class vehiculeView{
       
     }
 
+    // afficher formulaire de modification d'un vehicule
     public function modifVehiculeView($vehicule,$mrqId){
 
       // get tmarque i from controller router need it in modele , version
@@ -316,6 +328,7 @@ class vehiculeView{
         </form>
    <?php }
 
+    // afficher le tableau des vehicule
     public function showVehiculeTableView($vehicules,$mrqId) {
       if (isset($_POST['supp_vehic'])) {
         $this->controller= new vehiculeController();
@@ -328,61 +341,38 @@ class vehiculeView{
         <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new?marque=<?php echo $mrqId ; ?>" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
       </div>
 
-      <div class="vehic-table">
-
-
+     <div class="vehic-table">
       <?php
-                 $columns = array( 1 => 'Nom',
-                                   2 => 'Marque',
-                                   3 => 'Modele',
-                                   4 => 'Version',
-                                   5 => 'Annee' );
-                 $items = array();
 
-                 foreach($vehicules as $vehicule) {
-                  $item = [
-                    'param1' => $vehicule['vehicule_nom'], 
-                    'param2' => $vehicule['marque_nom'], 
-                    'param3' => $vehicule['modele_nom'],
-                    'param4' => $vehicule['version_nom'],
-                    'param5' => $vehicule['annee'],
-                    'actions' => [
-                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/details?vehicule='.$vehicule['vehicule_id'] , 'class' => 'btn btn-warning rounded-pill' , 'text' => 'Voir details'],
-                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'].'&marque='.$mrqId ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
-                      ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer']
-                  ]];
-                  $items[] = $item;
-                 }
-                
-                 $table = new dataTable($columns,$items,3);
-                 $table->render();
-                ?>
+      // initialiser les colonnes du tableau
+      $columns = array( 1 => 'Nom',
+                        2 => 'Marque',
+                        3 => 'Modele',
+                        4 => 'Version',
+                        5 => 'Annee' );
+      $items = array();
+      // initialiser les donnees a afficher dans le tableau
+        foreach($vehicules as $vehicule) {
+        $item = [
+          'param1' => $vehicule['vehicule_nom'], 
+          'param2' => $vehicule['marque_nom'], 
+          'param3' => $vehicule['modele_nom'],
+          'param4' => $vehicule['version_nom'],
+          'param5' => $vehicule['annee'],
+          'actions' => [
+            ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/details?vehicule='.$vehicule['vehicule_id'] , 'class' => 'btn btn-warning rounded-pill' , 'text' => 'Voir details'],
+            ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'].'&marque='.$mrqId ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
+            ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer']
+        ]];
+        $items[] = $item;
+        }
+        // instantier le tableu de donnees pour afficher les vehicules
+        $table = new dataTable($columns,$items,3);
+        $table->render();
+        ?>
         
-       <table id="myTable" class="table table-striped" style="width:100%">
-              
-              <tbody>
-                  <?php  foreach($vehicules as $vehicule) { ?>
-                         
-                        
-                             
-                              <td><a href="" class="btn btn-warning rounded-pill">Modifier</a></td>
-                              <td>
-                                  <form method="POST">
-                                      <input type="hidden" name="vehic_id" value="<?php echo $vehicule['vehicule_id'];?>">
-                                      <button type="submit" name="supp_vehic" >Supprimer</button>
-                                  </form>
-                              </td>
-                          </tr>
-                  <?php
-                          }
-                  ?>
-              </tbody>
-       </table>
-        
-      </div>
-
-  
-    <?php }
+     </div><?php
+    }
 }
 
 ?>

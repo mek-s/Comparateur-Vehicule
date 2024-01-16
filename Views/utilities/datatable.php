@@ -1,5 +1,6 @@
 <?php
 class dataTable{
+    // tableau de donnees dynamique
     private $columns;
     private $items;
     private $nbActions;
@@ -9,6 +10,7 @@ class dataTable{
        $this->items = $items;
        $this->nbActions = $nbActions;
     }
+
 
     public function render(){?>
         <table id="myTable" class="table table-striped" style="width:100%">

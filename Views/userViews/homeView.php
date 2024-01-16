@@ -58,12 +58,7 @@ class homeView{
 
    public function showZoneComparaisons(){
       $c = new compareController();
-      ?>
-      <?php
-        $c->showPopularComparController();
-      ?>
-      </div><?php
-
+      $c->showPopularComparController();
    }
    
    public function showHome(){

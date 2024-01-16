@@ -7,6 +7,9 @@ class contactsView{
 
     private $controller;
 
+    /*********************les vues de l'utilisateur*******************/
+
+    // afficher page contact
     public function showContactPage(){
         $controller = new userHomeController();
         $contacts = $controller->getContactsController();
@@ -46,7 +49,10 @@ class contactsView{
        
     }
 
-    public function showContactsView($contacts){
+    /*********************les vues de l'admin *******************/
+
+    // afficher le tableau des contacts
+    public function showContactsTableView($contacts){
   
               if (isset($_POST['supp_contact'])) {
                 $this->controller= new adminHomeController();
@@ -88,6 +94,7 @@ class contactsView{
          <?php
     }
 
+    // afficher le formulaire de creation de contact
     public function showContactsFormView(){
             if (isset($_POST['create_contact'])) {
     
@@ -132,6 +139,7 @@ class contactsView{
         
     }
 
+    // afficher le formulaire de modification de contact
     public function modifContactsFormView($contact){
       $imgId = $contact['image_id'];
       if (isset($_POST['mdf-cntc'])) {
@@ -166,9 +174,8 @@ class contactsView{
         
   
         <input type="submit" name="mdf-cntc" value="Enregistrer">
-      </form>
-      
-   <?php }
+      </form><?php 
+    }
 }
 
 ?>

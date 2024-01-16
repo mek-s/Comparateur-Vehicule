@@ -6,9 +6,7 @@ class usersView{
      
     private $controller;
 
-
-  
-
+    // afficher la table des utilisateurs
     public function showUsersTableView($users){
       if (isset($_POST['user_profil'])) {
         $this->controller= new usersController();
@@ -21,34 +19,32 @@ class usersView{
       
       ?>
 
-       <div class="users-table">
-
-       <?php
-                 $columns = array( 1 => 'Nom utilisateur',
-                                   2 => 'Email',
-                                   3 => 'Status' );
-                 $items = array();
-
-                 foreach($users as $user) {
-                  $item = [
-                    'param1' => $user['user_nom'].' '.$user['user_prenom'], 
-                    'param2' => $user['email'], 
-                    'param3' => $user['status'],
-                    'actions' => [
-                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/users/profil?user='.$user['user_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Voir profil'],
-                      ['type' => 'form', 'hidden_name' => 'user_id', 'hidden_value' => $user['user_id'], 'button_name' => 'valid_user', 'button_text' => 'Valider inscription'],
-                  ]];
-                  $items[] = $item;
-                 }
-                
-                 $table = new dataTable($columns,$items,2);
-                 $table->render();
-                ?>
+       <div class="users-table"> <?php
+        // initialiser les colonnes du tableau
+        $columns = array( 1 => 'Nom utilisateur',
+                          2 => 'Email',
+                          3 => 'Status' );
+        $items = array();
+        // initialiser les donnees a afficher dans le tableau
+        foreach($users as $user) {
+        $item = [
+          'param1' => $user['user_nom'].' '.$user['user_prenom'], 
+          'param2' => $user['email'], 
+          'param3' => $user['status'],
+          'actions' => [
+            ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/users/profil?user='.$user['user_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Voir profil'],
+            ['type' => 'form', 'hidden_name' => 'user_id', 'hidden_value' => $user['user_id'], 'button_name' => 'valid_user', 'button_text' => 'Valider inscription'],
+        ]];
+        $items[] = $item;
+        }
+        // instantier le tableu de donnees pour afficher les vehicules   
+        $table = new dataTable($columns,$items,2);
+        $table->render();?>
             
-           </div>
-      <?php
+      </div><?php
     }
 
+    //afficher le formulaire de connexion
     public function showSigninFormView(){
       $this->controller = new usersController();
 
@@ -75,6 +71,7 @@ class usersView{
      <?php
     }
 
+    // afficher le formulaire d'inscription
     public function showSignupFormView(){
       $this->controller = new usersController();
 
@@ -130,12 +127,12 @@ class usersView{
         <input type="password" name="mdp" required>
 
         <input type="submit" name="new_user"value="Creer utilisateur">
-      </form>
-    </div>
-    </div>
-     <?php
+       </form>
+      </div>
+     </div><?php
     }
 
+    // afficher le profil utilisateur 
     public function showUserProfilView($user,$vehicules){?>
       <h1>Profile utilisateur</h1>
       <div class="profile-container">
@@ -160,10 +157,8 @@ class usersView{
             <?php
           }
         ?> 
-      </div>
-      
-
-    <?php }
+      </div> <?php
+    }
     
 }
 

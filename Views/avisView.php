@@ -7,6 +7,8 @@ class avisView{
 
     private $controller;
 
+    /*********************les vues de l'admin *******************/
+
     public function showAvisTableView($avis){
         if (isset($_POST['valid_avis'])) {
             $this->controller= new avisController();

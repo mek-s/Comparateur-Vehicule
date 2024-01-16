@@ -6,6 +6,7 @@ class bdd {
     private $user ="root";
     private $password="";
 
+    // connexion a la base de donnees
     public function connect(){
         $dsn="mysql:dbname=".$this->dbName."; host=".$this->host.";";
         try{
@@ -18,10 +19,12 @@ class bdd {
         return $conn;
     }
 
+    // deconnexion de la base de donnees
     public function disconnect(&$conn){
         $conn=null;
     }
 
+    // executer une requette et retourne le resultat
     public function request($conn , $req , $params,$returnLastInsertId){
         $r = $conn->prepare($req);
         for ($i = 1; $i <= count($params); $i++) { 
