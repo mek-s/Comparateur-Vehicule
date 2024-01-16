@@ -58,17 +58,20 @@ class usersView{
           echo '<h1>Authenticated</h1>';
         } else echo '<h1>Username ou mot de passe incorecte</h1>';
       } ?>
-      <div class="form-container">
-
-      
-      <form method="POST">
-        <label for="">Nom utilisateur / Email</label>
-        <input type="text" name="nom" required>
-        <label for="">Mot de passe</label>
-        <input type="password" name="mdp" required>
-        <input type="submit" name="auth-user"value="Login">
-      </form>
+     
+      <div class="card">
+        <h1>Se connecter a votre compte </h1>
+        <div class="form-container">
+            <form method="POST">
+                <label for="">Nom utilisateur / Email</label>
+                <input type="text" name="nom" required>
+                <label for="">Mot de passe</label>
+                <input type="password" name="mdp" required>
+                <input type="submit" name="auth-user" value="Login">
+            </form>
+        </div>
       </div>
+    
      <?php
     }
 
@@ -96,6 +99,9 @@ class usersView{
         );
         $this->controller->createUserController($params);
       } ?>
+      <div class="card">
+        <h1>Creer un nouveau compte </h1>
+        <div class="form-container">
       <form method="POST">
         <label for="">Nom</label>
         <input type="text" name="nom" required>
@@ -125,10 +131,12 @@ class usersView{
 
         <input type="submit" name="new_user"value="Creer utilisateur">
       </form>
+    </div>
+    </div>
      <?php
     }
 
-    public function showUserProfilView($user){?>
+    public function showUserProfilView($user,$vehicules){?>
       <h1>Profile utilisateur</h1>
       <div class="profile-container">
         <img src="<?php echo $GLOBALS['base-url'].'Images/users/'.$user['chemin'];?>" alt="">
@@ -139,6 +147,21 @@ class usersView{
         <p>Date de naissance : <span> <?php echo $user['date_naissance'];?></span></p>
         
       </div>
+      <h1>Favoris</h1>
+      
+      <div class="vehic-principals">
+        <?php
+          foreach ($vehicules as $vehicule) {?>
+          <div class="principals-images">
+            <a href="/Comparateur-Vehicule/vehicules/details?vehicule=<?php echo $vehicule['vehicule_id']?>">
+              <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$vehicule['chemin']; ?>" alt="">
+            </a>
+            </div>
+            <?php
+          }
+        ?> 
+      </div>
+      
 
     <?php }
     

@@ -43,6 +43,16 @@ class vehiculeModel{
         $this->db->disconnect($cnx);
     }
 
+    public function getVehicCmpInfosModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT v.vehicule_id , v.vehicule_nom , v.annee, vr.version_nom , vr.version_id , md.modele_id , md.modele_nom , mr.marque_id , mr.marque_nom FROM `vehicules` v JOIN `versions` vr ON v.version_id = vr.version_id JOIN `modeles` md ON vr.modele_id = md.modele_id JOIN `marques` mr ON mr.marque_id = md.marque_id WHERE vehicule_id = ?";
+        $infos = $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $infos[0];
+    }
+
     // ajouter les caracteristiques du vehicule
     public function createVehiculeCaracsModel($params){
         $cnx=$this->db->connect();
@@ -223,6 +233,16 @@ class vehiculeModel{
     
         $this->db->disconnect($cnx);
         return $img[0];
+    }
+
+    public function ajouterFavorisModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "INSERT INTO `favoris_vehicules` (`user_id`, `vehicule_id`) VALUES (?, ?)";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        
     }
 
 }

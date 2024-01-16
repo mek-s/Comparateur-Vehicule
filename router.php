@@ -59,7 +59,7 @@ if (isset($_POST['formData'])) {
       4 => $vehic4['vehicule_id'] ));
 
 
-    $controller->showComparResult();
+    $controller->showComparResultView();
     exit();
 }
 
@@ -92,9 +92,11 @@ class router{
     '/Comparateur-Vehicule/admin/avis' => 'avisController@showAdminAvisController',
     '/Comparateur-Vehicule/admin/news' => 'newsController@showAdminNewsController',
     '/Comparateur-Vehicule/admin/news/new' => 'newsController@showNewsFormController',
+    '/Comparateur-Vehicule/admin/news/modifier' => 'newsController@showModifNewsController',
     '/Comparateur-Vehicule/admin/parametres' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/guides' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/contacts' => 'adminHomeController@showContactsController',
+    '/Comparateur-Vehicule/admin/parametres/contacts/modifier' => 'adminHomeController@modifContactsFormController',
     '/Comparateur-Vehicule/admin/parametres/contacts/new' => 'adminHomeController@showContactsFormController',
     '/Comparateur-Vehicule/admin/parametres/diaporama' => 'adminHomeController@showHomeController',
     '/Comparateur-Vehicule/admin/parametres/style' => 'adminHomeController@showHomeController',

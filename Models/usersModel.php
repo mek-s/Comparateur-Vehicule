@@ -92,6 +92,16 @@ class usersModel{
         return $user[0];
     }
 
+    public function getUserVehiculesModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT vv.* , i.chemin FROM `images` i JOIN (SELECT v.* , f.user_id FROM `vehicules` v JOIN (SELECT f.user_id , f.vehicule_id FROM `favoris_vehicules` f JOIN (SELECT user_id FROM `users` WHERE user_id = ?) u ON u.user_id = f.user_id) f ON v.vehicule_id = f.vehicule_id ) vv ON vv.image_id = i.image_id;";
+        $vehics= $this->db->request($cnx,$query,$params,false);  
+
+        $this->db->disconnect($cnx);
+        return $vehics;
+    }
+
   
 }
 

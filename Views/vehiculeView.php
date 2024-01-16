@@ -11,7 +11,18 @@ class vehiculeView{
 
    // user views
 
-    private function showInfosVehicule($vehicule,$note,$caracs){?>
+    private function showInfosVehicule($vehicule,$note,$caracs){
+      if (isset($_POST['fv'])) {
+         $params = array(
+          1 => $_SESSION['user_id'],
+          2 => $_POST['id']
+         );
+
+         $this->controller = new vehiculeController();
+         $this->controller-> ajouterFavorisController($params);
+      }
+      
+      ?>
        <div class="infos-vehic">
          <div class="image">
           <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$vehicule['chemin'];?>">
@@ -36,7 +47,13 @@ class vehiculeView{
             
             ?>
            </div>
-           <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $vehicule['vehicule_id'];?>&v2=">Comparer</a>
+           <?php if (!isset($_SESSION['auth_a'] )) {?>
+            <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $vehicule['vehicule_id'];?>&v2=&v3=&v4=&result=false">Comparer</a>
+            <form method="POST">
+              <input type="hidden" name="id" value="<?php echo $vehicule['vehicule_id']; ?>">
+              <input type="submit" name="fv" value="Ajouter au favoris">
+            </form>
+          <?php }?>
          </div>
        </div>
       <?php
@@ -233,8 +250,6 @@ class vehiculeView{
             $this->controller->modifVehiculeCaracsController($params);
          }
    
-        
-
         header("Location: /Comparateur-Vehicule/admin/vehicules?marque=$mrqId");
       }
      
@@ -333,8 +348,8 @@ class vehiculeView{
                     'param5' => $vehicule['annee'],
                     'actions' => [
                       ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/details?vehicule='.$vehicule['vehicule_id'] , 'class' => 'btn btn-warning rounded-pill' , 'text' => 'Voir details'],
-                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'].'&marque='.$mrqId[1] ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
-                      ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'].'&marque='.$mrqId ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
+                      ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer']
                   ]];
                   $items[] = $item;
                  }

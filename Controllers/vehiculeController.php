@@ -74,6 +74,11 @@ class vehiculeController{
       return $this->model-> getVehiculeByVersionModel($params);
     }
 
+    public function getVehicCmpInfosController($params){
+      $this->model = new vehiculeModel();
+      return $this->model-> getVehicCmpInfosModel($params);
+    }
+
     //retourne tous les vehicules d'une marque
     public function getVehiculesByMarque($params){
       $this->model = new vehiculeModel();
@@ -127,9 +132,11 @@ class vehiculeController{
 
       $params= array(1=> $param['marque']);
       $vehicules = $this->getVehiculesByMarque($params);
+
+      print_r($param['marque']);
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-       $this->view->showVehiculeTableView($vehicules,$param['marque'][0]);
+       $this->view->showVehiculeTableView($vehicules,$param['marque']);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
       
     }
@@ -184,6 +191,11 @@ class vehiculeController{
     public function getVehiculeImageController($params){
       $this->model = new vehiculeModel();
       return $this->model-> getVehiculeImageModel($params);
+    }
+
+    public function ajouterFavorisController($params){
+      $this->model = new vehiculeModel();
+      return $this->model-> ajouterFavorisModel($params);
     }
 
 }

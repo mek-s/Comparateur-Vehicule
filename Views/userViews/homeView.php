@@ -53,7 +53,7 @@ class homeView{
 
    public function showZoneComparateur(){
       $view = new compareView();
-      $view->showComparFormsView(array());
+      $view->showComparFormsView(array(),false,true);
    }
 
    public function showZoneComparaisons(){

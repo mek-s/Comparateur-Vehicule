@@ -130,7 +130,10 @@ class marqueController{
       );
 
       $marque = $this->model-> getMarqueModel($params);
+
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
       $this->view->modifMarqueView($marque);
+      require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
       
    }
 

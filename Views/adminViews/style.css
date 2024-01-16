@@ -20,6 +20,9 @@ body {
     align-items: flex-start;
   }
 
+
+
+
   input[type=submit]{
     align-self: flex-end;
     justify-self: flex-end;
@@ -28,6 +31,7 @@ body {
   input , select{
     padding-left: 10px;
     border-radius: 8px;
+    width: auto;
     height: 30px;
     border: 1px solid #888;
     font-size: 18px;

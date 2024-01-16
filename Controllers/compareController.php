@@ -14,7 +14,7 @@ class compareController{
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu();
-      $this->view->showComparateurView(array());
+      $this->view->showComparateurView(array(),false);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
       
     }
@@ -29,12 +29,15 @@ class compareController{
 
       $params = array(
           1 => $results['v1'],
-          2 => $results['v2']
+          2 => $results['v2'],
+          3 => $results['v3'],
+          4 => $results['v4']
       );
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu();
-      $this->view->showComparateurView($params);
+      $this->view->showComparateurView($params,$results['result']);
+     
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
     }
 
