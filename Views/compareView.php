@@ -27,17 +27,17 @@ class compareView{
 
         if (isset($_POST['cmp_submit'])) {
         
-           $idS = array();
+           $Vid = array();
 
            for ($i=1; $i <= 4; $i++) { 
              if (!empty($_POST['vehicles'][$i]['version']) && $_POST['vehicles'][$i]['version'] != 'default'){
                 $params = array( 1 => $_POST['vehicles'][$i]['version'] , 2 => $_POST['vehicles'][$i]['annee']);
                 $vehic = $this->controller->getVehicByVersionController($params);
-                $idS[$i] = $vehic['vehicule_id']; 
-             } else $idS[$i] = null; 
+                $Vid[$i] = $vehic['vehicule_id']; 
+             } else $Vid[$i] = null; 
              
           }
-            $this->controller->createComparaisonController($idS);
+            $this->controller->createComparaisonController($Vid);
             $show = true;
             if ($redirect == true) {
                 $url = '/Comparateur-Vehicule/compareV?';
@@ -117,8 +117,8 @@ class compareView{
                     $caracs = $this->controller->getCaracsController();
                     print_r($categ);
                     print_r($caracs);
-                    print_r($Ids);
-                    $this->showComparResultView($categ,$caracs,$idS);
+                    print_r($Vid);
+                    $this->showComparResultView($categ,$caracs,$Vid);
                 
                 ?>
             </div>
