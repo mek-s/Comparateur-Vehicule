@@ -18,6 +18,8 @@ class compareView{
     public function showComparFormsView($Ids,$show,$redirect){
         $this->controller =new vehiculeController();
         $infos = array();
+        $Vid = array();
+
         for ($i=1; $i <= 4; $i++) { $infos[$i] = NULL;}
         for ($i=1; $i < count($Ids); $i++) { 
            if ($Ids[$i] != NULL) {
@@ -27,7 +29,7 @@ class compareView{
 
         if (isset($_POST['cmp_submit'])) {
         
-           $Vid = array();
+           
 
            for ($i=1; $i <= 4; $i++) { 
              if (!empty($_POST['vehicles'][$i]['version']) && $_POST['vehicles'][$i]['version'] != 'default'){
@@ -115,9 +117,7 @@ class compareView{
                     $this->controller =new vehiculeController();
                     $categ = $this->controller->getCategoriesController();
                     $caracs = $this->controller->getCaracsController();
-                    print_r($categ);
-                    print_r($caracs);
-                    print_r($Vid);
+                   
                     $this->showComparResultView($categ,$caracs,$Vid);
                 
                 ?>
