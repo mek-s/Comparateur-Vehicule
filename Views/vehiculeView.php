@@ -1,6 +1,7 @@
 <?php
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\/vehiculeController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\imageController.php";
+require_once "C:\wamp64\www\Comparateur-Vehicule\Controllers\marqueController.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\userViews\homeView.php";
 require_once "C:\wamp64\www\Comparateur-Vehicule\Views\utilities\dataTable.php";
 
@@ -73,9 +74,20 @@ class vehiculeView{
 
     }
 
+    public function showModeles($modeles){
+      echo'<option value="default">Modele</option>';
+        foreach ($modeles as $modele) {
+            echo '<option value="'.$modele['modele_id'].'">'.$modele['modele_nom'].'</option>';
+        }
+    }
+
     //admin views
 
-    public function addVehiculeView(){
+    public function addVehiculeView($mrqId){
+
+      $this->controller= new marqueController();
+      $modeles = $this->controller->getModelesController($mrqId);
+
         if (isset($_POST['create-vehic'])) {
 
           // inserer l'imeg du vehicule
@@ -132,9 +144,17 @@ class vehiculeView{
             </select>
           </div>
           <div class="input">
-            <label>La marque du vehicule</label>
-            <input type="number" name="version" required>
-          </div>
+              <label >Le modele  du vehicule </label>
+              <select name="modele" id="modele1" onchange="getVersions(1)">
+                <?php $this->showModeles($modeles); ?>   
+              </select>
+           </div>
+            <div class="input">
+              <label>La version du vehicule</label>
+              <select name="version" id="version1">
+                  <option value="default">Version</option>
+              </select>
+            </div>
           <div class="input">
             <label>L'annee de creation du vehicule</label>
             <input type="number" name="annee" min="1900" max="2100" required>
@@ -166,7 +186,122 @@ class vehiculeView{
       
     }
 
-    public function showVehiculeTableView($vehicules) {
+    public function modifVehiculeView($vehicule,$mrqId){
+
+      // get tmarque i from controller router need it in modele , version
+
+      $imgId = $vehicule['image_id'];
+
+      if (isset($_POST['mdf-vehic'])) {
+        // if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        //  // inserer l'imeg du vehicule
+         // $this->controller = new imageController();
+         // $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+         // $dir = 'Images/vehicules/';
+          
+          //$imgId = $this->controller->createImageController($_FILES,$dir,$params);
+
+        //  }
+
+
+        $this->controller = new vehiculeController();
+        $params = array(
+          1   => $_POST['nom'],
+          2   => $_POST['type'],
+          3   => $_POST['version'],
+          4   => $_POST['annee'],
+          5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
+          6   => $imgId,
+          7   => $vehicule['vehicule_id']
+        );
+        
+        $this->controller->modifVehiculeController($params);
+
+        //inserer les caracteristiques du vehicule
+               
+        $caracIds = $_POST['carac_id'];
+        $values = $_POST['value'];
+
+       
+         for ($i=0; $i < count($caracIds) ; $i++) { 
+            $params = array(
+              1 => $values[$i],
+              2 => $caracIds[$i],
+              3 => $vehicule['vehicule_id'],
+            );
+
+            $this->controller->modifVehiculeCaracsController($params);
+         }
+   
+        
+
+        header("Location: /Comparateur-Vehicule/admin/vehicules?marque=$mrqId");
+      }
+     
+      ?>
+      <h1>Modifier un vehicule</h1>
+      <form method="POST" enctype="multipart/form-data" >
+          <div class="input">
+            <label>Nom vehicule</label>
+            <input type="text" name="nom" value="<?php echo $vehicule['vehicule_nom'];?>" required>
+          </div>
+
+          <div class="input">
+            <label>Type vehicule</label>
+            <select name="type" required>
+                <default value="<?php echo $vehicule['type'];?>"><?php echo $vehicule['type'];?></default>
+                <option value="voiture">Voiture</option>
+                <option value="moto">Moto</option>
+                <option value="camion">Camion</option>
+            </select>
+          </div>
+          <!-- <div class="input">
+            <label>Le modele du vehicule</label>
+            <input type="number" name="modele" value="<?php echo $vehicule[''];?>" required>
+          </div>
+           add select if new add input  -->
+          <div class="input">
+            <label>La version du vehicule</label>
+            <input type="number" name="version" value="<?php echo $vehicule['version_id'];?>" required>
+          </div>
+          <div class="input">
+            <label>L'annee de creation du vehicule</label>
+            <input type="number" name="annee" min="1900" max="2100" value="<?php echo $vehicule['annee'];?>" required>
+          </div>
+          <!-- <div class="input">
+            <label>Image du vehicule</label>
+            <input type="file" name="image" id="image" >
+          </div>  -->
+          <?php
+            $this->controller = new vehiculeController();
+
+            $caracs = $this->controller->getCaracsController();
+            $vehicCarcs = $this->controller->getVehiculeCaracsController(array(1=> $vehicule['vehicule_id']));
+            
+            foreach ($caracs as $carac) { ?>
+              <div class="input">
+                <label><?php echo $carac['carac_nom'];?></label>
+                <input type="hidden" name="carac_id[]" value="<?php echo $carac['carac_id']; ?>">
+                <input type="text" name="value[]" value="<?php 
+                    
+                    foreach ($vehicCarcs as $vc) {
+                      if ($vc['carac_id'] == $carac['carac_id']) {
+                        echo $vc['value'];
+                      }
+                    }?>">
+              </div> 
+           <?php }
+          ?>
+          <div class="input">
+            <label>Vehicule Principale ? </label>
+            <input type="checkbox" name="principal" <?php echo ($vehicule['principal'] == 1) ? 'checked' : ''; ?>>
+          </div>
+
+          <input type="submit" name="mdf-vehic" value="Enregistrer">
+        </form>
+   <?php }
+
+    public function showVehiculeTableView($vehicules,$mrqId) {
       if (isset($_POST['supp_vehic'])) {
         $this->controller= new vehiculeController();
         $this->controller->deleteVehiculeController(array(1=> $_POST['vehic_id']));
@@ -175,7 +310,7 @@ class vehiculeView{
       
       <div class="">
         <h1>Gestion des Vehicules</h1>
-        <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
+        <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new?marque=<?php echo $mrqId ; ?>" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
       </div>
 
       <div class="vehic-table">
@@ -198,7 +333,7 @@ class vehiculeView{
                     'param5' => $vehicule['annee'],
                     'actions' => [
                       ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/details?vehicule='.$vehicule['vehicule_id'] , 'class' => 'btn btn-warning rounded-pill' , 'text' => 'Voir details'],
-                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'] ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/vehicules/modifier?vehicule='.$vehicule['vehicule_id'].'&marque='.$mrqId[1] ,  'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
                       ['type' => 'form', 'hidden_name' => 'vehic_id', 'hidden_value' => $vehicule['vehicule_id'], 'button_name' => 'supp_vehic', 'button_text' => 'Supprimer'],
                   ]];
                   $items[] = $item;

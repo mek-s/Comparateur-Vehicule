@@ -11,8 +11,12 @@ class vehiculeController{
     public function showVehiculeFormController(){
       $this->view = new vehiculeView();
 
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-       $this->view->addVehiculeView();
+       $this->view->addVehiculeView($results['marque'][0]);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
     }
     
@@ -20,6 +24,12 @@ class vehiculeController{
     public function createVehiculeController($params){
         $this->model = new vehiculeModel();
         return $this->model->createVehiculeModel($params);   
+    }
+
+      // creer un nouvel vehicule
+      public function modifVehiculeController($params){
+        $this->model = new vehiculeModel();
+        $this->model->modifVehiculeModel($params);   
     }
 
     // supprimer un vehicule
@@ -32,6 +42,12 @@ class vehiculeController{
     public function createVehiculeCaracsController($params){
       $this->model = new vehiculeModel();
       return $this->model->createVehiculeCaracsModel($params);
+    }
+
+    // enregistrer les caracteristiques du nouvel vehicule
+    public function modifVehiculeCaracsController($params){
+      $this->model = new vehiculeModel();
+      return $this->model->modifVehiculeCaracsModel($params);
     }
 
     // retourne toutes les caracteristiques
@@ -113,7 +129,7 @@ class vehiculeController{
       $vehicules = $this->getVehiculesByMarque($params);
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-       $this->view->showVehiculeTableView($vehicules);
+       $this->view->showVehiculeTableView($vehicules,$param['marque'][0]);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
       
     }
@@ -144,6 +160,9 @@ class vehiculeController{
     }
 
     public function showModifVehiculeFormController(){
+      $this->model = new vehiculeModel();
+      $this->view = new vehiculeView();
+
       $request_uri = $_SERVER['REQUEST_URI'];
       $uri_parts = parse_url($request_uri);
       parse_str($uri_parts['query'],$results);
@@ -152,7 +171,9 @@ class vehiculeController{
          1=> $results['vehicule']
       );
 
-      echo 'modifier vehicule : '.$results['vehicule'];
+      $vehicule = $this->model-> getVehiculeModel($params);
+      $this->view->modifVehiculeView($vehicule,$results['marque']);
+      
     }
 
     public function createComparaisonController($params){

@@ -21,6 +21,18 @@ class vehiculeModel{
         return $id;
     }
 
+    // modifier un nouvel vehicule
+    public function modifVehiculeModel($params){
+        
+        $cnx=$this->db->connect();
+
+        $query = 'UPDATE `vehicules` SET `vehicule_nom` = ?, `type` = ?, `version_id` = ?, `annee` = ?, `principal` =  ? , `image_id` = ? WHERE `vehicules`.`vehicule_id` = ?';
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+       
+    }
+
     // supp un vehicule
     public function deleteVehiculeModel($params){
         $cnx=$this->db->connect();
@@ -36,6 +48,16 @@ class vehiculeModel{
         $cnx=$this->db->connect();
 
         $query = 'INSERT INTO `carac_vehicule` (`carac_id`, `vehicule_id`, `value`) VALUES (?,?,?)';
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+    }
+
+      // ajouter les caracteristiques du vehicule
+      public function modifVehiculeCaracsModel($params){
+        $cnx=$this->db->connect();
+
+        $query = 'UPDATE `carac_vehicule` SET `value` = ? WHERE `carac_id` = ? AND `vehicule_id` = ? ';
         $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
@@ -84,6 +106,8 @@ class vehiculeModel{
         $this->db->disconnect($cnx);
         return $vehic[0];
     }
+
+    
     //Recuperer un vehicule  par version_id  et annee
     public function getVehiculeByVersionModel($params){
         $cnx=$this->db->connect();
@@ -110,7 +134,7 @@ class vehiculeModel{
     public function getVehiculeCaracteristiquesModel($params){
         $cnx=$this->db->connect();
 
-        $query = "SELECT value, carac_nom, unite_mesure, i.chemin FROM `carac_vehicule` cv NATURAL JOIN `caracteristiques` c NATURAL JOIN( SELECT vehicule_id FROM `vehicules` WHERE vehicule_id = ?) v NATURAL JOIN `images` i";
+        $query = "SELECT value, carac_nom, carac_id, unite_mesure, i.chemin FROM `carac_vehicule` cv NATURAL JOIN `caracteristiques` c NATURAL JOIN( SELECT vehicule_id FROM `vehicules` WHERE vehicule_id = ?) v NATURAL JOIN `images` i";
         $caracs=$this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
