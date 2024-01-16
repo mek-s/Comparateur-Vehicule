@@ -112,7 +112,8 @@ class contactsView{
                       2   => $_POST['value'],
                       3   => $imgId
                     );
-                  $this->controller->createContactController($params);  
+                  $this->controller->createContactController($params);
+                  header('Location: /Comparateur-Vehicule/admin/parametres/contacts');  
               } ?>
 
               <h1>Ajouter un contact</h1>

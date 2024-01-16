@@ -151,6 +151,8 @@ class vehiculeView{
             );
 
                 $this->controller->createVehiculeCaracsController($params);
+
+                header('Location: /Comparateur-Vehicule/admin/vehicules?marque='.$mrqId);
           }
    
         } ?>
@@ -177,11 +179,19 @@ class vehiculeView{
                 <?php $this->showModeles($modeles); ?>   
               </select>
            </div>
+           <div class="input">
+              <label >Nouveau modele</label>
+              <input type="text" name="modele">
+           </div>
             <div class="input">
               <label>La version du vehicule</label>
               <select name="version" id="version1">
                   <option value="default">Version</option>
               </select>
+            </div>
+            <div class="input">
+              <label>Nouvelle version</label>
+              <input type="text" name="version">
             </div>
           <div class="input">
             <label>L'annee de creation du vehicule</label>

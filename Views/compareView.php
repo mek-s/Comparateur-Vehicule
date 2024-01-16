@@ -223,7 +223,7 @@ class compareView{
             $img2 = $this->controller->getVehiculeImageController(array( 1=> $comp['vehicule_2']));
           
             ?>
-            <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $comp['vehicule_1'];?>&v2=<?php echo $comp['vehicule_2'];?>&v3=&v4&result=true" class="comps-card">
+            <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $comp['vehicule_1'];?>&v2=<?php echo $comp['vehicule_2'];?>&v3=&v4=&result=true" class="comps-card">
             <div class="image-container">
                 <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$img1['chemin'];?>" alt="">
                 <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$img2['chemin'];?>" alt="">
