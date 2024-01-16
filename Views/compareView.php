@@ -148,7 +148,29 @@ class compareView{
     }
 
     public function showComparaisonsCards($params){
-        
+      
+        $this->controller = new vehiculeController();
+        echo '<div class="cards-container">';
+        foreach ($params as $comp) {
+            $img1 = $this->controller->getVehiculeImageController(array( 1=> $comp['vehicule_1']));
+            $img2 = $this->controller->getVehiculeImageController(array( 1=> $comp['vehicule_2']));
+          
+            ?>
+            <a href="/Comparateur-Vehicule/compareV?v1=<?php echo $comp['vehicule_1'];?>&v2=<?php echo $comp['vehicule_2'];?>" class="comps-card">
+            <div class="image-container">
+                <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$img1['chemin'];?>" alt="">
+                <img src="<?php echo $GLOBALS['base-url'].'Images/vehicules/'.$img2['chemin'];?>" alt="">
+            </div>
+            <div class="name-container">
+                <span><?php echo $img1['vehicule_nom'];?></span>
+                <span id="vs">VS</span>
+                <span><?php echo $img2['vehicule_nom'];?></span>
+            </div>
+            </a>
+            <?php
+        }
+        echo '</div>';
+      
     }
 
     public function showComparateurView($params){

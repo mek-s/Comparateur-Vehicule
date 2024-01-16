@@ -1,6 +1,6 @@
 /************************Style page details vehicule*************************/
 
-.details-container , compare-container{
+.details-container , .compare-container , .form-container{
   max-width: 1000px;
   margin: 20px auto;
 }

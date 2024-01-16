@@ -46,6 +46,17 @@ class compareController{
       $this->view->showComparaisonsCards($cmps);
     }
 
+    public function showPopularComparController(){
+      $this->view = new compareView();
+      $this->model = new vehiculeModel();
+
+      $cmps = $this->model->getPopularComparModel(array());
+      echo '<div class="comparaisons-zone">';
+      echo '<h1>Les plus recherches</h1>';
+      $this->view->showComparaisonsCards($cmps);
+      echo '</div>';
+    }
+
     public function getMarquesController(){
       $this->model = new marqueModel();
       $this->view = new compareView();

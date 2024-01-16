@@ -169,6 +169,38 @@ class vehiculeModel{
         $this->db->disconnect($cnx);
         
     }
+
+    public function getPopularVahicComparModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `comparaisons` WHERE supp = 0 AND (vehicule_1 = ? OR vehicule_2 = ?) ORDER BY rech DESC LIMIT 10";
+        $cmp = $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $cmp;
+    }
+
+    
+    public function getPopularComparModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT * FROM `comparaisons` WHERE supp = 0 ORDER BY rech DESC ";
+        $cmp = $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $cmp;
+    }
+
+    public function getVehiculeImageModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "SELECT i.chemin , v.vehicule_id , v.vehicule_nom FROM `images` i  NATURAL JOIN `vehicules` v WHERE v.vehicule_id = ?";
+        $img = $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+        return $img[0];
+    }
+
 }
 
 

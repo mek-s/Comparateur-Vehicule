@@ -45,22 +45,23 @@ class homeView{
 
    public function showZoneMarques(){?>
       <div class="marques-zone">
-         <?php
-         $v = new marqueView();
-         $v->showMarquesPrincipalesView();
-         ?>
-      </div><?php
+         <?php  $v = new marqueView();
+                $v->showMarquesPrincipalesView(); ?>
+      </div>
+      <?php
    }
 
    public function showZoneComparateur(){
       $view = new compareView();
-      $view->showComparFormsView();
+      $view->showComparFormsView(array());
    }
 
-   public function showZoneComparaisons(){?>
-      <div class="comparaisons-zone">
-  
-      
+   public function showZoneComparaisons(){
+      $c = new compareController();
+      ?>
+      <?php
+        $c->showPopularComparController();
+      ?>
       </div><?php
 
    }

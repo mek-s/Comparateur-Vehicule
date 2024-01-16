@@ -160,6 +160,11 @@ class vehiculeController{
       $this->model-> createComparaisonModel($params);
     }
 
+    public function getVehiculeImageController($params){
+      $this->model = new vehiculeModel();
+      return $this->model-> getVehiculeImageModel($params);
+    }
+
 }
 
 ?>
