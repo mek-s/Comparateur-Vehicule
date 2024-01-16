@@ -18,6 +18,15 @@ class newsModel{
         $this->db->disconnect($cnx);
     }
 
+    public function modifNewsModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "UPDATE `news` SET `title` = ?, `description` = ?, `subtitle` = ? , `image1` = ?, `image2` = ? WHERE `news_id` = ?";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+    }
+
     public function deleteNewsModel($params){
         $cnx=$this->db->connect();
 

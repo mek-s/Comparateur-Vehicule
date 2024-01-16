@@ -47,7 +47,7 @@ class newsView{
     public function showNewsTableView($news){
         if (isset($_POST['mdf_nws'])) {
             $this->controller= new newsController();
-            $this->controller->updateNewsController(array(1=> $_POST['nw_id']));
+            $this->controller->modifNewsController(array(1=> $_POST['nw_id']));
           } 
           if (isset($_POST['supp_nws'])) {
             $this->controller= new newsController();
@@ -73,7 +73,7 @@ class newsView{
                     'param2' => $nw['subtitle'] , 
                     'param3' =>$nw['description'],
                     'actions' => [
-                      ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'mdf_nws', 'button_text' => 'Modifier'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/news/modifier?news='.$nw['news_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
                       ['type' => 'form', 'hidden_name' => 'nw_id', 'hidden_value' => $nw['news_id'], 'button_name' => 'supp_nws', 'button_text' => 'Supprimer'],
                   ]];
                   $items[] = $item;
@@ -131,6 +131,58 @@ class newsView{
           </form>
         <?php 
         
+    }
+
+    public function showModifNewsView($news){
+      $img1 = $news['image1'];
+      $img2 = $news['image2'];
+      if (isset($_POST['mdf_nws'])) {
+
+        // // inserer l'imeg du vehicule
+        // $this->controller = new imageController();
+        // $params = array(1 => isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : null);
+        // $dir = 'Images/news/';
+        
+        // $imgId = $this->controller->createImageController($_FILES,$dir,$params);
+        
+          // inserer le vehicule
+          $this->controller = new newsController();
+            $params = array(
+              1   => $_POST['title'],
+              2   => $_POST['description'],
+              3   => $_POST['subtitle'],
+              4   => $img1,
+              5   => $img2,
+              6   => $news['news_id']
+            );
+          $this->controller->modifNewsController($params);  
+
+          header('Location: /Comparateur-Vehicule/admin/news');
+      } ?>
+      <h1>Ajouter un news</h1>
+      <form method="POST" enctype="multipart/form-data" >
+        <div class="input">
+          <label>Titre</label>
+          <input type="text" name="title" value="<?php echo $news['title'];?>" required>
+        </div>
+  
+        <div class="input">
+          <label>Le sous titre</label>
+          <input type="text" name="subtitle"  value="<?php echo $news['subtitle'];?>" required>
+        </div>
+        <div class="input">
+          <label>La description</label>
+          <input type="textarea" name="description"value="<?php echo $news['description'];?>" required>
+    </div>
+        <!-- <div class="input">
+          <label>Image de la marque</label>
+          <input type="file" name="image" id="image" >
+        </div>  -->
+        
+  
+        <input type="submit" name="mdf_nws" value="Enregistrer">
+      </form>
+    <?php 
     }
 
 }

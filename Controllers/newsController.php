@@ -55,8 +55,9 @@ class newsController{
         $this->model->deleteNewsModel($params);
     }
 
-    public function updateNewsController($params){
-
+    public function modifNewsController($params){
+        $this->model = new newsModel();
+        $this->model->modifNewsModel($params);
     }
 
     public function showAdminNewsController() {
@@ -75,6 +76,27 @@ class newsController{
 
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
         $this->view->showNewsFormView();
+        require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
+       
+    }
+
+    public function showModifNewsController(){
+        $this->view = new newsView();
+        $this->model = new newsModel();
+     
+
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $uri_parts = parse_url($request_uri);
+      parse_str($uri_parts['query'],$results);
+
+      $params = array(
+         1=> $results['news']
+      );
+
+      $news = $this->model-> getNewsByIdModel($params);
+
+        require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
+        $this->view->showModifNewsView($news);
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
        
     }
