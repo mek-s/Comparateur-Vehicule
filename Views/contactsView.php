@@ -47,10 +47,7 @@ class contactsView{
     }
 
     public function showContactsView($contacts){
-            if (isset($_POST['mdf_contact'])) {
-                $this->controller= new adminHomeController();
-                $this->controller->updateContactController(array(1=> $_POST['contact_id']));
-              } 
+  
               if (isset($_POST['supp_contact'])) {
                 $this->controller= new adminHomeController();
                 $this->controller->deleteContactController(array(1=> $_POST['contact_id']));
@@ -76,7 +73,7 @@ class contactsView{
                     'param1' => $contact['contact_nom'], 
                     'param2' => $contact['value'], 
                     'actions' => [
-                      ['type' => 'form', 'hidden_name' => 'contact_id', 'hidden_value' => $contact['contact_id'], 'button_name' => 'mdf_contact', 'button_text' => 'Modifier'],
+                      ['type' => 'link', 'href' => '/Comparateur-Vehicule/admin/parametres/contacts/modifier?contact='.$contact['contact_id'], 'class' => 'btn btn-warning rounded-pill', 'text' => 'Modifier'],
                       ['type' => 'form', 'hidden_name' => 'contact_id', 'hidden_value' => $contact['contact_id'], 'button_name' => 'supp_contact', 'button_text' => 'Supprimer'],
                   ]];
                   $items[] = $item;
@@ -134,6 +131,44 @@ class contactsView{
             
         
     }
+
+    public function modifContactsFormView($contact){
+      $imgId = $contact['image_id'];
+      if (isset($_POST['mdf-cntc'])) {
+        
+        $this->controller= new adminHomeController();
+        $this->controller->modifContactController(array(
+          1=>  $_POST['nom'],
+          2 => $_POST['value'],
+          3 => $imgId,
+          4 => $contact['contact_id']
+        ));
+
+        header('Location: /Comparateur-Vehicule/admin/parametres/contacts');
+        exit();
+      }?>
+
+      <h1>Modifier un contact</h1>
+      <form method="POST" enctype="multipart/form-data" >
+        <div class="input">
+          <label>Nom</label>
+          <input type="text" name="nom" value="<?php echo $contact['contact_nom'] ;?>" required>
+        </div>
+  
+        <div class="input">
+          <label>La valeur</label>
+          <input type="text" name="value" value="<?php echo $contact['value'] ;?>" required>
+        </div>
+        <!-- <div class="input">
+          <label>Image du contact</label>
+          <input type="file" name="image" id="image" >
+        </div>  -->
+        
+  
+        <input type="submit" name="mdf-cntc" value="Enregistrer">
+      </form>
+      
+   <?php }
 }
 
 ?>
