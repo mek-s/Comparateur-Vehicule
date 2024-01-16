@@ -17,18 +17,24 @@ class marqueController{
        $this->model-> createMarqueModel($params);
     }
 
+    // supprimer une marque
     public function deleteMarqueController($params){
       $this->model = new marqueModel();
        $this->model-> deleteMarqueModel($params);
     }
 
+    // modifier une  marque
+    public function modifMarqueController($params){
+      $this->model = new marqueModel();
+      $this->model-> modifMarqueModel($params);
+   }
+
     public function getMarquesController(){
        $this->model = new marqueModel();
-       $params=array();
-       return $this->model-> getMarquesModel($params);
+       return $this->model-> getMarquesModel(array());
     }
 
-    // retourne les modeles d'un marque
+    // retourne les modeles d'une marque
     public function getModelesController($id){
       $this->model = new marqueModel();
       $params = array(1=> $id); 
@@ -92,9 +98,7 @@ class marqueController{
    public function showAdminMarqueController(){
       
       $this->view = new marqueView();
-
-      $params= array();
-      $marques = $this->getMarquesController($params);
+      $marques = $this->getMarquesController(array());
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
        $this->view->showMarquesTableView($marques);
@@ -114,6 +118,9 @@ class marqueController{
    }
 
    public function showModifMarqueFormController(){
+      $this->view = new marqueView();
+      $this->model = new marqueModel();
+   
       $request_uri = $_SERVER['REQUEST_URI'];
       $uri_parts = parse_url($request_uri);
       parse_str($uri_parts['query'],$results);
@@ -122,7 +129,9 @@ class marqueController{
          1=> $results['marque']
       );
 
-      echo 'modifier marque : '.$results['marque'];
+      $marque = $this->model-> getMarqueModel($params);
+      $this->view->modifMarqueView($marque);
+      
    }
 
 }

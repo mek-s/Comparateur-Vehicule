@@ -58,6 +58,9 @@ class usersView{
           echo '<h1>Authenticated</h1>';
         } else echo '<h1>Username ou mot de passe incorecte</h1>';
       } ?>
+      <div class="form-container">
+
+      
       <form method="POST">
         <label for="">Nom utilisateur / Email</label>
         <input type="text" name="nom" required>
@@ -65,6 +68,7 @@ class usersView{
         <input type="password" name="mdp" required>
         <input type="submit" name="auth-user"value="Login">
       </form>
+      </div>
      <?php
     }
 

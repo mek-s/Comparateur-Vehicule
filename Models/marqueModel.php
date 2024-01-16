@@ -20,6 +20,16 @@ class marqueModel{
 
     }
 
+    // modifier une marque
+    public function modifMarqueModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "UPDATE `marques` SET `marque_nom` =  ? , `pays_origine` = ? , `siege_social` = ? , `annee_creation` = ?, `principale` = ? , `image_id` = ? WHERE `marques`.`marque_id` = ?";
+        $this->db->request($cnx,$query,$params,false);
+    
+        $this->db->disconnect($cnx);
+    }
+
     public function deleteMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -48,7 +58,7 @@ class marqueModel{
       
         $cnx=$this->db->connect();
         
-        $query = "SELECT * FROM marques NATURAL JOIN images WHERE supp = 0";
+        $query = "SELECT * FROM marques NATURAL JOIN images WHERE  supp = 0";
         $marques = $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
