@@ -8,17 +8,19 @@ class compareController{
     private $view;
     private $model;
     
+    // appel a la vue d'affichage de la page comparateur
     public function showComparateurController(){
       $home = new homeView();
       $this->view = new compareView();
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu();
-      $this->view->showComparateurView(array(),false);
+      $this->view->showComparateurView(array(),false,false);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
       
     }
 
+    // appel a la vue d'affichage de la page comparateur d'apres home
     public function showComparController(){
       $home = new homeView();
       $this->view = new compareView();
@@ -36,11 +38,11 @@ class compareController{
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\header.php");
       $home->showMenu();
-      $this->view->showComparateurView($params,$results['result']);
-     
+      $this->view->showComparateurView($params,$results['result'],true);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\userViews\/footer.php");
     }
 
+    // appel a la vue d'affichage des comparaisons d'un vehicule
     public function showVehiculComparaisons($params){
       $this->view = new compareView();
       $this->model = new vehiculeModel();
@@ -49,6 +51,7 @@ class compareController{
       $this->view->showComparaisonsCards($cmps);
     }
 
+    // appel a la vue d'affichage des poplaires comparaisons 
     public function showPopularComparController(){
       $this->view = new compareView();
       $this->model = new vehiculeModel();
@@ -60,23 +63,27 @@ class compareController{
       echo '</div>';
     }
 
+    // appel au model pour recuperer les marques
     public function getMarquesController(){
       $this->model = new marqueModel();
       $this->view = new compareView();
 
-      $params=array();
-      return $this->model->getMarquesModel($params);
+      return $this->model->getMarquesModel(array());
     }
 
+    // appel au model pour recuperer les modeles d'une marque
     public function getModelesController($params){
       $this->model = new marqueModel();
       return $this->model->getModelesModel($params);
     }
-        
+
+    // appel au model pour recuperer les versions d'une marque   
     public function getVersionsController($params){
       $this->model = new marqueModel();
       return $this->model->getVersionsModel($params);
     }
+
+    // appel au model pour recuperer une version 
     public function getVersionController($params){
       $this->model = new marqueModel();
       return $this->model->getVersionModel($params);

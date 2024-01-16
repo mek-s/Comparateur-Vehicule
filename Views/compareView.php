@@ -9,17 +9,29 @@ class compareView{
     private $controller;
 
 
+
+    /*********************les vues de l'utilisateur *******************/
+
     public function showMarques($marques){
         foreach ($marques as $marque) {
             echo '<option value="'.$marque['marque_id'].'">'.$marque['marque_nom'].'</option>';
         }
     }       
     
+    // afficher les formulaires de comparaison
     public function showComparFormsView($Ids,$show,$redirect){
-        $this->controller =new vehiculeController();
-        $infos = array();
-        $Vid = array();
 
+        $this->controller = new marqueController();
+        $marques = $this->controller->getMarquesController();
+
+        $this->controller =new vehiculeController();
+
+        $infos = array();
+        $Vid = array(); // tableau pour stocker les ids des vehicules 
+
+        // on recupere les ids des vehicule 
+        // apres on recuperer les informations sur vehicules
+        // le tableau pour stocker ses infos et remplir le formulaire par ses derniers
         for ($i=1; $i <= 4; $i++) { $infos[$i] = NULL;}
         for ($i=1; $i < count($Ids); $i++) { 
            if ($Ids[$i] != NULL) {
@@ -28,26 +40,33 @@ class compareView{
         }
 
         if (isset($_POST['cmp_submit'])) {
-        
-           
 
-           for ($i=1; $i <= 4; $i++) { 
+            // recuperer les versions et annees selectionnees d'apres form
+            // puis recuperer de la bdd les ids des vehicules correspandantes
+            // stocker les ids dans le tableau Vid
+            for ($i=1; $i <= 4; $i++) { 
              if (!empty($_POST['vehicles'][$i]['version']) && $_POST['vehicles'][$i]['version'] != 'default'){
                 $params = array( 1 => $_POST['vehicles'][$i]['version'] , 2 => $_POST['vehicles'][$i]['annee']);
                 $vehic = $this->controller->getVehicByVersionController($params);
                 $Vid[$i] = $vehic['vehicule_id']; 
              } else $Vid[$i] = null; 
-             
-          }
+            }
+
+            // creer une comparaison
             $this->controller->createComparaisonController($Vid);
+
+            //mettre show a vrai pour afficher les resultats 
             $show = true;
+
+            // redirect va etre true si on appel la methode de la page home
+            // et on redireger vers  la page comparateur pour afficher le resultat
             if ($redirect == true) {
                 $url = '/Comparateur-Vehicule/compareV?';
     
                 for ($i = 1; $i <= 4; $i++) {
-                    if ($Ids[$i] !== null) {
-                        $url .= 'v' . $i . '=' . $Ids[$i] . '&';
-                    }
+                    if ($Vid[$i] !== null) {
+                        $url .= 'v' . $i . '=' . $Vid[$i] . '&';
+                    } else $url .= 'v' . $i . '=' . NULL. '&';
                 }
             
                 $url .= 'result=true';
@@ -55,12 +74,9 @@ class compareView{
                 header('Location: ' . $url);
                 exit();
             }
-        }
-
-       $this->controller = new marqueController();
-       $marques = $this->controller->getMarquesController(); 
+        } 
        
-       ?>
+    ?>
        <div class="compare-container">
           <h1>Comparateur des vehicules</h1>
             <div class="compar-forms">
@@ -84,14 +100,12 @@ class compareView{
                                 <select name="vehicles[<?php echo $i; ?>][modele]" id="modele<?php echo $i; ?>" onchange="getVersions(<?php echo $i; ?>)">
                                  <option value="<?php if ($infos[$i] != NULL ) {echo $infos[$i]['modele_id'];} else echo ''; ?>" selected>
                                  <?php  if ($infos[$i] != NULL) {echo $infos[$i]['modele_nom'];} else echo 'Modele';  ?></option>
-              
                                 </select>
 
                                 <label>Version</label>
                                 <select name="vehicles[<?php echo $i; ?>][version]" id="version<?php echo $i; ?>" onchange="getAnnees(<?php echo $i; ?>)">
                                 <option value="<?php if ($infos[$i] != NULL ) {echo $infos[$i]['version_id'];} else echo ''; ?>" selected>
-                                  <?php  if ($infos[$i] != NULL) {echo $infos[$i]['version_nom'];} else echo 'Vesrion';  ?></option>
-                                   
+                                  <?php  if ($infos[$i] != NULL) {echo $infos[$i]['version_nom'];} else echo 'Vesrion';  ?></option>  
                                 </select>
 
                                 <label>Annee</label>
@@ -114,19 +128,31 @@ class compareView{
             
             <div id="comparaison">
                 <?php  
+                 // on n'affiche le tableau des resultats qu'apres la soumission du form
+                 // show est a vrai si on clique sur boutton comparer 
+                  if ($show == true) {
+                    
                     $this->controller =new vehiculeController();
                     $categ = $this->controller->getCategoriesController();
                     $caracs = $this->controller->getCaracsController();
                    
-                    $this->showComparResultView($categ,$caracs,$Vid);
-                
-                ?>
+                    //si on est dans page home et on veut afficher resultats
+                    //redirect est a vrai on recupere les ids des vehicules d'apres l'url $Ids
+                    // sionon on est dans page comparateur et on veut afficher resultats
+                    // on recupere les ids d'apres le formulaire $Vid
+                    if ($redirect == true) {
+                        $this->showComparResultView($categ,$caracs,$Ids);
+                    } else $this->showComparResultView($categ,$caracs,$Vid);
+                  } ?>
             </div>
         </div>
         
       <?php 
     }
 
+    // afficher le resultat de comparaison
+    //pour une meilleur visiblite des resultats
+    //j'ai diviser les caracteristiques en categories 
     public function showComparResultView($categories,$caracs,$idS){
         
         echo '<div class="tab">';
@@ -187,6 +213,7 @@ class compareView{
         <?php }
     }
 
+    // afficher les comparaisons deux a deux 
     public function showComparaisonsCards($params){
       
         $this->controller = new vehiculeController();
@@ -213,8 +240,9 @@ class compareView{
       
     }
 
-    public function showComparateurView($params,$show){
-        $this->showComparFormsView($params,$show,false);
+    // afficher la page comparateur
+    public function showComparateurView($params,$show,$redirect){
+       $this->showComparFormsView($params,$show,$redirect);
     }
 
 }

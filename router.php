@@ -76,7 +76,7 @@ class router{
     '/Comparateur-Vehicule/compare' => 'compareController@showComparateurController',
     '/Comparateur-Vehicule/compareV'=> 'compareController@showComparController',
     '/Comparateur-Vehicule/news' => 'newsController@showNewsController',
-    '/Comparateur-Vehicule/news/details' => 'newsController@showNewsDeatailsController',
+    '/Comparateur-Vehicule/news/details' => 'newsController@showNewsDetailsController',
     '/Comparateur-Vehicule/signin' => 'usersController@showSigninFormController',
     '/Comparateur-Vehicule/signup'=>  'usersController@showSignupFormController',
     '/Comparateur-Vehicule/admin' => 'adminHomeController@showHomeController',
@@ -104,6 +104,7 @@ class router{
     '/Comparateur-Vehicule/logout' => 'usersController@logoutController'
     ];
 
+  // verifier si une url est protegee
   private function isProtectedRoute($path) {
     $protectedRoutes = [
       '/Comparateur-Vehicule/admin',
@@ -130,22 +131,25 @@ class router{
     return in_array($path, $protectedRoutes);
   }
 
+  // 
   public function get($path){
 
        
-
+        // verifier si l'utilisateur n'est pas connecte et veut acceder a une route protectee
+        // le rediriger ver page se connecter
         if ($this->isProtectedRoute($path) && !isset($_SESSION['auth_a']) && !isset($_SESSION['auth_u'])) {
             header('Location: /Comparateur-Vehicule/signin');
             exit();
         }
         
+        // si l'url existe instancier le controlleur et appeler la methode
         if (array_key_exists($path, $this->routes)) {
             list($controllerName, $method) = explode('@', $this->routes[$path]);
 
             include_once __DIR__ . "/Controllers/{$controllerName}.php";
             $controller = new $controllerName();
             $controller->$method();
-        } else {
+        } else { // si l'url n'exite pas afficher message d'erreur
             header("HTTP/1.0 404 Not Found");
             echo '404 Not Found';
         }
