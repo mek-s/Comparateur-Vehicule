@@ -23,13 +23,12 @@ class usersModel{
     }
 
     // bloquer un utilisateur 
-    public function blockUserModel($id){
+    public function blockUserModel($params){
        
         $cnx=$this->db->connect();
 
         $query = "UPDATE `users` SET `status` = 'bloque' WHERE `user_id` = ?";
-        $params = array($id);
-        $this->db->request($cnx,$query);  
+        $this->db->request($cnx,$query,$params,false);  
 
         $this->db->disconnect($cnx);
     }

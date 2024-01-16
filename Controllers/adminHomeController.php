@@ -30,9 +30,10 @@ class adminHomeController{
         $params = array(1=> $results['user']);
     
         $user = $this->model->getUserModel($params);
+        $vehics = $this->model->getUserVehiculesModel(array(1=> $user['user_id']));
 
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-        $this->view->showUserProfilView($user);
+        $this->view->showUserProfilView($user,$vehics);
         require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
            
     }

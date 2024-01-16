@@ -24,7 +24,7 @@ class usersController{
     // appel au model pour bloquer un utilisateur
     public function blockUserController($params){
         $this->model = new usersModel();
-        $this->model->blockusersModel($params);
+        $this->model->blockUserModel($params);
     }
 
     // appel au model pour valider un utilisateur

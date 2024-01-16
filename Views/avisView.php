@@ -18,7 +18,7 @@ class avisView{
             $this->controller= new avisController();
             $this->controller->refuseAvisController(array(1=> $_POST['avis_id']));
         }
-        if (isset($_POST[''])) {
+        if (isset($_POST['block_user'])) {
             $this->controller= new usersController();
             $this->controller->blockUserController(array(1=> $_POST['user_id']));
         }
