@@ -18,7 +18,7 @@ class vehiculeController{
       parse_str($uri_parts['query'],$results);
 
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
-       $this->view->showVehiculeFormView($results['marque'][0]);
+       $this->view->showVehiculeFormView($results['marque'],$results['version'],$results['show']);
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\/footer.php");
     }
     // appel a la vue d'affichage de la page vehicule pour admin
@@ -32,8 +32,6 @@ class vehiculeController{
 
       $params= array(1=> $param['marque']);
       $vehicules = $this->getVehiculesByMarque($params);
-
-      print_r($param['marque']);
       
       require_once("C:\wamp64\www\Comparateur-Vehicule\Views\adminViews\header.php");
        $this->view->showVehiculeTableView($vehicules,$param['marque']);
@@ -115,7 +113,6 @@ class vehiculeController{
       return $this->model->modifVehiculeCaracsModel($params);
     }
 
-   /*************** les controlleurs de l'admin **********************/
 
    // appel au model pour recuperer  toutes les caracteristiques
     public function getCaracsController(){

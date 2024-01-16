@@ -16,6 +16,12 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 
+function openForm(){
+  $("#vnForm").show();
+
+}
+
+
 function getVersions(formIndex) { 
                 selectedModele = document.getElementById("modele" + formIndex).value;
                 $.ajax({

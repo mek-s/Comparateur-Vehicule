@@ -201,7 +201,9 @@ class vehiculeModel{
     }
     
 
-    /*********************gestion des marques *******************/    
+    /*********************gestion des marques *******************/ 
+    
+    
     // recuperer les vehicules principals d'une marque
     public function getPrincipalesVehiculesModel($params){
         $cnx=$this->db->connect();

@@ -10,7 +10,7 @@ class marqueModel{
     }
 
 
-    // creer une marque id 
+    // creer une marque  
     public function createMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -21,7 +21,7 @@ class marqueModel{
 
     }
 
-    // modifier une marque id
+    // modifier une marque 
     public function modifMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -31,7 +31,7 @@ class marqueModel{
         $this->db->disconnect($cnx);
     }
 
-    // supprimer une marque id 
+    // supprimer une marque  
     public function deleteMarqueModel($params){
         $cnx=$this->db->connect();
 
@@ -39,6 +39,28 @@ class marqueModel{
         $this->db->request($cnx,$query,$params,false);
     
         $this->db->disconnect($cnx);
+    }
+
+    // creer un modele pour une marque
+    public function createModeleModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "INSERT INTO `modeles` ( `modele_nom`, `marque_id`, `supp`) VALUES ( ?, ?, 0)";
+        $id =$this->db->request($cnx,$query,$params,true);
+    
+        $this->db->disconnect($cnx);
+        return $id;
+    }
+
+    // creer une version pour un modele
+    public function createVersionModel($params){
+        $cnx=$this->db->connect();
+
+        $query = "INSERT INTO `versions` (`version_nom`, `modele_id`, `date_debut`, `date_fin`, `supp`, `guide_id`) VALUES (?, ?, ?, ?, 0, NULL)";
+        $id =$this->db->request($cnx,$query,$params,true);
+    
+        $this->db->disconnect($cnx);
+        return $id;
     }
 
     // Recuperer les marques principales

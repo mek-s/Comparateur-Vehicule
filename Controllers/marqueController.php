@@ -29,6 +29,15 @@ class marqueController{
       $this->model-> modifMarqueModel($params);
    }
 
+   public function createModeleController($params){
+      $this->model = new marqueModel();
+      return $this->model->createModeleModel($params);
+    }
+
+    public function createVersionController($params){
+      $this->model = new marqueModel();
+      return $this->model->createVersionModel($params);
+    }
    // appel au model pour recuperer les marques
    public function getMarquesController(){
        $this->model = new marqueModel();

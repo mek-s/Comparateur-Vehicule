@@ -109,10 +109,25 @@ class vehiculeView{
     }
 
     // afficher le formulaire de creation d'un vehicule
-    public function showVehiculeFormView($mrqId){
+    public function showVehiculeFormView($mrqId,$versionId,$show){
+      print_r($show);
 
       $this->controller= new marqueController();
       $modeles = $this->controller->getModelesController($mrqId);
+      $verId =NULL;
+      $modId = NULL;
+
+      if (isset($_POST['nw_mod_ver'])) {
+        $this->controller= new marqueController();
+       
+        $params = array(1=> $_POST['nw_modele'] , 2=> $mrqId);
+        $modId = $this->controller->createModeleController($params);
+         
+        $params = array(1 => $_POST['nw_ver'] , 2=>$modId , 3=> $_POST['date_debut'] , 4=> $_POST['date_fin']);
+        $verId = $this->controller->createVersionController($params);
+        header('Location: /Comparateur-Vehicule/admin/vehicules/new?marque='.$mrqId.'&version='.$verId.'&show=false');
+        
+      }
 
         // soumettre le formulaire
         if (isset($_POST['create-vehic'])) {
@@ -131,7 +146,7 @@ class vehiculeView{
           $params = array(
             1   => $_POST['nom'],
             2   => $_POST['type'],
-            3   => $_POST['version'],
+            3   => $versionId == NULL ? $_POST['version'] : $versionId ,
             4   => $_POST['annee'],
             5   => (isset($_POST['principal']) && $_POST['principal'] == 'on') ? 1 : 0 ,
             6   => $imgId
@@ -158,6 +173,29 @@ class vehiculeView{
         } ?>
 
 
+        
+        <h3>Ajouter un nouveau modele / version</h3>
+        <form id="vnForm" method="POST" style="display:none;" onsubmit="return submit()">
+          <div class="input">
+              <label > Nom modele</label>
+              <input type="text" name="nw_modele">
+           </div>
+           <div class="input">
+              <label>Nom version</label>
+              <input type="text" name="nw_ver">
+          </div>
+          <div class="input">
+            <label>Date debut de la version</label>
+            <input type="number" name="date_debut" min="1900" max="2100" required>
+          </div>
+          <div class="input">
+            <label>Date fin de la version</label>
+            <input type="number" name="date_fin" min="1900" max="2100" required>
+          </div>
+
+           <input type="submit" name="nw_mod_ver" ovalue="nouvelle version"/>
+        </form>
+
         <h1>Ajouter un nouvel vehicule</h1>
         <form method="POST" enctype="multipart/form-data" >
           <div class="input">
@@ -172,27 +210,18 @@ class vehiculeView{
                 <option value="moto">Moto</option>
                 <option value="camion">Camion</option>
             </select>
-          </div>
-          <div class="input">
-              <label >Le modele  du vehicule </label>
-              <select name="modele" id="modele1" onchange="getVersions(1)">
-                <?php $this->showModeles($modeles); ?>   
-              </select>
-           </div>
-           <div class="input">
-              <label >Nouveau modele</label>
-              <input type="text" name="modele">
-           </div>
-            <div class="input">
-              <label>La version du vehicule</label>
-              <select name="version" id="version1">
-                  <option value="default">Version</option>
-              </select>
-            </div>
-            <div class="input">
-              <label>Nouvelle version</label>
-              <input type="text" name="version">
-            </div>
+          </div> 
+           <?php if ($show == true) {?>
+            
+                <div class="input">
+                <label>La version du vehicule</label>
+                <select name="version" id="version1">
+                    <option value="default">Version</option>
+                </select>
+              </div>
+              <button id="nw_vr" onClick="openForm()">Ajouter version</button>
+          <?php } 
+          ?>
           <div class="input">
             <label>L'annee de creation du vehicule</label>
             <input type="number" name="annee" min="1900" max="2100" required>
@@ -348,7 +377,7 @@ class vehiculeView{
       
       <div class="">
         <h1>Gestion des Vehicules</h1>
-        <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new?marque=<?php echo $mrqId ; ?>" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
+        <a class="button" href="/Comparateur-Vehicule/admin/vehicules/new?marque=<?php echo $mrqId ; ?>&version=&show=true" ><i class="fa fa-plus-circle"></i> Ajouter un vehicule</a>
       </div>
 
      <div class="vehic-table">
